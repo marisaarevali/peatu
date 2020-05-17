@@ -1,0 +1,38 @@
+
+
+
+platvormi m2ng
+https://www.youtube.com/watch?v=88DS3Z8nOdY
+
+
+peatumis teekond
+http://www.liikluskasvatus.ee/taiskasvanud/autojuhile-ja-soitjale/kiirus-maanteel/soidukiirus-ja-peatumisteekond/
+kiirus = 90km/h
+>>> x = 90
+>>> ((x*x)/100)*0.55		-> e. 0.0055*(x*x)
+44.55 -> on piduradamis teekond
+
+
+efe = efe*0.98;
+efe = 100
+360 - 285 = 75
+
+efe = efe*0.98;
+efe = 200
+434.7 - 288 = 156.749399
+
+
+efe = efe*0.98;
+efe = 300
+505 - 285 = 220
+
+
+efe = efe*0.98;
+efe = 400
+588 - 285 = 303
+
+
+
+https://phaser.io/examples/v2/input/drag-update
+https://phaser.io/examples/v2/category/input
+https://phaser.io/news/2015/02/phaser-modal-creator
