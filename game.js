@@ -54,6 +54,7 @@ function preload () {
     game.load.spritesheet('rehv_4', 'assets/lamellrehvid_nupp.png', 104, 25);
 }
 
+// giti esimene muudatus
 takistuseKaugus = 5000;
 var takistusTeke;
 
