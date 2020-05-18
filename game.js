@@ -119,19 +119,18 @@ function create () {
     startStopNupp = game.add.button(625, 484, 'startStopNupp', actionOnClick_ss, this, 0, 0, 0);
     
     
-    teekate_1 = game.add.button(23, 450, 'teekate_1', onClickTeekate_1, this, 2, 2, 2);
-    teekate_2 = game.add.button(23, 484, 'teekate_2', onClickTeekate_2, this, 1, 0, 2);
-    teekate_3 = game.add.button(23, 518, 'teekate_3', onClickTeekate_3, this, 1, 0, 2);
-    teekate_4 = game.add.button(23, 552, 'teekate_4', onClickTeekate_4, this, 1, 0, 2);
+    teekate_1 = game.add.button(123, 450, 'teekate_1', onClickTeekate_1, this, 2, 2, 2);
+    teekate_2 = game.add.button(123, 484, 'teekate_2', onClickTeekate_2, this, 1, 0, 2);
+    teekate_3 = game.add.button(123, 518, 'teekate_3', onClickTeekate_3, this, 1, 0, 2);
+    //teekate_4 = game.add.button(23, 552, 'teekate_4', onClickTeekate_4, this, 1, 0, 2);
 
-    rehv_1 = game.add.button(175, 450, 'rehv_1', onClickRehv_1, this, 2, 2, 2); 
-    rehv_2 = game.add.button(175, 484, 'rehv_2', onClickRehv_2, this, 1, 0, 2);
-    rehv_3 = game.add.button(175, 518, 'rehv_3', onClickRehv_3, this, 1, 0, 2);
-    rehv_4 = game.add.button(175, 552, 'rehv_4', onClickRehv_4, this, 1, 0, 2);
+    //rehv_1 = game.add.button(175, 450, 'rehv_1', onClickRehv_1, this, 2, 2, 2); 
+    //rehv_2 = game.add.button(175, 484, 'rehv_2', onClickRehv_2, this, 1, 0, 2);
+    //rehv_3 = game.add.button(175, 518, 'rehv_3', onClickRehv_3, this, 1, 0, 2);
+    //rehv_4 = game.add.button(175, 552, 'rehv_4', onClickRehv_4, this, 1, 0, 2);
 
 
-    //mängija saab ennustada peatumisteekonda meetrites
-    kiiruseM66dik = game.add.sprite(380, 390, 'kiiruseM66dik');
+    
     boundsM66dik = new Phaser.Rectangle(346, 360, 425, 65);
     //  vajadusel saab kastikiese ka v2lja joonistada:
      /* var graphics = game.add.graphics(boundsM66dik.x, boundsM66dik.y);
@@ -169,11 +168,11 @@ function create () {
     teekate_1.inputEnabled = false;
     teekate_2.inputEnabled = false;
     teekate_3.inputEnabled = false;
-    teekate_4.inputEnabled = false;
-    rehv_1.inputEnabled = false;
-    rehv_2.inputEnabled = false;
-    rehv_3.inputEnabled = false;
-    rehv_4.inputEnabled = false;
+    // teekate_4.inputEnabled = false;
+    // rehv_1.inputEnabled = false;
+    // rehv_2.inputEnabled = false;
+    // rehv_3.inputEnabled = false;
+    // rehv_4.inputEnabled = false;
     //et avalehel ei saaks jätka vajutada :@
     jatkanNupp.inputEnabled = false;
     this.input.keyboard.enabled = false;   
@@ -281,11 +280,11 @@ function create () {
         teekate_1.inputEnabled = true;
         teekate_2.inputEnabled = true;
         teekate_3.inputEnabled = true;
-        teekate_4.inputEnabled = true;
-        rehv_1.inputEnabled = true;
-        rehv_2.inputEnabled = true;
-        rehv_3.inputEnabled = true;
-        rehv_4.inputEnabled = true;
+        // teekate_4.inputEnabled = true;
+        // rehv_1.inputEnabled = true;
+        // rehv_2.inputEnabled = true;
+        // rehv_3.inputEnabled = true;
+        // rehv_4.inputEnabled = true;
         lipp.inputEnabled = true;
         this.input.keyboard.enabled = true;
         
@@ -312,7 +311,8 @@ function update () {
     //    if (this.spaceKey.isDown && player.body.position.x  == 0){
         startStopInt = 1;       
         startStopNupp = game.add.button(625, 484, 'startStopNupp', actionOnClick_ss, this, 1, 1, 1);
-        
+        kiiruseM66dik.destroy();
+        lipp.destroy();
                 
         // auto k2ivitusheli if
         if (efe2 == 0) {
@@ -469,6 +469,8 @@ function teekateValik(tee_var) {
     player = game.add.sprite(0, game.world.height - 247, 'car')
     takistus = game.add.sprite(takistuseKaugus, game.world.height - 255, 'kits')    
     lipuTeke()
+    
+    
     /* if (tee_var == 'majadLumine' || tee_var == 'maaLumine' ){
         kiiruseM66dik.destroy();
         kiiruseM66dik_Must = game.add.sprite(380,390, 'kiiruseM66dik_Must')
@@ -487,9 +489,6 @@ function teekateValik(tee_var) {
 }
 
 function actionOnClick_ss() {
-    kiiruseM66dik.destroy();
-    lipp.destroy();
-    
     startStopInt += 1;
     
     kiiruseNupp.inputEnabled = false;
@@ -497,11 +496,11 @@ function actionOnClick_ss() {
     teekate_1.inputEnabled = false;
     teekate_2.inputEnabled = false;
     teekate_3.inputEnabled = false;
-    teekate_4.inputEnabled = false;
-    rehv_1.inputEnabled = false;
-    rehv_2.inputEnabled = false;
-    rehv_3.inputEnabled = false;
-    rehv_4.inputEnabled = false;
+    // teekate_4.inputEnabled = false;
+    // rehv_1.inputEnabled = false;
+    // rehv_2.inputEnabled = false;
+    // rehv_3.inputEnabled = false;
+    // rehv_4.inputEnabled = false;
 } 
 
 function onClickTeekate_1() {
@@ -520,7 +519,7 @@ function onClickTeekate_1() {
     console.log("teekate1 nupp vajutatud" )
     teekate_2 = game.add.button(23, 484, 'teekate_2', onClickTeekate_2, this, 1, 0, 2);
     teekate_3 = game.add.button(23, 518, 'teekate_3', onClickTeekate_3, this, 1, 0, 2);
-    teekate_4 = game.add.button(23, 552, 'teekate_4', onClickTeekate_4, this, 1, 0, 2);
+    //teekate_4 = game.add.button(23, 552, 'teekate_4', onClickTeekate_4, this, 1, 0, 2);
 }
 
 function onClickTeekate_2() {
@@ -540,7 +539,7 @@ function onClickTeekate_2() {
     console.log("teekate2 nupp vajutatud" )
     teekate_1 = game.add.button(23, 450, 'teekate_1', onClickTeekate_1, this, 1, 0, 2);    
     teekate_3 = game.add.button(23, 518, 'teekate_3', onClickTeekate_3, this, 1, 0, 2);
-    teekate_4 = game.add.button(23, 552, 'teekate_4', onClickTeekate_4, this, 1, 0, 2);
+    //teekate_4 = game.add.button(23, 552, 'teekate_4', onClickTeekate_4, this, 1, 0, 2);
 }
 
 function onClickTeekate_3() {
@@ -562,7 +561,7 @@ function onClickTeekate_3() {
     teekate_4 = game.add.button(23, 552, 'teekate_4', onClickTeekate_4, this, 1, 0, 2);
 }
 
-function onClickTeekate_4() {
+/* function onClickTeekate_4() {
     teeValik = 4;
     
     teeolu_var = 2.2/3;
@@ -575,9 +574,9 @@ function onClickTeekate_4() {
     teekate_1 = game.add.button(23, 450, 'teekate_1', onClickTeekate_1, this, 1, 0, 2);
     teekate_2 = game.add.button(23, 484, 'teekate_2', onClickTeekate_2, this, 1, 0, 2);
     teekate_3 = game.add.button(23, 518, 'teekate_3', onClickTeekate_3, this, 1, 0, 2);
-}
+} */
 
-function onClickRehv_1() {
+/* function onClickRehv_1() {
     rehv_1 = game.add.button(175, 450, 'rehv_1', onClickRehv_1, this, 2, 2, 2);
     console.log("rehv1 nupp vajutatud" )
     rehv_2 = game.add.button(175, 484, 'rehv_2', onClickRehv_2, this, 1, 0, 2);
@@ -607,7 +606,7 @@ function onClickRehv_4() {
     rehv_1 = game.add.button(175, 450, 'rehv_1', onClickRehv_1, this, 1, 0, 2);
     rehv_2 = game.add.button(175, 484, 'rehv_2', onClickRehv_2, this, 1, 0, 2);
     rehv_3 = game.add.button(175, 518, 'rehv_3', onClickRehv_3, this, 1, 0, 2);
-}
+} */
 
 function onClickUuesti() {
 
@@ -683,7 +682,7 @@ function dragStop() {
 }
 
 function lipuTeke() {
-    if (teeValik == 3 ) {
+    if (teeValik == 3) {
         lipp = game.add.sprite(358.5, 392, 'lippMust')
         game.physics.arcade.enable(lipp)
         lipp.anchor.x = 0.5;
@@ -691,8 +690,8 @@ function lipuTeke() {
         lipp.inputEnabled = true;
         lipp.input.enableDrag(false,false,false,250,boundsM66dik);
         lipp.input.allowVerticalDrag = false;
-        kiiruseM66dik = game.add.sprite(380,390, 'kiiruseM66dik_Must')
         lipp.events.onDragStop.add(lippStop);
+        kiiruseM66dik = game.add.sprite(380,390, 'kiiruseM66dik_Must')
     }
     else {
         lipp = game.add.sprite(358.5, 392, 'lipp')
@@ -702,8 +701,8 @@ function lipuTeke() {
         lipp.inputEnabled = true;
         lipp.input.enableDrag(false,false,false,250,boundsM66dik);
         lipp.input.allowVerticalDrag = false;
-        kiiruseM66dik = game.add.sprite(380,390, 'kiiruseM66dik')
         lipp.events.onDragStop.add(lippStop);
+        kiiruseM66dik = game.add.sprite(380,390, 'kiiruseM66dik')
     }
 }
 
