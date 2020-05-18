@@ -516,6 +516,8 @@ function onClickTeekate_1() {
         teekateValik('majadJaTee');
     }
     
+    teekateNupudDel();
+    
     teekate_1 = game.add.button(123, 450, 'teekate_1', onClickTeekate_1, this, 2, 2, 2);
     console.log("teekate1 nupp vajutatud" )
     teekate_2 = game.add.button(123, 484, 'teekate_2', onClickTeekate_2, this, 1, 0, 2);
@@ -536,6 +538,8 @@ function onClickTeekate_2() {
         teekateValik('majadLompidega');
     }
     
+    teekateNupudDel();
+    
     teekate_2 = game.add.button(123, 484, 'teekate_2', onClickTeekate_2, this, 2, 2, 2);
     console.log("teekate2 nupp vajutatud" )
     teekate_1 = game.add.button(123, 450, 'teekate_1', onClickTeekate_1, this, 1, 0, 2);    
@@ -554,6 +558,8 @@ function onClickTeekate_3() {
     } else {
         teekateValik('majadLumine');
     }
+    
+    teekateNupudDel(); 
     
     teekate_3 = game.add.button(123, 518, 'teekate_3', onClickTeekate_3, this, 2, 2, 2);
     console.log("teekate3 nupp vajutatud" )
@@ -862,8 +868,10 @@ function juhisedClick() {
 var currentTime1
 var currentTime2
 
-//var now = new Date().toLocaleTimeString();
+function teekateNupudDel() {
+    teekate_1.destroy();
+    teekate_2.destroy();
+    teekate_3.destroy();
+}
 
 
-//var currentTime1 = +new Date();
-//var currentTime2 = +new Date();
