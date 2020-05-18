@@ -225,6 +225,7 @@ function create () {
     autoFullStop = 0;
 
     heliInt = 0;
+    juhisedInt = 0;
     
     
 
@@ -273,6 +274,7 @@ function create () {
         proovinNupp.destroy()
         jatkanNupp.inputEnabled = true;
         jatkanNupp.input.useHandCursor = true;
+        proovinInt = 0;
     }
 
     function jatkanClick() {
@@ -407,7 +409,6 @@ function update () {
             //efe = efe - 1;
             
             // et soundi m2ngitaks vaid 1 kord, muutub efe2 kohe üheks
-            
             if (efe2 == 1) {
             breaking_sound.play(); 
             currentTime2 = +new Date();
@@ -523,7 +524,7 @@ function onClickTeekate_1() {
     }
     
     teekateNupudDel();
-    
+
     teekate_1 = game.add.button(123, 450, 'teekate_1', onClickTeekate_1, this, 2, 2, 2);
     console.log("teekate1 nupp vajutatud" )
     teekate_2 = game.add.button(123, 484, 'teekate_2', onClickTeekate_2, this, 1, 0, 2);
@@ -545,7 +546,7 @@ function onClickTeekate_2() {
     }
     
     teekateNupudDel();
-    
+
     teekate_2 = game.add.button(123, 484, 'teekate_2', onClickTeekate_2, this, 2, 2, 2);
     console.log("teekate2 nupp vajutatud" )
     teekate_1 = game.add.button(123, 450, 'teekate_1', onClickTeekate_1, this, 1, 0, 2);    
@@ -565,8 +566,8 @@ function onClickTeekate_3() {
         teekateValik('majadLumine');
     }
     
-    teekateNupudDel(); 
-    
+    teekateNupudDel();
+
     teekate_3 = game.add.button(123, 518, 'teekate_3', onClickTeekate_3, this, 2, 2, 2);
     console.log("teekate3 nupp vajutatud" )
     teekate_1 = game.add.button(123, 450, 'teekate_1', onClickTeekate_1, this, 1, 0, 2);
@@ -642,6 +643,8 @@ function onClickUuesti() {
     efe3 = 0;
     startStopInt = 0;   
     proloog = 0;
+
+    juhisedInt = 0;
     
     
     
@@ -879,16 +882,42 @@ function heliClick() {
     }
 }
 function juhisedClick() {
-    console.log('juhisednupp vajutatud')
+    juhisedInt +=1;
+    if (juhisedInt % 2 == 1) {
+        console.log('juhisednupp vajutatud')
+        juhised = game.add.sprite(0, 0, 'juhised') 
+        game.physics.arcade.enable(juhised)
+        kiiruseNupp.inputEnabled = false;
+        startStopNupp.inputEnabled = false;
+        teekate_1.inputEnabled = false;
+        teekate_2.inputEnabled = false;
+        teekate_3.inputEnabled = false;
+        //et avalehel ei saaks jätka vajutada :@
+        jatkanNupp.inputEnabled = false;
+        this.input.keyboard.enabled = false;  
+        nupuTaust = game.add.sprite(675, 20, 'nupuTaust')   
+        game.physics.arcade.enable(nupuTaust)
+        heliNupp = game.add.button(685, 27, 'heliNupp', heliClick, this, 1, 1, 1);
+        juhisedNupp = game.add.button(730, 27, 'juhisedNupp', juhisedClick, this, 0, 0, 0);  
+    }
+    else {
+        juhised.destroy()
+        kiiruseNupp.inputEnabled = true;
+        startStopNupp.inputEnabled = true;
+        teekate_1.inputEnabled = true;
+        teekate_2.inputEnabled = true;
+        teekate_3.inputEnabled = true;
+        //et avalehel ei saaks jätka vajutada :@
+        this.input.keyboard.enabled = true;
+    }
+    
 }
 // aja muutujad
 var currentTime1
 var currentTime2
 
 function teekateNupudDel() {
-    teekate_1.destroy();
-    teekate_2.destroy();
-    teekate_3.destroy();
+teekate_1.destroy();
+teekate_2.destroy();
+teekate_3.destroy();
 }
-
-
