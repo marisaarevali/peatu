@@ -488,7 +488,6 @@ function teekateValik(tee_var) {
 
 function actionOnClick_ss() {
     kiiruseM66dik.destroy();
-    kiiruseM66dik_Must.destroy();
     lipp.destroy();
     lippMust.destroy();
     
