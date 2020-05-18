@@ -142,8 +142,10 @@ function create () {
     
     lipuTeke()
 
-    //juhised
 
+    
+    
+    //juhised
     juhised = game.add.sprite(0, 0, 'juhised') 
     game.physics.arcade.enable(juhised)    
     jatkanNupp = game.add.button(625, 501, 'jatkanNupp', jatkanClick, this, 0, 0, 0);
@@ -156,7 +158,7 @@ function create () {
     // nupud heli ja juhised
     nupuTaust = game.add.sprite(675, 20, 'nupuTaust')   
     game.physics.arcade.enable(nupuTaust)
-    heliNupp = game.add.button(685, 27, 'heliNupp', heliClick, this, 0, 0, 0);
+    heliNupp = game.add.button(685, 27, 'heliNupp', heliClick, this, 1, 1, 1);
     juhisedNupp = game.add.button(730, 27, 'juhisedNupp', juhisedClick, this, 0, 0, 0);
     
     
@@ -221,6 +223,8 @@ function create () {
     taustaLiikumine = 0;
     autoPidurdus = 0;
     autoFullStop = 0;
+
+    heliInt = 0;
     
     
 
@@ -407,6 +411,8 @@ function update () {
             if (efe2 == 1) {
             breaking_sound.play(); 
             currentTime2 = +new Date();
+            heliNupp.inputEnabled = false;
+            juhisedNupp.inputEnabled = false;
 
             setTimeout(engineSoundStopFunc, 1200);
             }
@@ -636,11 +642,13 @@ function onClickUuesti() {
     efe3 = 0;
     startStopInt = 0;   
     proloog = 0;
-
+    
     
     
     startStopNupp.destroy();
     startStopNupp = game.add.button(625, 484, 'startStopNupp', actionOnClick_ss, this, 0, 0, 0);
+    heliNupp.inputEnabled = true;
+    juhisedNupp.inputEnabled = true;
 
     
     l6petanNupp.destroy();
@@ -858,9 +866,18 @@ function podraTeke() {
 }
 
 function heliClick() {
-    console.log('helinupp vajutatud')
+    heliNupp.destroy()
+    heliInt +=1;
+    if (heliInt % 2 == 0){
+              
+        heliNupp = game.add.button(685, 27, 'heliNupp', heliClick, this, 1, 1, 1);
+        game.sound.mute = false;
+    }
+    else {
+        heliNupp = game.add.button(685, 27, 'heliNupp', heliClick, this, 0, 0, 0);
+        game.sound.mute = true;
+    }
 }
-
 function juhisedClick() {
     console.log('juhisednupp vajutatud')
 }
