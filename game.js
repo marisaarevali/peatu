@@ -31,6 +31,7 @@ function preload () {
     game.load.image('avaleht', 'assets/avaleht.png');
     game.load.image('juhised', 'assets/juhised.png');
     game.load.image('l6puTiiter', 'assets/lopp.png');
+    game.load.image('nupuTaust', 'assets/nuputaust.png');
 
     game.load.audio('breaking_sound', 'assets/audio/pidur.ogg');
     game.load.audio('k2ivitus_sound', 'assets/audio/k2ivitus_l6igatud.ogg');
@@ -42,6 +43,8 @@ function preload () {
     game.load.spritesheet('proovinNupp', 'assets/proovin.png', 150, 50);
     game.load.spritesheet('jatkanNupp', 'assets/jatkan.png', 130, 50);
     game.load.spritesheet('l6petanNupp', 'assets/lopetan.png', 150, 50);
+    game.load.spritesheet('heliNupp', 'assets/helinupp.png', 35, 35);
+    game.load.spritesheet('juhisedNupp', 'assets/juhisednupp.png', 35, 35);
     
     game.load.spritesheet('teekate_1', 'assets/kuivasfalt_nupp.png', 104, 25);
     game.load.spritesheet('teekate_2', 'assets/m2rgasfalt_nupp.png', 104, 25);
@@ -54,7 +57,6 @@ function preload () {
     game.load.spritesheet('rehv_4', 'assets/lamellrehvid_nupp.png', 104, 25);
 }
 
-// giti esimene muudatus
 takistuseKaugus = 5000;
 var takistusTeke;
 
@@ -152,6 +154,12 @@ function create () {
     avaleht = game.add.sprite(0, 0, 'avaleht')   
     game.physics.arcade.enable(avaleht)
     proovinNupp = game.add.button(325, 400, 'proovinNupp', proovinClick, this, 0, 0, 0);
+
+    // nupud heli ja juhised
+    nupuTaust = game.add.sprite(675, 20, 'nupuTaust')   
+    game.physics.arcade.enable(nupuTaust)
+    heliNupp = game.add.button(685, 27, 'heliNupp', heliClick, this, 0, 0, 0);
+    juhisedNupp = game.add.button(730, 27, 'juhisedNupp', juhisedClick, this, 0, 0, 0);
     
     
     this.spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
@@ -836,7 +844,13 @@ function podraTeke() {
 
 }
 
+function heliClick() {
+    console.log('helinupp vajutatud')
+}
 
+function juhisedClick() {
+    console.log('juhisednupp vajutatud')
+}
 // aja muutujad
 var currentTime1
 var currentTime2
