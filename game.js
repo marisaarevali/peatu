@@ -49,12 +49,12 @@ function preload () {
     game.load.spritesheet('teekate_1', 'assets/kuivasfalt_nupp.png', 104, 25);
     game.load.spritesheet('teekate_2', 'assets/m2rgasfalt_nupp.png', 104, 25);
     game.load.spritesheet('teekate_3', 'assets/lumineasfalt_nupp.png', 104, 25);
-    game.load.spritesheet('teekate_4', 'assets/kruusatee_nupp.png', 104, 25);
+/*     game.load.spritesheet('teekate_4', 'assets/kruusatee_nupp.png', 104, 25);
  
     game.load.spritesheet('rehv_1', 'assets/suverehvid_nupp.png', 104, 25);
     game.load.spritesheet('rehv_2', 'assets/kulunudrehvid_nupp.png', 104, 25);
     game.load.spritesheet('rehv_3', 'assets/naastrehvid_nupp.png', 104, 25);
-    game.load.spritesheet('rehv_4', 'assets/lamellrehvid_nupp.png', 104, 25);
+    game.load.spritesheet('rehv_4', 'assets/lamellrehvid_nupp.png', 104, 25); */
 }
 
 takistuseKaugus = 5000;
@@ -313,6 +313,11 @@ function update () {
         startStopNupp = game.add.button(625, 484, 'startStopNupp', actionOnClick_ss, this, 1, 1, 1);
         kiiruseM66dik.destroy();
         lipp.destroy();
+        kiiruseNupp.inputEnabled = false;
+        startStopNupp.inputEnabled = false;
+        teekate_1.inputEnabled = false;
+        teekate_2.inputEnabled = false;
+        teekate_3.inputEnabled = false;
                 
         // auto k2ivitusheli if
         if (efe2 == 0) {
@@ -491,11 +496,7 @@ function teekateValik(tee_var) {
 function actionOnClick_ss() {
     startStopInt += 1;
     
-    kiiruseNupp.inputEnabled = false;
-    startStopNupp.inputEnabled = false;
-    teekate_1.inputEnabled = false;
-    teekate_2.inputEnabled = false;
-    teekate_3.inputEnabled = false;
+    
     // teekate_4.inputEnabled = false;
     // rehv_1.inputEnabled = false;
     // rehv_2.inputEnabled = false;
@@ -515,10 +516,10 @@ function onClickTeekate_1() {
         teekateValik('majadJaTee');
     }
     
-    teekate_1 = game.add.button(23, 450, 'teekate_1', onClickTeekate_1, this, 2, 2, 2);
+    teekate_1 = game.add.button(123, 450, 'teekate_1', onClickTeekate_1, this, 2, 2, 2);
     console.log("teekate1 nupp vajutatud" )
-    teekate_2 = game.add.button(23, 484, 'teekate_2', onClickTeekate_2, this, 1, 0, 2);
-    teekate_3 = game.add.button(23, 518, 'teekate_3', onClickTeekate_3, this, 1, 0, 2);
+    teekate_2 = game.add.button(123, 484, 'teekate_2', onClickTeekate_2, this, 1, 0, 2);
+    teekate_3 = game.add.button(123, 518, 'teekate_3', onClickTeekate_3, this, 1, 0, 2);
     //teekate_4 = game.add.button(23, 552, 'teekate_4', onClickTeekate_4, this, 1, 0, 2);
 }
 
@@ -535,10 +536,10 @@ function onClickTeekate_2() {
         teekateValik('majadLompidega');
     }
     
-    teekate_2 = game.add.button(23, 484, 'teekate_2', onClickTeekate_2, this, 2, 2, 2);
+    teekate_2 = game.add.button(123, 484, 'teekate_2', onClickTeekate_2, this, 2, 2, 2);
     console.log("teekate2 nupp vajutatud" )
-    teekate_1 = game.add.button(23, 450, 'teekate_1', onClickTeekate_1, this, 1, 0, 2);    
-    teekate_3 = game.add.button(23, 518, 'teekate_3', onClickTeekate_3, this, 1, 0, 2);
+    teekate_1 = game.add.button(123, 450, 'teekate_1', onClickTeekate_1, this, 1, 0, 2);    
+    teekate_3 = game.add.button(123, 518, 'teekate_3', onClickTeekate_3, this, 1, 0, 2);
     //teekate_4 = game.add.button(23, 552, 'teekate_4', onClickTeekate_4, this, 1, 0, 2);
 }
 
@@ -554,11 +555,11 @@ function onClickTeekate_3() {
         teekateValik('majadLumine');
     }
     
-    teekate_3 = game.add.button(23, 518, 'teekate_3', onClickTeekate_3, this, 2, 2, 2);
+    teekate_3 = game.add.button(123, 518, 'teekate_3', onClickTeekate_3, this, 2, 2, 2);
     console.log("teekate3 nupp vajutatud" )
-    teekate_1 = game.add.button(23, 450, 'teekate_1', onClickTeekate_1, this, 1, 0, 2);
-    teekate_2 = game.add.button(23, 484, 'teekate_2', onClickTeekate_2, this, 1, 0, 2);
-    teekate_4 = game.add.button(23, 552, 'teekate_4', onClickTeekate_4, this, 1, 0, 2);
+    teekate_1 = game.add.button(123, 450, 'teekate_1', onClickTeekate_1, this, 1, 0, 2);
+    teekate_2 = game.add.button(123, 484, 'teekate_2', onClickTeekate_2, this, 1, 0, 2);
+    //teekate_4 = game.add.button(23, 552, 'teekate_4', onClickTeekate_4, this, 1, 0, 2);
 }
 
 /* function onClickTeekate_4() {
@@ -614,7 +615,7 @@ function onClickUuesti() {
     kiirus = 50;
     kiiruseNupp.inputEnabled = true;
     onClickTeekate_1();
-    onClickRehv_1();
+    //onClickRehv_1();
     
     // laetakse uuesti global variabled algsete vÃ¤Ã¤rtustega sisse
     teeValik = 1;
