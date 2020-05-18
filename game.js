@@ -131,7 +131,6 @@ function create () {
 
 
     //mängija saab ennustada peatumisteekonda meetrites
-    kiiruseM66dik_Must = game.add.sprite(380,390, 'kiiruseM66dik_Must')
     kiiruseM66dik = game.add.sprite(380, 390, 'kiiruseM66dik');
     boundsM66dik = new Phaser.Rectangle(346, 360, 425, 65);
     //  vajadusel saab kastikiese ka v2lja joonistada:
@@ -141,7 +140,7 @@ function create () {
     
     
     //lipu liigutamine´
-    lipuTekeMust()
+    
     lipuTeke()
 
     //juhised
@@ -177,11 +176,7 @@ function create () {
     rehv_4.inputEnabled = false;
     //et avalehel ei saaks jätka vajutada :@
     jatkanNupp.inputEnabled = false;
-    this.input.keyboard.enabled = false;
-    
-    
-    
-    
+    this.input.keyboard.enabled = false;   
     
     cursors = game.input.keyboard.createCursorKeys()
     
@@ -473,7 +468,8 @@ function teekateValik(tee_var) {
     }
     player = game.add.sprite(0, game.world.height - 247, 'car')
     takistus = game.add.sprite(takistuseKaugus, game.world.height - 255, 'kits')    
-    if (tee_var == 'majadLumine' || tee_var == 'maaLumine' ){
+    lipuTeke()
+    /* if (tee_var == 'majadLumine' || tee_var == 'maaLumine' ){
         kiiruseM66dik.destroy();
         kiiruseM66dik_Must = game.add.sprite(380,390, 'kiiruseM66dik_Must')
         lipuTekeMust()        
@@ -481,7 +477,7 @@ function teekateValik(tee_var) {
     else {
         kiiruseM66dik = game.add.sprite(380, 390, 'kiiruseM66dik')
         lipuTeke()
-    }
+    } */
     
     
 
@@ -689,18 +685,31 @@ function dragStop() {
 }
 
 function lipuTeke() {
-    lipp = game.add.sprite(358.5, 392, 'lipp')
-    game.physics.arcade.enable(lipp)
-    lipp.anchor.x = 0.5;
-    lipp.anchor.y = 0.5;    
-    lipp.inputEnabled = true;
-    lipp.input.enableDrag(false,false,false,250,boundsM66dik);
-    lipp.input.allowVerticalDrag = false;
-    
-    lipp.events.onDragStop.add(lippStop);
+    if (teeValik == 3 ) {
+        lipp = game.add.sprite(358.5, 392, 'lippMust')
+        game.physics.arcade.enable(lipp)
+        lipp.anchor.x = 0.5;
+        lipp.anchor.y = 0.5;    
+        lipp.inputEnabled = true;
+        lipp.input.enableDrag(false,false,false,250,boundsM66dik);
+        lipp.input.allowVerticalDrag = false;
+        kiiruseM66dik = game.add.sprite(380,390, 'kiiruseM66dik_Must')
+        lipp.events.onDragStop.add(lippStop);
+    }
+    else {
+        lipp = game.add.sprite(358.5, 392, 'lipp')
+        game.physics.arcade.enable(lipp)
+        lipp.anchor.x = 0.5;
+        lipp.anchor.y = 0.5;    
+        lipp.inputEnabled = true;
+        lipp.input.enableDrag(false,false,false,250,boundsM66dik);
+        lipp.input.allowVerticalDrag = false;
+        kiiruseM66dik = game.add.sprite(380,390, 'kiiruseM66dik')
+        lipp.events.onDragStop.add(lippStop);
+    }
 }
 
-function lipuTekeMust() {
+/* function lipuTekeMust() {
     lippMust = game.add.sprite(358.5, 392, 'lippMust')
     game.physics.arcade.enable(lippMust)
     lippMust.anchor.x = 0.5;
@@ -710,7 +719,7 @@ function lipuTekeMust() {
     lippMust.input.allowVerticalDrag = false;
     
     lippMust.events.onDragStop.add(lippStopMust);
-}
+} */
 
 
 function lippStop() {
@@ -720,12 +729,12 @@ function lippStop() {
     console.log(ennustus);
 }
 
-function lippStopMust() {
+/* function lippStopMust() {
     console.log("lipu nupp just lasti lahti")    
     console.log(lippMust.body.position.x);
     ennustus = (lippMust.body.position.x - 346)/4;
     console.log(ennustus);
-}
+} */
 
 function otsaSoit() {
     if (takistus.x <= (player.x + 185) && efe3 == 0) {
