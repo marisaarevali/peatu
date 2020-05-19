@@ -25,9 +25,16 @@ function preload () {
     game.load.image('kiiruseNupp', 'assets/nupp.png');
     game.load.image('lipp', 'assets/lipp.png');
     game.load.image('lippMust', 'assets/lipp_must.png');
-    game.load.image('l6puLause_1', 'assets/tagasiside1_1.png');
+    game.load.image('l6puLause_1_1', 'assets/tagasiside1_1.png');
+    game.load.image('l6puLause_1_2', 'assets/tagasiside1_2.png');
+    game.load.image('l6puLause_1_3', 'assets/tagasiside1_3.png');
+    game.load.image('l6puLause_1_4', 'assets/tagasiside1_4.png');
     game.load.image('l6puLause_2', 'assets/tagasiside2.png');
-    game.load.image('l6puLause_3', 'assets/tagasiside3_1.png');
+    game.load.image('l6puLause_3_1', 'assets/tagasiside3_1.png');
+    game.load.image('l6puLause_3_2', 'assets/tagasiside3_2.png');
+    game.load.image('l6puLause_3_3', 'assets/tagasiside3_3.png');
+    game.load.image('l6puLause_3_4', 'assets/tagasiside3_4.png');
+    
     game.load.image('avaleht', 'assets/avaleht.png');
     game.load.image('juhised', 'assets/juhised.png');
     game.load.image('l6puTiiter', 'assets/lopp.png');
@@ -787,7 +794,11 @@ function l6puLause_kuva() {
 
 function lopuText_1() {
     //pidurdus ilma liputa
-    l6puLause = game.add.sprite(0, 0, 'l6puLause_1') 
+    
+    // liputa_var on muutuja mis tekitatakse randomiga, valikuks kas I, II, III, voi IV lopulause (ilma liputa)pilti kasutatkse l6putekstina
+    liputa_var = "" + unToRandom(4,'l6puLause_1_');
+    console.log(liputa_var, " on liputa var");    
+    l6puLause = game.add.sprite(0, 0, liputa_var); 
     game.physics.arcade.enable(l6puLause)
     // num = (player.body.position.x + 185 - pidurdusAlgPunkt)/4;
     num = ((kiirus*kiirus)/100)*0.55*(1/teeolu_var)    
@@ -821,7 +832,10 @@ function lopuText_2() {
 
 function lopuText_3() {
     //pidurdus lipuga
-    l6puLause = game.add.sprite(0, 0, 'l6puLause_3') 
+    // lipuga_var on muutuja mis tekitatakse randomiga, valikuks kas I, II, III, voi IV lopulause (lipuga)pilti kasutatkse l6putekstina
+    lipuga_var = "" + unToRandom(4,'l6puLause_3_');
+    console.log(lipuga_var, " on lipuga var");    
+    l6puLause = game.add.sprite(0, 0, lipuga_var) 
     game.physics.arcade.enable(l6puLause)
     // num = (player.body.position.x + 185 - pidurdusAlgPunkt)/4;
     num = ((kiirus*kiirus)/100)*0.55*(1/teeolu_var)    
@@ -921,3 +935,14 @@ teekate_1.destroy();
 teekate_2.destroy();
 teekate_3.destroy();
 }
+
+var liputa_var;
+// randomi functsioon ; yhest kuni nr "el_num" ; saadud number lisatakse  stringile(el_string) otsa
+function unToRandom(el_num, el_string) {
+    return(el_string+(Math.floor(Math.random()*el_num)+1))
+}
+
+
+
+// Math.floor(Math.random()*4)+1
+ 
