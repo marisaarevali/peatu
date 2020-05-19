@@ -167,7 +167,7 @@ function create () {
     game.physics.arcade.enable(nupuTaust)
     heliNupp = game.add.button(685, 27, 'heliNupp', heliClick, this, 1, 1, 1);
     juhisedNupp = game.add.button(730, 27, 'juhisedNupp', juhisedClick, this, 0, 0, 0);
-    
+    juhisedNupp.inputEnabled = false;    
     
     this.spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     
@@ -233,7 +233,7 @@ function create () {
 
     heliInt = 0;
     juhisedInt = 0;
-    
+
     
 
 
@@ -285,6 +285,8 @@ function create () {
     }
 
     function jatkanClick() {
+        juhisedNupp.inputEnabled = true;
+        jatkanInt = 1;
         juhised.destroy()
         jatkanNupp.destroy()
         kiiruseNupp.inputEnabled = true;
@@ -674,6 +676,10 @@ function onClickUuesti() {
 function onClickL6petan() {
     l6puTiiter = game.add.sprite(0, 0, 'l6puTiiter')   
     game.physics.arcade.enable(l6puTiiter)
+    uuestiNupp.inputEnabled = false;
+    l6petanNupp.inputEnabled = false;
+    startStopNupp.inputEnabled = false;
+    startStopNupp.input.useHandCursor = false;
 }
 
 
@@ -914,8 +920,7 @@ function juhisedClick() {
         game.physics.arcade.enable(nupuTaust)
         heliNupp = game.add.button(685, 27, 'heliNupp', heliClick, this, 1, 1, 1);
         juhisedNupp = game.add.button(730, 27, 'juhisedNupp', juhisedClick, this, 0, 0, 0);  
-    }
-    else {
+    } else {
         juhised.destroy()
         kiiruseNupp.inputEnabled = true;
         startStopNupp.inputEnabled = true;
