@@ -25,9 +25,9 @@ function preload () {
     game.load.image('kiiruseNupp', 'assets/nupp.png');
     game.load.image('lipp', 'assets/lipp.png');
     game.load.image('lippMust', 'assets/lipp_must.png');
-    game.load.image('l6puLause_1', 'assets/tagasiside1.png');
+    game.load.image('l6puLause_1', 'assets/tagasiside1_1.png');
     game.load.image('l6puLause_2', 'assets/tagasiside2.png');
-    game.load.image('l6puLause_3', 'assets/tagasiside3.png');
+    game.load.image('l6puLause_3', 'assets/tagasiside3_1.png');
     game.load.image('avaleht', 'assets/avaleht.png');
     game.load.image('juhised', 'assets/juhised.png');
     game.load.image('l6puTiiter', 'assets/lopp.png');
@@ -39,16 +39,16 @@ function preload () {
 
     // nupude pildid
     game.load.spritesheet('startStopNupp', 'assets/startstop_nupp.png', 150, 50);
-    game.load.spritesheet('uuestiNupp', 'assets/proovinuuesti.png', 165, 50);
+    game.load.spritesheet('uuestiNupp', 'assets/proovinuuesti.png', 200, 51);
     game.load.spritesheet('proovinNupp', 'assets/proovin.png', 150, 50);
     game.load.spritesheet('jatkanNupp', 'assets/jatkan.png', 130, 50);
     game.load.spritesheet('l6petanNupp', 'assets/lopetan.png', 150, 50);
     game.load.spritesheet('heliNupp', 'assets/helinupp.png', 35, 35);
     game.load.spritesheet('juhisedNupp', 'assets/juhisednupp.png', 35, 35);
     
-    game.load.spritesheet('teekate_1', 'assets/kuivasfalt_nupp.png', 104, 25);
-    game.load.spritesheet('teekate_2', 'assets/m2rgasfalt_nupp.png', 104, 25);
-    game.load.spritesheet('teekate_3', 'assets/lumineasfalt_nupp.png', 104, 25);
+    game.load.spritesheet('teekate_1', 'assets/kuivteekatenupp.png', 104, 25);
+    game.load.spritesheet('teekate_2', 'assets/m2rgteekatenupp.png', 104, 25);
+    game.load.spritesheet('teekate_3', 'assets/j2ineteekatenupp.png', 104, 25);
 /*     game.load.spritesheet('teekate_4', 'assets/kruusatee_nupp.png', 104, 25);
  
     game.load.spritesheet('rehv_1', 'assets/suverehvid_nupp.png', 104, 25);
@@ -805,8 +805,8 @@ function lopuText_1() {
     textGroup.setAll('anchor.x', 0.5);
     textGroup.setAll('anchor.y', 0.5);
     // 7 mai martini lisatud read
-    uuestiNupp = game.add.button(490, 430, 'uuestiNupp', onClickUuesti, this, 0, 0, 0);
-    l6petanNupp = game.add.button(125, 430, 'l6petanNupp', onClickL6petan, this, 0, 0, 0);
+    uuestiNupp = game.add.button(490, 480, 'uuestiNupp', onClickUuesti, this, 0, 0, 0);
+    l6petanNupp = game.add.button(125, 480, 'l6petanNupp', onClickL6petan, this, 0, 0, 0);
 
 }
 
@@ -815,8 +815,8 @@ function lopuText_2() {
     l6puLause = game.add.sprite(0, 0, 'l6puLause_2') 
     game.physics.arcade.enable(l6puLause)
     // 7 mai martini lisatud read
-    uuestiNupp = game.add.button(490, 340, 'uuestiNupp', onClickUuesti, this, 0, 0, 0);
-    l6petanNupp = game.add.button(135, 340, 'l6petanNupp', onClickL6petan, this, 0, 0, 0);
+    uuestiNupp = game.add.button(490, 325, 'uuestiNupp', onClickUuesti, this, 0, 0, 0);
+    l6petanNupp = game.add.button(135, 325, 'l6petanNupp', onClickL6petan, this, 0, 0, 0);
 }
 
 function lopuText_3() {
@@ -839,8 +839,8 @@ function lopuText_3() {
     textGroup.setAll('anchor.x', 0.5);
     textGroup.setAll('anchor.y', 0.5);
     // 7 mai martini lisatud read
-    uuestiNupp = game.add.button(490, 430, 'uuestiNupp', onClickUuesti, this, 0, 0, 0);
-    l6petanNupp = game.add.button(125, 430, 'l6petanNupp', onClickL6petan, this, 0, 0, 0);
+    uuestiNupp = game.add.button(490, 480, 'uuestiNupp', onClickUuesti, this, 0, 0, 0);
+    l6petanNupp = game.add.button(125, 480, 'l6petanNupp', onClickL6petan, this, 0, 0, 0);
 
 }
 
