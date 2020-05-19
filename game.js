@@ -652,7 +652,7 @@ function onClickUuesti() {
     proloog = 0;
 
     juhisedInt = 0;
-    
+    ennustus = 0;
     
     
     startStopNupp.destroy();
@@ -708,7 +708,8 @@ function dragStop() {
 
 function lipuTeke() {
     if (teeValik == 3) {
-        lipp = game.add.sprite(358.5, 392, 'lippMust')
+//        lipp = game.add.sprite(358.5, 392, 'lippMust')
+        lipp = game.add.sprite(ennustus * 4 + 358.5, 392, 'lippMust')        
         game.physics.arcade.enable(lipp)
         lipp.anchor.x = 0.5;
         lipp.anchor.y = 0.5;    
@@ -719,7 +720,7 @@ function lipuTeke() {
         kiiruseM66dik = game.add.sprite(380,390, 'kiiruseM66dik_Must')
     }
     else {
-        lipp = game.add.sprite(358.5, 392, 'lipp')
+        lipp = game.add.sprite(ennustus * 4 + 358.5, 392, 'lipp')
         game.physics.arcade.enable(lipp)
         lipp.anchor.x = 0.5;
         lipp.anchor.y = 0.5;    
