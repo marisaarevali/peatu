@@ -755,7 +755,7 @@ function lipuTeke() {
 function lippStop() {
     console.log("lipu nupp just lasti lahti")    
     console.log(lipp.body.position.x);
-    ennustus = (lipp.body.position.x - 346)/4;
+    ennustus = Math.round(((lipp.body.position.x - 346)/4 + Number.EPSILON) * 100) / 100;
     console.log(ennustus);
 }
 
@@ -815,14 +815,20 @@ function lopuText_1() {
     //textGroup.add(game.make.text(135, 350,Math.round((kiirus + Number.EPSILON) * 100) / 100, { font: "20px Arial", fill: "black" }));
     //reageerimisaeg
     if (currentTime2 > currentTime1) {
-            textGroup.add(game.make.text(340, 209,Math.round(((currentTime2 - currentTime1) + Number.EPSILON)*100) / 100000, tekstiStiil));        
+        reagAeg();
+        textGroup.add(game.make.text(340, 209,reag_var, tekstiStiil));
+        // peatumisTeekond = pidurdusteekond + rageermisteekond(meetrites))
+        peatumisTeekond = Math.round((num + reagMmeeter_var + Number.EPSILON) * 100) / 100  
+        //peatumisteekond meetrites
+        textGroup.add(game.make.text(448, 302, peatumisTeekond, tekstiStiil));
+         //reageerimisteekond meetrid
+        textGroup.add(game.make.text(210, 229, reagMmeeter_var, tekstiStiil));
+                
     }
-    //reageerimisteekond meetrid
-    textGroup.add(game.make.text(210, 229, "12.22", tekstiStiil));
+   
     //pidurdusteekond
     textGroup.add(game.make.text(313, 265, Math.round((num + Number.EPSILON) * 100) / 100, tekstiStiil));
-    //peatumisteekond meetrites
-    textGroup.add(game.make.text(448, 302, "103.22", tekstiStiil));
+    
     //peatumisaeg sekundites
     textGroup.add(game.make.text(603, 302, "50.22", tekstiStiil));
 
@@ -851,19 +857,29 @@ function lopuText_3() {
     console.log(lipuga_var, " on lipuga var");    
     l6puLause = game.add.sprite(0, 0, lipuga_var) 
     game.physics.arcade.enable(l6puLause)
+    num = ((kiirus*kiirus)/100)*0.55*(1/teeolu_var)
+
     textGroup = game.add.group();
     //lipu ennustus
     textGroup.add(game.make.text(550, 213, ennustus, tekstiStiil));
-    // tegelik peatumisteekond meetrites
-    textGroup.add(game.make.text(380, 252, "100.22", tekstiStiil));
+    
     // peatumisaeg sekundites
     textGroup.add(game.make.text(199, 272, "10.22", tekstiStiil));
     //reageerimisaeg
     if (currentTime2 > currentTime1) {
-            textGroup.add(game.make.text(344, 311,Math.round(((currentTime2 - currentTime1) + Number.EPSILON)*100) / 100000, tekstiStiil));        
+        reagAeg();
+        textGroup.add(game.make.text(344, 311, reag_var, tekstiStiil));           
+        // peatumisTeekond = pidurdusteekond + rageermisteekond(meetrites))
+        peatumisTeekond = Math.round((num + reagMmeeter_var + Number.EPSILON) * 100) / 100  
+        //reageerimisajal läbitud meetrid
+        textGroup.add(game.make.text(250, 331, reagMmeeter_var, tekstiStiil));
+        // tegelik peatumisteekond meetrites
+        textGroup.add(game.make.text(380, 252, peatumisTeekond, tekstiStiil));      
     }
     //reageerimisajal läbitud meetrid
-    textGroup.add(game.make.text(250, 331, "11.22", tekstiStiil));
+    //textGroup.add(game.make.text(250, 331, reagMmeeter_var, tekstiStiil));
+    // tegelik peatumisteekond meetrites
+    //textGroup.add(game.make.text(380, 252, "100.22", tekstiStiil));
 
     textGroup.setAll('anchor.x', 0.5);
     textGroup.setAll('anchor.y', 0.5);
@@ -955,6 +971,18 @@ var liputa_var;
 function unToRandom(el_num, el_string) {
     return(el_string+(Math.floor(Math.random()*el_num)+1))
 }
+
+// peatumisTeekond var on pidurdusteekond + reageerimis ajal l2bitud meetrid
+var peatumisTeekond;
+
+var reag_var;
+var reagMmeeter_var;
+// reag_var on reageerimis aeg, sekundites ; reagMmeeter_var on reageerimis ajal l2bitud meetrid
+function reagAeg() {
+    reag_var = Math.round(((currentTime2 - currentTime1) + Number.EPSILON)*100) / 100000
+    reagMmeeter_var = Math.round(((kiirus/3.6*reag_var) + Number.EPSILON)*100) / 100
+}
+
 
 
 
