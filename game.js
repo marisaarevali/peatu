@@ -212,7 +212,7 @@ function create () {
 
     kiiruseCalc();
 }
-
+//global variabled
     // muutujad, vasakul olevatele nupukestele ; nad on kas 1, 2, 3 v6i 4
     // by default teevalik = 1 ja rehvivalik = 1  
     teeValik = 1;
@@ -224,7 +224,8 @@ function create () {
 //   kiirus2 = ((kiiruseNupp.body.position.x - bounds.x)/(bounds.width-18)*100)+30;
 //    efe = kiirus*4;
 
-
+    tekstiStiil = {font: "16px Arial", fill: "black", fontWeight: "bold"};
+    var textGroup;
     iter = 0;
     autoLiikumine = 1;
     taustaLiikumine = 0;
@@ -353,8 +354,8 @@ function update () {
         taustaLiikumine = 1;
         
         if (iter == 0) {
-            takistusTeke = setTimeout(podraTeke, Math.floor(2000 + (Math.random() * 5000)));
-            //takistusTeke = setTimeout(podraTeke, Math.floor( 3000));
+            //takistusTeke = setTimeout(podraTeke, Math.floor(2000 + (Math.random() * 5000)));
+            takistusTeke = setTimeout(podraTeke, Math.floor( 1000));
             iter = 1;
         }
 
@@ -632,7 +633,6 @@ function onClickRehv_4() {
 } */
 
 function onClickUuesti() {
-
     kiiruseNupp.x = 370.6;
     kiirus = 50;
     kiiruseNupp.inputEnabled = true;
@@ -655,6 +655,7 @@ function onClickUuesti() {
 
     juhisedInt = 0;
     ennustus = 0;
+    lipp.x = ennustus * 4 + 358.5;
     
     
     startStopNupp.destroy();
@@ -799,26 +800,32 @@ function l6puLause_kuva() {
 // teekate_4 = game.add.button(23, 552, 'teekate_4', onClickTeekate_4, this, 1, 0, 2);    
 }
 
-function lopuText_1() {
-    //pidurdus ilma liputa
+
+//pidurdus ilma liputa
+function lopuText_1() {   
     
     // liputa_var on muutuja mis tekitatakse randomiga, valikuks kas I, II, III, voi IV lopulause (ilma liputa)pilti kasutatkse l6putekstina
     liputa_var = "" + unToRandom(4,'l6puLause_1_');
     console.log(liputa_var, " on liputa var");    
     l6puLause = game.add.sprite(0, 0, liputa_var); 
     game.physics.arcade.enable(l6puLause)
-    // num = (player.body.position.x + 185 - pidurdusAlgPunkt)/4;
     num = ((kiirus*kiirus)/100)*0.55*(1/teeolu_var)    
-    textGroup = game.add.group();
-    //pidurdusteekond
-    textGroup.add(game.make.text(305, 273, Math.round((num + Number.EPSILON) * 100) / 100, { font: "15px Arial", fill: "black" }));      
+    textGroup = game.add.group();          
     //auto kiirus
     //textGroup.add(game.make.text(135, 350,Math.round((kiirus + Number.EPSILON) * 100) / 100, { font: "20px Arial", fill: "black" }));
-    
     //reageerimisaeg
     if (currentTime2 > currentTime1) {
-            textGroup.add(game.make.text(330, 218,Math.round(((currentTime2 - currentTime1) + Number.EPSILON)*100) / 100000, { font: "15px Arial", fill: "black" }));        
+            textGroup.add(game.make.text(340, 209,Math.round(((currentTime2 - currentTime1) + Number.EPSILON)*100) / 100000, tekstiStiil));        
     }
+    //reageerimisteekond meetrid
+    textGroup.add(game.make.text(210, 229, "12.22", tekstiStiil));
+    //pidurdusteekond
+    textGroup.add(game.make.text(313, 265, Math.round((num + Number.EPSILON) * 100) / 100, tekstiStiil));
+    //peatumisteekond meetrites
+    textGroup.add(game.make.text(448, 302, "103.22", tekstiStiil));
+    //peatumisaeg sekundites
+    textGroup.add(game.make.text(603, 302, "50.22", tekstiStiil));
+
 
     textGroup.setAll('anchor.x', 0.5);
     textGroup.setAll('anchor.y', 0.5);
@@ -828,8 +835,8 @@ function lopuText_1() {
 
 }
 
-function lopuText_2() {
-    //pidurdasid liiga vara
+//pidurdasid liiga vara
+function lopuText_2() {    
     l6puLause = game.add.sprite(0, 0, 'l6puLause_2') 
     game.physics.arcade.enable(l6puLause)
     // 7 mai martini lisatud read
@@ -844,18 +851,19 @@ function lopuText_3() {
     console.log(lipuga_var, " on lipuga var");    
     l6puLause = game.add.sprite(0, 0, lipuga_var) 
     game.physics.arcade.enable(l6puLause)
-    // num = (player.body.position.x + 185 - pidurdusAlgPunkt)/4;
-    num = ((kiirus*kiirus)/100)*0.55*(1/teeolu_var)    
     textGroup = game.add.group();
-    //pidurdusteekond
-    textGroup.add(game.make.text(305, 273, Math.round((num + Number.EPSILON) * 100) / 100, { font: "15px Arial", fill: "black" }));      
-    //auto kiirus
-    //textGroup.add(game.make.text(135, 350,Math.round((kiirus + Number.EPSILON) * 100) / 100, { font: "20px Arial", fill: "black" }));
-    
+    //lipu ennustus
+    textGroup.add(game.make.text(550, 213, ennustus, tekstiStiil));
+    // tegelik peatumisteekond meetrites
+    textGroup.add(game.make.text(380, 252, "100.22", tekstiStiil));
+    // peatumisaeg sekundites
+    textGroup.add(game.make.text(199, 272, "10.22", tekstiStiil));
     //reageerimisaeg
     if (currentTime2 > currentTime1) {
-            textGroup.add(game.make.text(330, 218,Math.round(((currentTime2 - currentTime1) + Number.EPSILON)*100) / 100000, { font: "15px Arial", fill: "black" }));        
+            textGroup.add(game.make.text(344, 311,Math.round(((currentTime2 - currentTime1) + Number.EPSILON)*100) / 100000, tekstiStiil));        
     }
+    //reageerimisajal läbitud meetrid
+    textGroup.add(game.make.text(250, 331, "11.22", tekstiStiil));
 
     textGroup.setAll('anchor.x', 0.5);
     textGroup.setAll('anchor.y', 0.5);
