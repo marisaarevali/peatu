@@ -354,8 +354,8 @@ function update () {
         taustaLiikumine = 1;
         
         if (iter == 0) {
-            //takistusTeke = setTimeout(podraTeke, Math.floor(2000 + (Math.random() * 5000)));
-            takistusTeke = setTimeout(podraTeke, Math.floor( 1000));
+            takistusTeke = setTimeout(podraTeke, Math.floor(2000 + (Math.random() * 5000)));
+            //takistusTeke = setTimeout(podraTeke, Math.floor( 1000));
             iter = 1;
         }
 
@@ -823,14 +823,16 @@ function lopuText_1() {
         textGroup.add(game.make.text(448, 302, peatumisTeekond, tekstiStiil));
          //reageerimisteekond meetrid
         textGroup.add(game.make.text(210, 229, reagMmeeter_var, tekstiStiil));
+        //peatumisaeg sekundites
+        pidurdusAeg = (kiirus/3.6) / (7.5 * teeolu_var);
+        textGroup.add(game.make.text(603, 302, Math.round((pidurdusAeg + reag_var + Number.EPSILON) * 100) / 100, tekstiStiil));
                 
     }
    
     //pidurdusteekond
     textGroup.add(game.make.text(313, 265, Math.round((num + Number.EPSILON) * 100) / 100, tekstiStiil));
     
-    //peatumisaeg sekundites
-    textGroup.add(game.make.text(603, 302, "50.22", tekstiStiil));
+    
 
 
     textGroup.setAll('anchor.x', 0.5);
@@ -863,8 +865,7 @@ function lopuText_3() {
     //lipu ennustus
     textGroup.add(game.make.text(550, 213, ennustus, tekstiStiil));
     
-    // peatumisaeg sekundites
-    textGroup.add(game.make.text(199, 272, "10.22", tekstiStiil));
+    
     //reageerimisaeg
     if (currentTime2 > currentTime1) {
         reagAeg();
@@ -874,7 +875,10 @@ function lopuText_3() {
         //reageerimisajal läbitud meetrid
         textGroup.add(game.make.text(250, 331, reagMmeeter_var, tekstiStiil));
         // tegelik peatumisteekond meetrites
-        textGroup.add(game.make.text(380, 252, peatumisTeekond, tekstiStiil));      
+        textGroup.add(game.make.text(380, 252, peatumisTeekond, tekstiStiil));  
+        // peatumisaeg sekundites
+        pidurdusAeg = (kiirus/3.6) / (7.5 * teeolu_var);
+        textGroup.add(game.make.text(199, 272, Math.round((pidurdusAeg + reag_var + Number.EPSILON) * 100) / 100, tekstiStiil));    
     }
     //reageerimisajal läbitud meetrid
     //textGroup.add(game.make.text(250, 331, reagMmeeter_var, tekstiStiil));
@@ -983,6 +987,7 @@ function reagAeg() {
     reagMmeeter_var = Math.round(((kiirus/3.6*reag_var) + Number.EPSILON)*100) / 100
 }
 
+var pidurdusAeg;
 
 
 
