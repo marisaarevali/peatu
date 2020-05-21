@@ -404,15 +404,15 @@ function update () {
             
             efe = efe - pidurdusKonfitsent;
             player.body.velocity.x = efe;
-            console.log(efe2, efe3)
-
+        
             // et pidurit ei saaks all l6putult hoida:
             autoPidurdus = 0;
             
-            console.log("majad ja teed: ", majadJaTee.body.velocity.x)
-                        
-            console.log("Auto sõidetud distants: ", player.body.position.x + 185)       
-            console.log(efe)
+            // kui debugda vaja on, siis vb on vaja neli alumist rida tagasi sisse kommenteerida
+            // console.log(efe2, efe3)
+            // console.log("majad ja teed: ", majadJaTee.body.velocity.x)                        
+            // console.log("Auto sõidetud distants: ", player.body.position.x + 185)       
+            // console.log(efe)
             
             //efe = efe*0.95;
             //efe = ((efe**0.5)*100)*0.108 ;       
@@ -440,13 +440,14 @@ function update () {
         takistus.body.velocity.x = 0;
         majadJaTee.body.velocity.x = 0;
         
-        console.log(efe2, efe3)
         efe = efe - pidurdusKonfitsent;
         player.body.velocity.x = efe;
 
-        console.log("majad ja teed: ", majadJaTee.body.velocity.x)
-        console.log("Auto sõidetud distants: ", player.body.position.x + 185)
-        console.log(efe)
+        // kui debugda vaja on, siis vb on vaja neli alumist rida tagasi sisse kommenteerida
+        // console.log(efe2, efe3)
+        // console.log("majad ja teed: ", majadJaTee.body.velocity.x)
+        // console.log("Auto sõidetud distants: ", player.body.position.x + 185)
+        // console.log(efe)
 
         if (efe < 2){
         autoFullStop = 0;
@@ -903,8 +904,13 @@ function podraTeke() {
     // ning korrutame neljaga, et saada distants pixli kauguses
     // PS! reageermis aeg pixlites = meeterid*4 ; 50km/h läbib auto 200px/s ja 100km/h läbib auto 400px/s
     reagJaPidur = ((kiirus*kiirus)/100)*0.55*(1/teeolu_var) + kiirus
-    takistuseKaugus2 = ((reagJaPidur*4) + 50 + 185)    
-    
+    takistuseKaugus2 = ((reagJaPidur*4) + 50 + 185)      
+
+    if (takistuseKaugus2 > 770) {
+        console.log(takistuseKaugus2, "oli")
+        takistuseKaugus2 = 770
+    }    
+
     takistus.destroy();
     
     takistus = game.add.sprite(takistuseKaugus2, game.world.height - 255, 'kits')
