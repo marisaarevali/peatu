@@ -292,7 +292,7 @@ function create () {
         jatkanNupp.destroy()
         kiiruseNupp.inputEnabled = true;
         startStopNupp.inputEnabled = true;
-        startStopNupp.input.useHandCursor = true;
+        //startStopNupp.input.useHandCursor = true;
         teekate_1.inputEnabled = true;
         teekate_2.inputEnabled = true;
         teekate_3.inputEnabled = true;
@@ -323,20 +323,23 @@ function create () {
 
 function update () {
     
-    if (this.spaceKey.isDown && autoLiikumine == 1 || startStopInt == 1 && taustaLiikumine == 0){
+    if (this.spaceKey.isDown && autoLiikumine == 1 && juhisedInt % 2 == 0 || startStopInt == 1 && taustaLiikumine == 0){
     //    if (this.spaceKey.isDown && player.body.position.x  == 0){
         startStopInt = 1;       
-        startStopNupp = game.add.button(625, 484, 'startStopNupp', actionOnClick_ss, this, 1, 1, 1);
-        kiiruseM66dik.destroy();
-        lipp.destroy();
-        kiiruseNupp.inputEnabled = false;
-        startStopNupp.inputEnabled = false;
-        teekate_1.inputEnabled = false;
-        teekate_2.inputEnabled = false;
-        teekate_3.inputEnabled = false;
+        
                 
         // auto k2ivitusheli if
-        if (efe2 == 0) {
+        if (efe2 == 0) { 
+            startStopNupp.destroy();           
+            startStopNupp = game.add.button(625, 484, 'startStopNupp', actionOnClick_ss, this, 1, 1, 1);
+            kiiruseM66dik.destroy();
+            lipp.destroy();
+            juhisedNupp.inputEnabled = false;
+            kiiruseNupp.inputEnabled = false;
+            //startStopNupp.inputEnabled = false;
+            teekate_1.inputEnabled = false;
+            teekate_2.inputEnabled = false;
+            teekate_3.inputEnabled = false;
             setTimeout(engineSoundStartFunc, 743);
             k2ivitus_sound.play();
         }
@@ -423,7 +426,6 @@ function update () {
             breaking_sound.play(); 
             currentTime2 = +new Date();
             heliNupp.inputEnabled = false;
-            juhisedNupp.inputEnabled = false;
 
             setTimeout(engineSoundStopFunc, 1200);
             }
@@ -634,12 +636,20 @@ function onClickRehv_4() {
 } */
 
 function onClickUuesti() {
+    startStopNupp.destroy();
+    juhisedNupp.destroy()
+    l6petanNupp.destroy();
+    // eemaldame l6puteksti elemendid:
+    l6puLause.destroy();  
+    uuestiNupp.destroy();
+    textGroup.destroy();
+    nupuTaust.destroy();
+
     kiiruseNupp.x = 370.6;
     kiirus = 50;
     kiiruseNupp.inputEnabled = true;
     onClickTeekate_1();
-    //onClickRehv_1();
-    
+    //onClickRehv_1();    
     // laetakse uuesti global variabled algsete vÃ¤Ã¤rtustega sisse
     teeValik = 1;
     rehviValik = 1;
@@ -653,23 +663,20 @@ function onClickUuesti() {
     efe3 = 0;
     startStopInt = 0;   
     proloog = 0;
-
     juhisedInt = 0;
     ennustus = 0;
-    lipp.x = ennustus * 4 + 358.5;
+    lipp.x = ennustus * 4 + 358.5; 
     
-    
-    startStopNupp.destroy();
     startStopNupp = game.add.button(625, 484, 'startStopNupp', actionOnClick_ss, this, 0, 0, 0);
-    heliNupp.inputEnabled = true;
-    juhisedNupp.inputEnabled = true;
+    //this.input.keyboard.enabled = true;
+    
 
     
-    l6petanNupp.destroy();
-    // eemaldame l6puteksti elemendid:
-    l6puLause.destroy();  
-    uuestiNupp.destroy();
-    textGroup.destroy();    
+    
+    nupuTaust = game.add.sprite(675, 20, 'nupuTaust')   
+    game.physics.arcade.enable(nupuTaust)
+    heliNupuTeke();
+    juhisedNupp = game.add.button(730, 27, 'juhisedNupp', juhisedClick, this, 0, 0, 0);
 
 
 
@@ -851,6 +858,9 @@ function lopuText_2() {
     // 7 mai martini lisatud read
     uuestiNupp = game.add.button(490, 325, 'uuestiNupp', onClickUuesti, this, 0, 0, 0);
     l6petanNupp = game.add.button(135, 325, 'l6petanNupp', onClickL6petan, this, 0, 0, 0);
+    textGroup = game.add.group();
+    //et proovi uuestiga saaks texgroupi kustutada
+    textGroup.add(game.make.text(1000, 1000, ennustus, tekstiStiil));
 }
 
 function lopuText_3() {
@@ -924,8 +934,12 @@ function podraTeke() {
 }
 
 function heliClick() {
-    heliNupp.destroy()
     heliInt +=1;
+    heliNupuTeke();
+}
+
+function heliNupuTeke() { 
+    heliNupp.destroy()    
     if (heliInt % 2 == 0){
               
         heliNupp = game.add.button(685, 27, 'heliNupp', heliClick, this, 1, 1, 1);
@@ -936,9 +950,13 @@ function heliClick() {
         game.sound.mute = true;
     }
 }
+
 function juhisedClick() {
     juhisedInt +=1;
+    console.log(juhisedInt, "juhisedint")
+    juhisedNupp.destroy();
     if (juhisedInt % 2 == 1) {
+        heliNupp.destroy();        
         console.log('juhisednupp vajutatud')
         juhised = game.add.sprite(0, 0, 'juhised') 
         game.physics.arcade.enable(juhised)
@@ -949,10 +967,11 @@ function juhisedClick() {
         teekate_3.inputEnabled = false;
         //et avalehel ei saaks jätka vajutada :@
         jatkanNupp.inputEnabled = false;
-        this.input.keyboard.enabled = false;  
-        nupuTaust = game.add.sprite(675, 20, 'nupuTaust')   
-        game.physics.arcade.enable(nupuTaust)
-        heliNupp = game.add.button(685, 27, 'heliNupp', heliClick, this, 1, 1, 1);
+        //this.input.keyboard.enabled = false; 
+        //nupuTaust = game.add.sprite(675, 20, 'nupuTaust')   
+        //game.physics.arcade.enable(nupuTaust)
+        //heliNupp = game.add.button(685, 27, 'heliNupp', heliClick, this, 1, 1, 1);
+        heliNupuTeke();
         juhisedNupp = game.add.button(730, 27, 'juhisedNupp', juhisedClick, this, 0, 0, 0);  
         juhisedJatkanNupp = game.add.button(625, 501, 'jatkanNupp', juhisedClick, this, 0, 0, 0);
 
@@ -965,7 +984,8 @@ function juhisedClick() {
         teekate_2.inputEnabled = true;
         teekate_3.inputEnabled = true;
         //et avalehel ei saaks jätka vajutada :@
-        this.input.keyboard.enabled = true;
+        //this.input.keyboard.enabled = true;
+        juhisedNupp = game.add.button(730, 27, 'juhisedNupp', juhisedClick, this, 0, 0, 0);
 
     }
     
