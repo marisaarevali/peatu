@@ -954,8 +954,11 @@ function juhisedClick() {
         game.physics.arcade.enable(nupuTaust)
         heliNupp = game.add.button(685, 27, 'heliNupp', heliClick, this, 1, 1, 1);
         juhisedNupp = game.add.button(730, 27, 'juhisedNupp', juhisedClick, this, 0, 0, 0);  
+        juhisedJatkanNupp = game.add.button(625, 501, 'jatkanNupp', juhisedClick, this, 0, 0, 0);
+
     } else {
         juhised.destroy()
+        juhisedJatkanNupp.destroy()
         kiiruseNupp.inputEnabled = true;
         startStopNupp.inputEnabled = true;
         teekate_1.inputEnabled = true;
@@ -963,6 +966,7 @@ function juhisedClick() {
         teekate_3.inputEnabled = true;
         //et avalehel ei saaks jätka vajutada :@
         this.input.keyboard.enabled = true;
+
     }
     
 }
