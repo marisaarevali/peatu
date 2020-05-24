@@ -20,7 +20,7 @@ function preload () {
     game.load.image('kiiruseM66dik_Must', 'assets/kiirusem66dik_must.png');
     game.load.image('alumineMenuu', 'assets/alumine.png');
     game.load.image('car', 'assets/car_r.png');
-    game.load.image('kits', 'assets/kits.png');
+    game.load.image('kits', 'assets/kast.png');
     game.load.image('rist', 'assets/rist.png');
     game.load.image('kiiruseNupp', 'assets/nupp.png');
     game.load.image('lipp', 'assets/lipp.png');
@@ -103,7 +103,7 @@ function create () {
 
     player = game.add.sprite(0, game.world.height - 247, 'car')
 
-    takistus = game.add.sprite(takistuseKaugus, game.world.height - 255, 'kits')
+    takistus = game.add.sprite(takistuseKaugus, game.world.height - 270, 'kits')
 
     kiiruseNupp = game.add.sprite(370.6, game.world.height - 97, 'kiiruseNupp')
 
@@ -923,7 +923,7 @@ function podraTeke() {
 
     takistus.destroy();
     
-    takistus = game.add.sprite(takistuseKaugus2, game.world.height - 255, 'kits')
+    takistus = game.add.sprite(takistuseKaugus2, game.world.height - 242, 'kits')
     game.physics.arcade.enable(takistus)
     
     console.log(takistuseKaugus2)
