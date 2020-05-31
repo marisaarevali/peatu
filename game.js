@@ -18,6 +18,9 @@ function preload () {
 
     game.load.image('kiiruseM66dik', 'assets/kiirusem66dik.png');
     game.load.image('kiiruseM66dik_Must', 'assets/kiirusem66dik_must.png');
+    game.load.image('asfaltGradient', 'assets/asfalt_gradient.png');
+    game.load.image('lumiGradient', 'assets/lumi_gradient.png');
+    game.load.image('vihmGradient', 'assets/vihm_gradient.png');
     game.load.image('alumineMenuu', 'assets/alumine.png');
     game.load.image('car', 'assets/car_r.png');
     game.load.image('kits', 'assets/kast.png');
@@ -101,7 +104,7 @@ function create () {
     */
     
 
-    player = game.add.sprite(0, game.world.height - 247, 'car')
+    // player = game.add.sprite(0, game.world.height - 247, 'car')
 
     takistus = game.add.sprite(takistuseKaugus, game.world.height - 270, 'kits')
 
@@ -118,7 +121,7 @@ function create () {
     
 
 
-    game.physics.arcade.enable(player)
+    // game.physics.arcade.enable(player)
     game.physics.arcade.enable(majadJaTee)
     game.physics.arcade.enable(takistus)
     
@@ -138,19 +141,24 @@ function create () {
 
 
     
-    boundsM66dik = new Phaser.Rectangle(346, 360, 425, 65);
+    // boundsM66dik = new Phaser.Rectangle(346, 360, 425, 65);
+    boundsM66dik = new Phaser.Rectangle(375, 360, 425, 65);
     //  vajadusel saab kastikiese ka v2lja joonistada:
-     /* var graphics = game.add.graphics(boundsM66dik.x, boundsM66dik.y);
+    /* 
+    var graphics = game.add.graphics(boundsM66dik.x, boundsM66dik.y);
     graphics.beginFill(0x000077);
-    graphics.drawRect(0, 0, boundsM66dik.width, boundsM66dik.height); */
+    graphics.drawRect(0, 0, boundsM66dik.width, boundsM66dik.height); 
+    */
     
     
     //lipu liigutamine´
     
-    lipuTeke()
+    lipuTeke();
 
-
-    
+    //maaGradientTeke();
+       
+    player = game.add.sprite(0, game.world.height - 247, 'car')
+    game.physics.arcade.enable(player)
     
     //juhised
     juhised = game.add.sprite(0, 0, 'juhised') 
@@ -224,7 +232,7 @@ function create () {
 //   kiirus2 = ((kiiruseNupp.body.position.x - bounds.x)/(bounds.width-18)*100)+30;
 //    efe = kiirus*4;
 
-    tekstiStiil = {font: "16px Arial", fill: "black", fontWeight: "bold"};
+    tekstiStiil = {font: "16px Arial", fill: "black"}; //fontWeight: "bold"};
     var textGroup;
     iter = 0;
     autoLiikumine = 1;
@@ -334,6 +342,8 @@ function update () {
             startStopNupp = game.add.button(625, 484, 'startStopNupp', actionOnClick_ss, this, 1, 1, 1);
             kiiruseM66dik.destroy();
             lipp.destroy();
+            maaGradient.destroy();
+            peatumisTekst.destroy();
             juhisedNupp.inputEnabled = false;
             kiiruseNupp.inputEnabled = false;
             //startStopNupp.inputEnabled = false;
@@ -461,10 +471,17 @@ function update () {
         }
         autoPidurdus = 0;
 
-        // if (this.rightKey.downDuration(10000)) {
+    } else if (lipu_var == 1) {
+        // m66dustik liigub vasakule
+        if (lipp.x > 708 && kiiruseM66dik.x >= -590) {
+            kiiruseM66dik.x = kiiruseM66dik.x - 3
+        
+        // m66dustik liigub paremale
+        } else if (lipp.x < 467 && kiiruseM66dik.x <= 409-3) {
+            kiiruseM66dik.x = kiiruseM66dik.x + 3        
+        }
 
 
-    // Auto k2ima minemine, siis kui esimest korda space alla vajutada
     }  
 
 }
@@ -485,16 +502,18 @@ function teekateValik(tee_var) {
     player.destroy();
     takistus.destroy();
     lipp.destroy();
+    peatumisTekst.destroy();
     kiiruseM66dik.destroy();
+    maaGradient.destroy();
 
     majadJaTee = game.add.sprite(0, 29, tee_var)
     for (i = 1; i < 3; i++) {
             majadJaTee.addChild(game.make.sprite(i*1705, 0, tee_var))
     }
+    lipuTeke();
     player = game.add.sprite(0, game.world.height - 247, 'car')
     takistus = game.add.sprite(takistuseKaugus, game.world.height - 255, 'kits')    
-    lipuTeke()
-    
+       
     
     /* if (tee_var == 'majadLumine' || tee_var == 'maaLumine' ){
         kiiruseM66dik.destroy();
@@ -570,7 +589,8 @@ function onClickTeekate_2() {
 function onClickTeekate_3() {
     teeValik = 3;
 
-    teeolu_var = 1.0/3;
+    // teeolu_var = 1.0/3;
+    teeolu_var = 0.2845;
     pidurdusKonfitsent = 1.5 * teeolu_var * 4;
 
     if (kiirus >= 51) {
@@ -648,6 +668,8 @@ function onClickUuesti() {
     kiiruseNupp.x = 370.6;
     kiirus = 50;
     kiiruseNupp.inputEnabled = true;
+    lippX_var = 387.5;
+    kiiruseM66dikX_var = 409;
     onClickTeekate_1();
     //onClickRehv_1();    
     // laetakse uuesti global variabled algsete vÃ¤Ã¤rtustega sisse
@@ -665,13 +687,10 @@ function onClickUuesti() {
     proloog = 0;
     juhisedInt = 0;
     ennustus = 0;
-    lipp.x = ennustus * 4 + 358.5; 
     
     startStopNupp = game.add.button(625, 484, 'startStopNupp', actionOnClick_ss, this, 0, 0, 0);
     //this.input.keyboard.enabled = true;
-    
 
-    
     
     nupuTaust = game.add.sprite(675, 20, 'nupuTaust')   
     game.physics.arcade.enable(nupuTaust)
@@ -721,30 +740,54 @@ function dragStop() {
     
 }
 
+kiiruseM66dikX_var = 409;
+lippX_var = 387.5;
 function lipuTeke() {
-    if (teeValik == 3) {
-//        lipp = game.add.sprite(358.5, 392, 'lippMust')
-        lipp = game.add.sprite(ennustus * 4 + 358.5, 392, 'lippMust')        
+    peatumisTekstFunc();
+    
+        if (teeValik == 3) {
+//          lipp = game.add.sprite(358.5, 392, 'lippMust')
+//          lipp = game.add.sprite(ennustus * 4 + 387.5, 392, 'lippMust')        
+            lipp = game.add.sprite(lippX_var, 392, 'lippMust')  
+            kiiruseM66dik = game.add.sprite(kiiruseM66dikX_var,389, 'kiiruseM66dik_Must');
+            maaGradient = game.add.sprite(0, 365, 'lumiGradient');
+        
+        } else {
+            lipp = game.add.sprite(lippX_var, 392, 'lipp')
+            kiiruseM66dik = game.add.sprite(kiiruseM66dikX_var,389, 'kiiruseM66dik');
+            if (teeValik == 2) {
+                maaGradient = game.add.sprite(0, 365, 'vihmGradient');
+            } else {
+                maaGradient = game.add.sprite(0, 365, 'asfaltGradient');
+            }
+            
+        }
+ // vihm_gradient.png               
         game.physics.arcade.enable(lipp)
         lipp.anchor.x = 0.5;
         lipp.anchor.y = 0.5;    
         lipp.inputEnabled = true;
         lipp.input.enableDrag(false,false,false,250,boundsM66dik);
         lipp.input.allowVerticalDrag = false;
+        lipp.events.onDragStart.add(lippStart);
         lipp.events.onDragStop.add(lippStop);
-        kiiruseM66dik = game.add.sprite(380,390, 'kiiruseM66dik_Must')
-    }
-    else {
-        lipp = game.add.sprite(ennustus * 4 + 358.5, 392, 'lipp')
-        game.physics.arcade.enable(lipp)
-        lipp.anchor.x = 0.5;
-        lipp.anchor.y = 0.5;    
-        lipp.inputEnabled = true;
-        lipp.input.enableDrag(false,false,false,250,boundsM66dik);
-        lipp.input.allowVerticalDrag = false;
-        lipp.events.onDragStop.add(lippStop);
-        kiiruseM66dik = game.add.sprite(380,390, 'kiiruseM66dik')
-    }
+
+
+}
+
+lipu_var = 0;
+function lippStart() {
+    lipu_var = 1;
+}
+
+function lippStop() {
+    lipu_var = 0;
+    console.log("lipu nupp just lasti lahti")
+    console.log(lipp.body.position.x);
+    ennustus = Math.round(((lipp.body.position.x - 375 + 409 - kiiruseM66dik.x)/4  + Number.EPSILON) * 100) / 100;
+    console.log(ennustus);
+    kiiruseM66dikX_var = kiiruseM66dik.x;
+    lippX_var = lipp.x;
 }
 
 /* function lipuTekeMust() {
@@ -758,14 +801,6 @@ function lipuTeke() {
     
     lippMust.events.onDragStop.add(lippStopMust);
 } */
-
-
-function lippStop() {
-    console.log("lipu nupp just lasti lahti")    
-    console.log(lipp.body.position.x);
-    ennustus = Math.round(((lipp.body.position.x - 346)/4 + Number.EPSILON) * 100) / 100;
-    console.log(ennustus);
-}
 
 /* function lippStopMust() {
     console.log("lipu nupp just lasti lahti")    
@@ -1019,7 +1054,10 @@ function reagAeg() {
 
 var pidurdusAeg;
 
+var peatumisTekst;
+function peatumisTekstFunc() {
+    peatumisTekst  = game.add.group();
+    peatumisTekst.add(game.make.text(500,430,"Peatumisteekond (m)", { font: "17px Arial", fill: "black" }));
+    }
 
-
-// Math.floor(Math.random()*4)+1
- 
+// tekstiStiil
