@@ -46,6 +46,7 @@ function preload () {
     game.load.audio('breaking_sound', 'assets/audio/pidur.ogg');
     game.load.audio('k2ivitus_sound', 'assets/audio/k2ivitus_l6igatud.ogg');
     game.load.audio('mootoriheli_loop', 'assets/audio/mootoriheli_loop.ogg');
+    game.load.audio('driving_sound', 'assets/audio/kiirendusjasoit.ogg');
 
     // nupude pildid
     game.load.spritesheet('startStopNupp', 'assets/startstop_nupp.png', 150, 50);
@@ -88,11 +89,6 @@ function create () {
 //    majadJaTee.smoothed = false;
 
     alumineMenuu = game.add.sprite(0, 425, 'alumineMenuu');
-    
-    
-    
-
-
 
     // kastike ymber kiiruse nupukese  ;
     bounds = new Phaser.Rectangle(325, game.world.height - 97,246,20);
@@ -103,8 +99,6 @@ function create () {
     graphics.drawRect(0, 0, bounds.width, bounds.height);
     */
     
-
-    // player = game.add.sprite(0, game.world.height - 247, 'car')
 
     takistus = game.add.sprite(takistuseKaugus, game.world.height - 270, 'kits')
 
@@ -117,10 +111,6 @@ function create () {
     
     kiiruseNupp.events.onDragStop.add(dragStop);
 
-
-    
-
-
     // game.physics.arcade.enable(player)
     game.physics.arcade.enable(majadJaTee)
     game.physics.arcade.enable(takistus)
@@ -132,14 +122,6 @@ function create () {
     teekate_1 = game.add.button(123, 450, 'teekate_1', onClickTeekate_1, this, 2, 2, 2);
     teekate_2 = game.add.button(123, 484, 'teekate_2', onClickTeekate_2, this, 1, 0, 2);
     teekate_3 = game.add.button(123, 518, 'teekate_3', onClickTeekate_3, this, 1, 0, 2);
-    //teekate_4 = game.add.button(23, 552, 'teekate_4', onClickTeekate_4, this, 1, 0, 2);
-
-    //rehv_1 = game.add.button(175, 450, 'rehv_1', onClickRehv_1, this, 2, 2, 2); 
-    //rehv_2 = game.add.button(175, 484, 'rehv_2', onClickRehv_2, this, 1, 0, 2);
-    //rehv_3 = game.add.button(175, 518, 'rehv_3', onClickRehv_3, this, 1, 0, 2);
-    //rehv_4 = game.add.button(175, 552, 'rehv_4', onClickRehv_4, this, 1, 0, 2);
-
-
     
     // boundsM66dik = new Phaser.Rectangle(346, 360, 425, 65);
     boundsM66dik = new Phaser.Rectangle(375, 360, 425, 65);
@@ -185,23 +167,12 @@ function create () {
     teekate_1.inputEnabled = false;
     teekate_2.inputEnabled = false;
     teekate_3.inputEnabled = false;
-    // teekate_4.inputEnabled = false;
-    // rehv_1.inputEnabled = false;
-    // rehv_2.inputEnabled = false;
-    // rehv_3.inputEnabled = false;
-    // rehv_4.inputEnabled = false;
+
     //et avalehel ei saaks jätka vajutada :@
     jatkanNupp.inputEnabled = false;
     this.input.keyboard.enabled = false;   
     
     cursors = game.input.keyboard.createCursorKeys()
-    
-//    elcursors = game.input.keyboard.addCallbacks(context, onDown, onUp, onPress)
-//    cursors = game.input.keyboard.addCallbacks()
-
-    // this.leftKey = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
-    // this.rightKey = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
-   
     
 
     //  Stop the following keys from propagating up to the browser|browser ei liigu allapoole kui spacebari vajutada
@@ -212,11 +183,10 @@ function create () {
 
     
     //audio
-    breaking_sound = game.add.audio('breaking_sound');
-    
+    breaking_sound = game.add.audio('breaking_sound');    
     k2ivitus_sound = game.add.audio('k2ivitus_sound');
     mootoriheli_loop = game.add.audio('mootoriheli_loop');
-    
+    driving_sound = game.add.audio('driving_sound');
 
     kiiruseCalc();
 }
@@ -274,6 +244,13 @@ function create () {
     function engineSoundStopFunc() {
         mootoriheli_loop.stop();
     }
+    function drivingSoundStartFunc() {
+        driving_sound.play();
+    }
+
+    function drivingSoundStopFunc() {
+        driving_sound.stop();
+    }
 
     function waitFunc() {
         autoPidurdus = 1;
@@ -311,7 +288,8 @@ function create () {
         // rehv_4.inputEnabled = true;
         lipp.inputEnabled = true;
         this.input.keyboard.enabled = true;
-        
+        setTimeout(engineSoundStartFunc, 800);
+        k2ivitus_sound.play();        
         
     }
        
@@ -350,8 +328,10 @@ function update () {
             teekate_1.inputEnabled = false;
             teekate_2.inputEnabled = false;
             teekate_3.inputEnabled = false;
-            setTimeout(engineSoundStartFunc, 743);
-            k2ivitus_sound.play();
+            engineSoundStopFunc();
+            drivingSoundStartFunc();
+            // setTimeout(engineSoundStartFunc, 743);
+            // k2ivitus_sound.play();
         }
         
         //setTimeout(carStart, 1);
@@ -378,18 +358,7 @@ function update () {
 
     // et auto s6idaks ka siis, kui space yleval on peale esimest vajutust
     } else if (taustaLiikumine == 1 && this.spaceKey.isUp && startStopInt < 2) {
-    // } else if (taustaLiikumine == 1 && autoLiikumine == 1 && this.spaceKey.isUp) {
 
-        /* Dada  Types:
-        teavasJaPilved.tilePosition.x = teavasJaPilved.tilePosition.x -0.005*efe;
-        majadJaTee.body.velocity.x = -1*efe;
-        if (player.body.position.x >= 100) {
-        player.body.velocity.x = 0;
-        }
-        */
-        // kitse e. takistuse liikumine:
-        // takistus.body.velocity.x = -1*efe;
-        
         //setTimeout(carStart, 743);
         //setTimeout(carStart, 1);        
         carStart()
@@ -427,24 +396,19 @@ function update () {
             // console.log("Auto sõidetud distants: ", player.body.position.x + 185)       
             // console.log(efe)
             
-            //efe = efe*0.95;
-            //efe = ((efe**0.5)*100)*0.108 ;       
-            //efe = efe - 1;
-            
             // et soundi m2ngitaks vaid 1 kord, muutub efe2 kohe üheks
             if (efe2 == 1) {
             breaking_sound.play(); 
             currentTime2 = +new Date();
             heliNupp.inputEnabled = false;
 
-            setTimeout(engineSoundStopFunc, 1200);
+            // setTimeout(engineSoundStopFunc, 1200);
+            setTimeout(drivingSoundStopFunc, 1000);
             }
             efe2 = 0;        
             clearTimeout(takistusTeke);
                        
-//            otsaSoit();
-        
-            // l6ppliku peatumsie if
+
     } else if (autoFullStop == 1 ) { 
 
         otsaSoit();
@@ -514,19 +478,6 @@ function teekateValik(tee_var) {
     player = game.add.sprite(0, game.world.height - 247, 'car')
     takistus = game.add.sprite(takistuseKaugus, game.world.height - 255, 'kits')    
        
-    
-    /* if (tee_var == 'majadLumine' || tee_var == 'maaLumine' ){
-        kiiruseM66dik.destroy();
-        kiiruseM66dik_Must = game.add.sprite(380,390, 'kiiruseM66dik_Must')
-        lipuTekeMust()        
-    }
-    else {
-        kiiruseM66dik = game.add.sprite(380, 390, 'kiiruseM66dik')
-        lipuTeke()
-    } */
-    
-    
-
     game.physics.arcade.enable(majadJaTee)
     game.physics.arcade.enable(player)
     game.physics.arcade.enable(takistus)
@@ -534,13 +485,6 @@ function teekateValik(tee_var) {
 
 function actionOnClick_ss() {
     startStopInt += 1;
-    
-    
-    // teekate_4.inputEnabled = false;
-    // rehv_1.inputEnabled = false;
-    // rehv_2.inputEnabled = false;
-    // rehv_3.inputEnabled = false;
-    // rehv_4.inputEnabled = false;
 } 
 
 function onClickTeekate_1() {
@@ -561,7 +505,6 @@ function onClickTeekate_1() {
     console.log("teekate1 nupp vajutatud" )
     teekate_2 = game.add.button(123, 484, 'teekate_2', onClickTeekate_2, this, 1, 0, 2);
     teekate_3 = game.add.button(123, 518, 'teekate_3', onClickTeekate_3, this, 1, 0, 2);
-    //teekate_4 = game.add.button(23, 552, 'teekate_4', onClickTeekate_4, this, 1, 0, 2);
 }
 
 function onClickTeekate_2() {
@@ -583,7 +526,6 @@ function onClickTeekate_2() {
     console.log("teekate2 nupp vajutatud" )
     teekate_1 = game.add.button(123, 450, 'teekate_1', onClickTeekate_1, this, 1, 0, 2);    
     teekate_3 = game.add.button(123, 518, 'teekate_3', onClickTeekate_3, this, 1, 0, 2);
-    //teekate_4 = game.add.button(23, 552, 'teekate_4', onClickTeekate_4, this, 1, 0, 2);
 }
 
 function onClickTeekate_3() {
@@ -605,55 +547,7 @@ function onClickTeekate_3() {
     console.log("teekate3 nupp vajutatud" )
     teekate_1 = game.add.button(123, 450, 'teekate_1', onClickTeekate_1, this, 1, 0, 2);
     teekate_2 = game.add.button(123, 484, 'teekate_2', onClickTeekate_2, this, 1, 0, 2);
-    //teekate_4 = game.add.button(23, 552, 'teekate_4', onClickTeekate_4, this, 1, 0, 2);
 }
-
-/* function onClickTeekate_4() {
-    teeValik = 4;
-    
-    teeolu_var = 2.2/3;
-    pidurdusKonfitsent = 1.5 * teeolu_var * 4;
-    
-    teekateValik('maaKruus');
-    
-    teekate_4 = game.add.button(23, 552, 'teekate_4', onClickTeekate_4, this, 2, 2, 2);
-    console.log("teekate4 nupp vajutatud" )
-    teekate_1 = game.add.button(23, 450, 'teekate_1', onClickTeekate_1, this, 1, 0, 2);
-    teekate_2 = game.add.button(23, 484, 'teekate_2', onClickTeekate_2, this, 1, 0, 2);
-    teekate_3 = game.add.button(23, 518, 'teekate_3', onClickTeekate_3, this, 1, 0, 2);
-} */
-
-/* function onClickRehv_1() {
-    rehv_1 = game.add.button(175, 450, 'rehv_1', onClickRehv_1, this, 2, 2, 2);
-    console.log("rehv1 nupp vajutatud" )
-    rehv_2 = game.add.button(175, 484, 'rehv_2', onClickRehv_2, this, 1, 0, 2);
-    rehv_3 = game.add.button(175, 518, 'rehv_3', onClickRehv_3, this, 1, 0, 2);
-    rehv_4 = game.add.button(175, 552, 'rehv_4', onClickRehv_4, this, 1, 0, 2);
-}
-
-function onClickRehv_2() {
-    rehv_2 = game.add.button(175, 484, 'rehv_2', onClickRehv_2, this, 2, 2, 2);
-    console.log("rehv2 nupp vajutatud" )
-    rehv_1 = game.add.button(175, 450, 'rehv_1', onClickRehv_1, this, 1, 0, 2);    
-    rehv_3 = game.add.button(175, 518, 'rehv_3', onClickRehv_3, this, 1, 0, 2);
-    rehv_4 = game.add.button(175, 552, 'rehv_4', onClickRehv_4, this, 1, 0, 2);
-}
-
-function onClickRehv_3() {
-    rehv_3 = game.add.button(175, 518, 'rehv_3', onClickRehv_3, this, 2, 2, 2);
-    console.log("rehv3 nupp vajutatud" )
-    rehv_1 = game.add.button(175, 450, 'rehv_1', onClickRehv_1, this, 1, 0, 2);
-    rehv_2 = game.add.button(175, 484, 'rehv_2', onClickRehv_2, this, 1, 0, 2);
-    rehv_4 = game.add.button(175, 552, 'rehv_4', onClickRehv_4, this, 1, 0, 2);
-}
-
-function onClickRehv_4() {
-    rehv_4 = game.add.button(175, 552, 'rehv_4', onClickRehv_4, this, 2, 2, 2);
-    console.log("rehv4 nupp vajutatud" )
-    rehv_1 = game.add.button(175, 450, 'rehv_1', onClickRehv_1, this, 1, 0, 2);
-    rehv_2 = game.add.button(175, 484, 'rehv_2', onClickRehv_2, this, 1, 0, 2);
-    rehv_3 = game.add.button(175, 518, 'rehv_3', onClickRehv_3, this, 1, 0, 2);
-} */
 
 function onClickUuesti() {
     startStopNupp.destroy();
@@ -690,15 +584,15 @@ function onClickUuesti() {
     
     startStopNupp = game.add.button(625, 484, 'startStopNupp', actionOnClick_ss, this, 0, 0, 0);
     //this.input.keyboard.enabled = true;
-
-    
+        
     nupuTaust = game.add.sprite(675, 20, 'nupuTaust')   
     game.physics.arcade.enable(nupuTaust)
     heliNupuTeke();
     juhisedNupp = game.add.button(730, 27, 'juhisedNupp', juhisedClick, this, 0, 0, 0);
 
-
-
+    setTimeout(engineSoundStartFunc, 800);
+    k2ivitus_sound.play();
+    
 }
 
 function onClickL6petan() {
@@ -746,8 +640,6 @@ function lipuTeke() {
     peatumisTekstFunc();
     
         if (teeValik == 3) {
-//          lipp = game.add.sprite(358.5, 392, 'lippMust')
-//          lipp = game.add.sprite(ennustus * 4 + 387.5, 392, 'lippMust')        
             lipp = game.add.sprite(lippX_var, 392, 'lippMust')  
             kiiruseM66dik = game.add.sprite(kiiruseM66dikX_var,389, 'kiiruseM66dik_Must');
             maaGradient = game.add.sprite(0, 365, 'lumiGradient');
@@ -762,7 +654,6 @@ function lipuTeke() {
             }
             
         }
- // vihm_gradient.png               
         game.physics.arcade.enable(lipp)
         lipp.anchor.x = 0.5;
         lipp.anchor.y = 0.5;    
@@ -789,25 +680,6 @@ function lippStop() {
     kiiruseM66dikX_var = kiiruseM66dik.x;
     lippX_var = lipp.x;
 }
-
-/* function lipuTekeMust() {
-    lippMust = game.add.sprite(358.5, 392, 'lippMust')
-    game.physics.arcade.enable(lippMust)
-    lippMust.anchor.x = 0.5;
-    lippMust.anchor.y = 0.5;    
-    lippMust.inputEnabled = true;
-    lippMust.input.enableDrag(false,false,false,250,boundsM66dik);
-    lippMust.input.allowVerticalDrag = false;
-    
-    lippMust.events.onDragStop.add(lippStopMust);
-} */
-
-/* function lippStopMust() {
-    console.log("lipu nupp just lasti lahti")    
-    console.log(lippMust.body.position.x);
-    ennustus = (lippMust.body.position.x - 346)/4;
-    console.log(ennustus);
-} */
 
 function otsaSoit() {
     if (takistus.x <= (player.x + 185) && efe3 == 0) {
@@ -840,7 +712,6 @@ function l6puLause_kuva() {
     else if (proloog == 1 && ennustus > 0) {
         lopuText_3();
     }
-// teekate_4 = game.add.button(23, 552, 'teekate_4', onClickTeekate_4, this, 1, 0, 2);    
 }
 
 
