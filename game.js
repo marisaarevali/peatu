@@ -928,7 +928,7 @@ var pidurdusAeg;
 var peatumisTekst;
 function peatumisTekstFunc() {
     peatumisTekst  = game.add.group();
-    peatumisTekst.add(game.make.text(500,430,"Peatumisteekond (m)", { font: "17px Arial", fill: "black" }));
+    peatumisTekst.add(game.make.text(500,430,"Peatumisteekond (m)", { font: "17px Arial", fill: "black", fontWeight : "bold"}));
     }
 
 // tekstiStiil
