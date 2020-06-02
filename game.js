@@ -56,6 +56,7 @@ function preload () {
     game.load.spritesheet('l6petanNupp', 'assets/lopetan.png', 150, 50);
     game.load.spritesheet('heliNupp', 'assets/helinupp.png', 35, 35);
     game.load.spritesheet('juhisedNupp', 'assets/juhisednupp.png', 35, 35);
+    game.load.spritesheet('linkNupp', 'assets/link.png', 314, 17);
     
     game.load.spritesheet('teekate_1', 'assets/kuivteekatenupp.png', 104, 25);
     game.load.spritesheet('teekate_2', 'assets/m2rgteekatenupp.png', 104, 25);
@@ -558,7 +559,8 @@ function onClickUuesti() {
     uuestiNupp.destroy();
     textGroup.destroy();
     nupuTaust.destroy();
-
+    mntLink.destroy();
+    
     kiiruseNupp.x = 370.6;
     kiirus = 50;
     kiiruseNupp.inputEnabled = true;
@@ -602,6 +604,7 @@ function onClickL6petan() {
     l6petanNupp.inputEnabled = false;
     startStopNupp.inputEnabled = false;
     startStopNupp.input.useHandCursor = false;
+    mntLinkFunc(238,223)
 }
 
 
@@ -714,6 +717,15 @@ function l6puLause_kuva() {
     }
 }
 
+var mntLink;
+function mntLinkFunc(xx,yy) {
+    // mntLink = game.add.text(133, 428, "https://kiirus.mnt.ee/vota-aega-mitte-elu", { font: "20px Arial", fill: "blue" });
+    mntLink = game.add.button(xx, yy, 'linkNupp', onClickLink, this, 0, 0, 0);
+}
+
+function onClickLink() {
+    window.open("https://kiirus.mnt.ee/vota-aega-mitte-elu", "_blank");
+}
 
 //pidurdus ilma liputa
 function lopuText_1() {   
@@ -740,7 +752,7 @@ function lopuText_1() {
         //peatumisaeg sekundites
         pidurdusAeg = (kiirus/3.6) / (7.5 * teeolu_var);
         textGroup.add(game.make.text(603, 302, Math.round((pidurdusAeg + reag_var + Number.EPSILON) * 100) / 100, tekstiStiil));
-                
+        mntLinkFunc(126,437);
     }
    
     //pidurdusteekond
@@ -767,6 +779,7 @@ function lopuText_2() {
     textGroup = game.add.group();
     //et proovi uuestiga saaks texgroupi kustutada
     textGroup.add(game.make.text(1000, 1000, ennustus, tekstiStiil));
+    mntLinkFunc(3500,100);
 }
 
 function lopuText_3() {
@@ -796,6 +809,7 @@ function lopuText_3() {
         // peatumisaeg sekundites
         pidurdusAeg = (kiirus/3.6) / (7.5 * teeolu_var);
         textGroup.add(game.make.text(199, 272, Math.round((pidurdusAeg + reag_var + Number.EPSILON) * 100) / 100, tekstiStiil));    
+        mntLinkFunc(126,437);
     }
     //reageerimisajal läbitud meetrid
     //textGroup.add(game.make.text(250, 331, reagMmeeter_var, tekstiStiil));
