@@ -25,6 +25,7 @@ function preload () {
     game.load.image('car', 'assets/car_r.png');
     game.load.image('kits', 'assets/kast.png');
     game.load.image('rist', 'assets/rist.png');
+    game.load.image('hyyumark', 'assets/hyyumark.png');
     game.load.image('kiiruseNupp', 'assets/nupp.png');
     game.load.image('lipp', 'assets/lipp.png');
     game.load.image('lippMust', 'assets/lipp_must.png');
@@ -51,7 +52,7 @@ function preload () {
     // nupude pildid
     game.load.spritesheet('startStopNupp', 'assets/startstop_nupp.png', 150, 50);
     game.load.spritesheet('uuestiNupp', 'assets/proovinuuesti.png', 200, 51);
-    game.load.spritesheet('proovinNupp', 'assets/proovin.png', 150, 50);
+    game.load.spritesheet('proovinNupp', 'assets/sinine_nupp.png', 150, 50);
     game.load.spritesheet('jatkanNupp', 'assets/jatkan.png', 130, 50);
     game.load.spritesheet('l6petanNupp', 'assets/lopetan.png', 150, 50);
     game.load.spritesheet('heliNupp', 'assets/helinupp.png', 35, 35);
@@ -67,6 +68,12 @@ function preload () {
     game.load.spritesheet('rehv_2', 'assets/kulunudrehvid_nupp.png', 104, 25);
     game.load.spritesheet('rehv_3', 'assets/naastrehvid_nupp.png', 104, 25);
     game.load.spritesheet('rehv_4', 'assets/lamellrehvid_nupp.png', 104, 25); */
+
+    // tekstid
+    game.load.text('avalehtTekst', 'assets/text_est/avaleht.txt');
+    game.load.text('avalehtTestin', 'assets/text_est/avaleht_testin.txt');
+
+
 }
 
 takistuseKaugus = 5000;
@@ -152,6 +159,17 @@ function create () {
     avaleht = game.add.sprite(0, 0, 'avaleht')   
     game.physics.arcade.enable(avaleht)
     proovinNupp = game.add.button(325, 400, 'proovinNupp', proovinClick, this, 0, 0, 0);
+    
+    // võtan nupu teksti muutujast
+    proovinText = game.cache.getText('avalehtTestin');
+    // panen teksti kuvama
+    proovinTekst = game.add.text(357, 412, proovinText,  { font: "22px Arial", fill: '#ffffff', fontWeight: "500" });
+    //avalehe tekst
+    avalehtText = game.cache.getText('avalehtTekst');
+    // panen teksti kuvama
+    avalehtTekst = game.add.text(163, 300, avalehtText,  { font: "20px Arial", fill: '#000', fontWeight: "500",align: 'center' });
+
+
 
     // nupud heli ja juhised
     nupuTaust = game.add.sprite(675, 20, 'nupuTaust')   
@@ -695,7 +713,7 @@ function otsaSoit() {
         takistus.destroy();
         player.destroy();
         
-        takistus = game.add.sprite(takistusePositsioon, game.world.height - 294, 'rist')
+        takistus = game.add.sprite(takistusePositsioon, game.world.height - 294, 'hyyumark')
         player = game.add.sprite(autoPositsioon, game.world.height - 247, 'car')        
         
         game.physics.arcade.enable(takistus)
