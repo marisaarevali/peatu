@@ -234,6 +234,8 @@ function create () {
     driving_sound = game.add.audio('driving_sound');
 
     kiiruseCalc();
+    // et algus oleks heli by default maas
+    game.sound.mute = true;
 }
 //global variabled
     // muutujad, vasakul olevatele nupukestele ; nad on kas 1, 2, 3 v6i 4
@@ -255,7 +257,7 @@ function create () {
     autoPidurdus = 0;
     autoFullStop = 0;
 
-    heliInt = 0;
+    heliInt = 1;
     juhisedInt = 0;
 
 
@@ -334,7 +336,7 @@ function create () {
         // juhised ja helinupp
         nupuTaust = game.add.sprite(675, 20, 'nupuTaust')   
         game.physics.arcade.enable(nupuTaust)
-        heliNupp = game.add.button(685, 27, 'heliNupp', heliClick, this, 1, 1, 1);
+        heliNupp = game.add.button(685, 27, 'heliNupp', heliClick, this, 0, 0, 0);
         juhisedNupp = game.add.button(730, 27, 'juhisedNupp', juhisedClick, this, 0, 0, 0);
         //juhisedNupp.inputEnabled = false; 
 
