@@ -5,6 +5,8 @@ const game = new Phaser.Game(800, 600, Phaser.AUTO, '', {
 
 });
 
+keelevalik = 0;
+
 function preload () {
     game.load.image('teavasJaPilved', 'assets/taevasjapilved.png');
 
@@ -43,6 +45,7 @@ function preload () {
     game.load.image('juhised', 'assets/juhised.png');
     game.load.image('l6puTiiter', 'assets/lopp.png');
     game.load.image('nupuTaust', 'assets/nuputaust.png');
+    game.load.image('keeleNupuTaust', 'assets/keelenuputaust.png');
 
     game.load.audio('breaking_sound', 'assets/audio/pidur.ogg');
     game.load.audio('k2ivitus_sound', 'assets/audio/k2ivitus_l6igatud.ogg');
@@ -69,10 +72,18 @@ function preload () {
     game.load.spritesheet('rehv_3', 'assets/naastrehvid_nupp.png', 104, 25);
     game.load.spritesheet('rehv_4', 'assets/lamellrehvid_nupp.png', 104, 25); */
 
+
+    game.load.spritesheet('est', 'assets/est.png', 35, 35);
+    game.load.spritesheet('rus', 'assets/rus.png', 35, 35);
+    game.load.spritesheet('eng', 'assets/eng.png', 35, 35);
+
     // tekstid
+   
     game.load.text('avalehtTekst', 'assets/text_est/avaleht.txt');
     game.load.text('avalehtTestin', 'assets/text_est/avaleht_testin.txt');
 
+
+   
 
 }
 
@@ -80,10 +91,14 @@ takistuseKaugus = 5000;
 var takistusTeke;
 
 function create () {
+
+    
     this.game.scale.pageAlignHorizontally = true;this.game.scale.refresh();
+    
+    
     game.physics.startSystem(Phaser.Physics.ARCADE)
     
-    
+
     teavasJaPilved = game.add.tileSprite(0, -25, 800, 450, 'teavasJaPilved')
 
 
@@ -171,12 +186,23 @@ function create () {
 
 
 
-    // nupud heli ja juhised
-    nupuTaust = game.add.sprite(675, 20, 'nupuTaust')   
-    game.physics.arcade.enable(nupuTaust)
-    heliNupp = game.add.button(685, 27, 'heliNupp', heliClick, this, 1, 1, 1);
-    juhisedNupp = game.add.button(730, 27, 'juhisedNupp', juhisedClick, this, 0, 0, 0);
-    juhisedNupp.inputEnabled = false;    
+    // nupud heli ja juhised --- SEE TULEKS SIIT VIIA ÄRA ----
+    //nupuTaust = game.add.sprite(675, 20, 'nupuTaust')   
+    //game.physics.arcade.enable(nupuTaust)
+    //heliNupp = game.add.button(685, 27, 'heliNupp', heliClick, this, 1, 1, 1);
+    //juhisedNupp = game.add.button(730, 27, 'juhisedNupp', juhisedClick, this, 0, 0, 0);
+    //juhisedNupp.inputEnabled = false;    
+
+    // KEELEVALIK
+    keeleNupuTaust = game.add.sprite(625, 20, 'keeleNupuTaust')
+    est = game.add.button(635, 27, 'est', estClick, this, 1, 1, 1);
+    est.inputEnabled = false;
+    rus = game.add.button(682, 27, 'rus', rusClick, this, 0, 0, 0);
+    eng = game.add.button(728, 27, 'eng', engClick, this, 0, 0, 0);
+
+
+
+
     
     this.spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     
@@ -232,6 +258,8 @@ function create () {
     heliInt = 0;
     juhisedInt = 0;
 
+
+    keelInt = 0;
     
 
 
@@ -284,16 +312,32 @@ function create () {
     function proovinClick() {
         avaleht.destroy()
         proovinNupp.destroy()
+        proovinTekst.destroy()
+        avalehtTekst.destroy()
         jatkanNupp.inputEnabled = true;
         jatkanNupp.input.useHandCursor = true;
         proovinInt = 0;
     }
 
     function jatkanClick() {
-        juhisedNupp.inputEnabled = true;
+        //juhisedNupp.inputEnabled = true;
         jatkanInt = 1;
         juhised.destroy()
         jatkanNupp.destroy()
+
+        keeleNupuTaust.destroy();
+        est.destroy();
+        rus.destroy(); 
+        eng.destroy();    
+
+
+        // juhised ja helinupp
+        nupuTaust = game.add.sprite(675, 20, 'nupuTaust')   
+        game.physics.arcade.enable(nupuTaust)
+        heliNupp = game.add.button(685, 27, 'heliNupp', heliClick, this, 1, 1, 1);
+        juhisedNupp = game.add.button(730, 27, 'juhisedNupp', juhisedClick, this, 0, 0, 0);
+        //juhisedNupp.inputEnabled = false; 
+
         kiiruseNupp.inputEnabled = true;
         startStopNupp.inputEnabled = true;
         //startStopNupp.input.useHandCursor = true;
@@ -341,7 +385,11 @@ function update () {
             lipp.destroy();
             maaGradient.destroy();
             peatumisTekst.destroy();
-            juhisedNupp.inputEnabled = false;
+            //sõiduajal kaota ära juhiste ja helinupp
+            juhisedNupp.destroy();
+            heliNupp.destroy();
+            nupuTaust.destroy();
+
             kiiruseNupp.inputEnabled = false;
             //startStopNupp.inputEnabled = false;
             teekate_1.inputEnabled = false;
@@ -889,6 +937,7 @@ function heliNupuTeke() {
     }
 }
 
+
 function juhisedClick() {
     juhisedInt +=1;
     console.log(juhisedInt, "juhisedint")
@@ -964,3 +1013,74 @@ function peatumisTekstFunc() {
     }
 
 // tekstiStiil
+
+
+
+//keelevaliku funktsioon
+estInt = 0;
+rusInt = 1;
+engInt = 1;
+
+function estClick() {
+    estInt +=1;
+    estFunk();    
+}
+
+function rusClick() {
+    rusInt +=1;
+    rusFunk();
+}
+
+function engClick() {
+    engInt +=1;
+    engFunk();
+}
+
+
+function estFunk() { 
+
+        est.destroy();
+        rus.destroy(); 
+        eng.destroy();              
+        est = game.add.button(635, 27, 'est', estClick, this, 1, 1, 1);
+        rus = game.add.button(682, 27, 'rus', rusClick, this, 0, 0, 0);
+        eng = game.add.button(728, 27, 'eng', engClick, this, 0, 0, 0);
+        est.inputEnabled = false;
+        keelevalik = 0;       
+    
+}
+
+
+
+function rusFunk() { 
+
+        est.destroy();
+        rus.destroy(); 
+        eng.destroy();               
+        est = game.add.button(635, 27, 'est', estClick, this, 0, 0, 0);
+        est.inputEnabled = true;
+        rus = game.add.button(682, 27, 'rus', rusClick, this, 1, 1, 1);
+        rus.inputEnabled = false;
+        eng = game.add.button(728, 27, 'eng', engClick, this, 0, 0, 0);
+        keelevalik = 1;       
+    
+}
+
+function engFunk() {
+        
+        est.destroy();
+        rus.destroy(); 
+        eng.destroy();              
+        est = game.add.button(635, 27, 'est', estClick, this, 0, 0, 0);
+        est.inputEnabled = true;
+        rus = game.add.button(682, 27, 'rus', rusClick, this, 0, 0, 0);
+        rus.inputEnabled = true;
+        eng = game.add.button(728, 27, 'eng', engClick, this, 1, 1, 1);
+        eng.inputEnabled = false;
+        keelevalik = 2;  
+        console.log(keelevalik);        
+        
+    
+}
+
+
