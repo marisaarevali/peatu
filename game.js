@@ -174,7 +174,9 @@ function create () {
     // nupud heli ja juhised
     nupuTaust = game.add.sprite(675, 20, 'nupuTaust')   
     game.physics.arcade.enable(nupuTaust)
-    heliNupp = game.add.button(685, 27, 'heliNupp', heliClick, this, 1, 1, 1);
+    // heliNupp = game.add.button(685, 27, 'heliNupp', heliClick, this, 1, 1, 1);
+    heliNupp = game.add.button(685, 27, 'heliNupp', heliClick, this, 0, 0, 0);
+    game.sound.mute = true;
     juhisedNupp = game.add.button(730, 27, 'juhisedNupp', juhisedClick, this, 0, 0, 0);
     juhisedNupp.inputEnabled = false;    
     
@@ -229,7 +231,10 @@ function create () {
     autoPidurdus = 0;
     autoFullStop = 0;
 
-    heliInt = 0;
+    // Et m2ngu alguses oleks heli "ON" olekus, panna heliInt = 0 ja kommenteerida 
+    // ylevaltpoolt 'game.sound.mute = true;'rida v2lja
+    // Lisaks ylalpoolt ka muuta 'heliNupp =' read 2ra
+    heliInt = 1;
     juhisedInt = 0;
 
     
