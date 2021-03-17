@@ -5,7 +5,7 @@ const game = new Phaser.Game(800, 600, Phaser.AUTO, '', {
 
 });
 
-keelevalik = 0;
+
 
 function preload () {
     game.load.image('teavasJaPilved', 'assets/taevasjapilved.png');
@@ -55,8 +55,10 @@ function preload () {
     // nupude pildid
     game.load.spritesheet('startStopNupp', 'assets/startstop_nupp.png', 150, 50);
     game.load.spritesheet('uuestiNupp', 'assets/proovinuuesti.png', 200, 51);
+
     game.load.spritesheet('proovinNupp', 'assets/sinine_nupp.png', 150, 50);
-    game.load.spritesheet('jatkanNupp', 'assets/jatkan.png', 130, 50);
+    game.load.spritesheet('jatkanNupp', 'assets/sinine_nupp.png', 150, 50);
+
     game.load.spritesheet('l6petanNupp', 'assets/lopetan.png', 150, 50);
     game.load.spritesheet('heliNupp', 'assets/helinupp.png', 35, 35);
     game.load.spritesheet('juhisedNupp', 'assets/juhisednupp.png', 35, 35);
@@ -72,6 +74,13 @@ function preload () {
     game.load.spritesheet('rehv_3', 'assets/naastrehvid_nupp.png', 104, 25);
     game.load.spritesheet('rehv_4', 'assets/lamellrehvid_nupp.png', 104, 25); */
 
+    //juhiste lehe pisikesed nupud
+    game.load.spritesheet('mumm', 'assets/mumm.png', 15, 15);
+    game.load.spritesheet('lipuke', 'assets/lipuke.png', 22, 22);
+    game.load.spritesheet('juhendistart', 'assets/juhendistart.png', 75, 26);
+    game.load.spritesheet('juhendistop', 'assets/juhendistop.png', 76, 26);
+
+
 
     game.load.spritesheet('est', 'assets/est.png', 35, 35);
     game.load.spritesheet('rus', 'assets/rus.png', 35, 35);
@@ -86,7 +95,7 @@ function preload () {
    
 
 }
-
+keelevalik = 0;
 takistuseKaugus = 5000;
 var takistusTeke;
 
@@ -165,24 +174,58 @@ function create () {
     player = game.add.sprite(0, game.world.height - 247, 'car')
     game.physics.arcade.enable(player)
     
-    //juhised
+    //Juhised leht
     juhised = game.add.sprite(0, 0, 'juhised') 
     game.physics.arcade.enable(juhised)    
     jatkanNupp = game.add.button(625, 501, 'jatkanNupp', jatkanClick, this, 0, 0, 0);
+
+    //sprited teksti vahel
+    mumm = game.add.sprite(436, 183, 'mumm');
+    lipuke = game.add.sprite(562, 228, 'lipuke');
+    juhendistart = game.add.sprite(321, 276, 'juhendistart');    
+    juhendistop = game.add.sprite(488, 325, 'juhendistop');    
+
+    juhisedTekst  = game.add.group();
+/*     juhisedTekst.add(game.make.text(330,20,"Juhend", { font: "42px Arial", fill: '#000', fontWeight: "500" }));
+    juhisedTekst.add(game.make.text(100, 128, "Teekatte valimiseks kliki sobival nupul.",{ font: "20px Arial", fill: '#000', fontWeight: "500"}))
+    juhisedTekst.add(game.make.text(100, 178, "Sõidukiiruse valimiseks libista mumm     sobiva kiiruse juurde.",{ font: "20px Arial", fill: '#000', fontWeight: "500"}))
+    juhisedTekst.add(game.make.text(100, 228, "Peatumisteekonna pikkuse määramiseks libista lipp      sobivale kaugusele.",{ font: "20px Arial", fill: '#000', fontWeight: "500"}))
+    juhisedTekst.add(game.make.text(100, 278, "Sõidu alustamiseks kliki                 nuppu või tühiku klahvi.",{ font: "20px Arial", fill: '#000', fontWeight: "500"}))
+    juhisedTekst.add(game.make.text(100, 328, "Auto peatamiseks, takistuse ilmumisel, kliki                nuppu või tühiku klahvi.",{ font: "20px Arial", fill: '#000', fontWeight: "500"}))
+
+    juhisedTekst.add(game.make.text(100, 522, "Kliki heli vaigistamiseks",{ font: "20px Arial", fill: '#000', fontWeight: "500"}))
+    juhisedTekst.add(game.make.text(375, 522, "Kliki juhiste vaatamiseks",{ font: "20px Arial", fill: '#000', fontWeight: "500"}))
+
+    juhisedTekst.add(game.make.text(653, 515, "JÄTKAN!",{ font: "22px Arial", fill: '#ffffff', fontWeight: "500" }))    
+    
+    juhisedTekst.add(game.make.text(330, 279, "START!",{ font: "16px Arial", fill: '#fff', fontWeight: "500" }))
+    juhisedTekst.add(game.make.text(496, 329, "STOPP!",{ font: "16px Arial", fill: '#fff', fontWeight: "500" })) */
+    
+    
    
     // Avaleht
     avaleht = game.add.sprite(0, 0, 'avaleht')   
     game.physics.arcade.enable(avaleht)
     proovinNupp = game.add.button(325, 400, 'proovinNupp', proovinClick, this, 0, 0, 0);
+    //esialgu on rakendus eestikeelne
+    avalehtTekst  = game.add.group();
+    avalehtTekst.add(game.make.text(357,412,"TESTIN!", { font: "22px Arial", fill: '#ffffff', fontWeight: "500" }));
+    avalehtTekst.add(game.make.text(163, 300, "Kas tead, kui pikk on peatumisteekond autoga sõites?\n Testi oma teadmisi!",{ font: "20px Arial", fill: '#000', fontWeight: "500",align: 'center' }))
+
+
+
+
     
-    // võtan nupu teksti muutujast
+    
+    
+    /* // võtan nupu teksti muutujast
     proovinText = game.cache.getText('avalehtTestin');
     // panen teksti kuvama
     proovinTekst = game.add.text(357, 412, proovinText,  { font: "22px Arial", fill: '#ffffff', fontWeight: "500" });
     //avalehe tekst
     avalehtText = game.cache.getText('avalehtTekst');
     // panen teksti kuvama
-    avalehtTekst = game.add.text(163, 300, avalehtText,  { font: "20px Arial", fill: '#000', fontWeight: "500",align: 'center' });
+    avalehtTekst = game.add.text(163, 300, avalehtText,  { font: "20px Arial", fill: '#000', fontWeight: "500",align: 'center' }); */
 
 
 
@@ -262,7 +305,8 @@ function create () {
 
 
     keelInt = 0;
-    
+    // kontrolli kas on avaleht
+    avalehtKontroll = 0;
 
 
     //Mari lisatud, tagasiside var
@@ -314,11 +358,16 @@ function create () {
     function proovinClick() {
         avaleht.destroy()
         proovinNupp.destroy()
-        proovinTekst.destroy()
-        avalehtTekst.destroy()
+        avalehtTekst.destroy();
+        avalehtKontroll = 1;
         jatkanNupp.inputEnabled = true;
         jatkanNupp.input.useHandCursor = true;
         proovinInt = 0;
+        juhisedTekstFunc();
+
+
+        
+
     }
 
     function jatkanClick() {
@@ -326,11 +375,18 @@ function create () {
         jatkanInt = 1;
         juhised.destroy()
         jatkanNupp.destroy()
-
         keeleNupuTaust.destroy();
+        juhisedTekst.destroy();
         est.destroy();
         rus.destroy(); 
-        eng.destroy();    
+        eng.destroy();
+        mumm.destroy();
+        lipuke.destroy();
+        juhendistart.destroy();    
+        juhendistop.destroy();   
+  
+        //tekstikontroll
+        avalehtKontroll = 2;  
 
 
         // juhised ja helinupp
@@ -964,9 +1020,16 @@ function juhisedClick() {
         juhisedNupp = game.add.button(730, 27, 'juhisedNupp', juhisedClick, this, 0, 0, 0);  
         juhisedJatkanNupp = game.add.button(625, 501, 'jatkanNupp', juhisedClick, this, 0, 0, 0);
 
+        juhisedTekstFunc();
+
     } else {
-        juhised.destroy()
-        juhisedJatkanNupp.destroy()
+        juhised.destroy();
+        juhisedJatkanNupp.destroy();
+        juhisedTekst.destroy();
+        mumm.destroy();
+        lipuke.destroy();
+        juhendistart.destroy();
+        juhendistop.destroy();
         kiiruseNupp.inputEnabled = true;
         startStopNupp.inputEnabled = true;
         teekate_1.inputEnabled = true;
@@ -975,6 +1038,7 @@ function juhisedClick() {
         //et avalehel ei saaks jätka vajutada :@
         //this.input.keyboard.enabled = true;
         juhisedNupp = game.add.button(730, 27, 'juhisedNupp', juhisedClick, this, 0, 0, 0);
+        
 
     }
     
@@ -1047,9 +1111,20 @@ function estFunk() {
         est = game.add.button(635, 27, 'est', estClick, this, 1, 1, 1);
         rus = game.add.button(682, 27, 'rus', rusClick, this, 0, 0, 0);
         eng = game.add.button(728, 27, 'eng', engClick, this, 0, 0, 0);
-        est.inputEnabled = false;
-        keelevalik = 0;       
-    
+        est.inputEnabled = false;        
+        keelevalik = 0;  
+        console.log(keelevalik)
+        //kõigepealt kontrolli kas oled avalehel
+        if (avalehtKontroll == 0) {
+            avalehtTekst.destroy();
+            avalehtTekst  = game.add.group();
+            avalehtTekst.add(game.make.text(357,412,"TESTIN!", { font: "22px Arial", fill: '#ffffff', fontWeight: "500" }));
+            avalehtTekst.add(game.make.text(163, 300, "Kas tead, kui pikk on peatumisteekond autoga sõites?\n Testi oma teadmisi!",{ font: "20px Arial", fill: '#000', fontWeight: "500",align: 'center' }))
+        }
+        if (avalehtKontroll == 1) {
+            juhisedTekstFunc();
+        } 
+   
 }
 
 
@@ -1064,7 +1139,19 @@ function rusFunk() {
         rus = game.add.button(682, 27, 'rus', rusClick, this, 1, 1, 1);
         rus.inputEnabled = false;
         eng = game.add.button(728, 27, 'eng', engClick, this, 0, 0, 0);
-        keelevalik = 1;       
+        keelevalik = 1;
+        console.log(keelevalik);
+        if (avalehtKontroll == 0) {
+            avalehtTekst.destroy();
+            avalehtTekst  = game.add.group();
+            avalehtTekst.add(game.make.text(340,413,"ПРОВЕРИТЬ!", { font: "19px Arial", fill: '#ffffff', fontWeight: "500" }));
+            avalehtTekst.add(game.make.text(40, 300, "Тебе известно, какой длины получается остановочный путь, двигаясь на автомобиле? \n Проверь свои знания! ",{ font: "18px Arial", fill: '#000', fontWeight: "500",align: 'center' }))
+        }
+        if (avalehtKontroll == 1) {
+            juhisedTekstFunc();
+        }
+        
+             
     
 }
 
@@ -1078,11 +1165,116 @@ function engFunk() {
         rus = game.add.button(682, 27, 'rus', rusClick, this, 0, 0, 0);
         rus.inputEnabled = true;
         eng = game.add.button(728, 27, 'eng', engClick, this, 1, 1, 1);
-        eng.inputEnabled = false;
-        keelevalik = 2;  
-        console.log(keelevalik);        
+        eng.inputEnabled = false;        
+        keelevalik = 2;
+        console.log(keelevalik);
+        if (avalehtKontroll == 0) {
+            avalehtTekst.destroy();
+            avalehtTekst  = game.add.group();
+            avalehtTekst.add(game.make.text(342,412,"TAKE TEST", { font: "22px Arial", fill: '#ffffff', fontWeight: "500" }));
+            avalehtTekst.add(game.make.text(157, 300, "Do you know what the stopping distance is when driving?\n Test yourself to find out how much you know! ",{ font: "20px Arial", fill: '#000', fontWeight: "500",align: 'center' }))
+        }
+
+        if (avalehtKontroll == 1) {
+            juhisedTekstFunc();
+        }
+        
+   
         
     
 }
+
+
+function juhisedTekstFunc() {
+    if (keelevalik == 0) {
+        juhisedTekst.destroy();
+        mumm.destroy();
+        lipuke.destroy();
+        juhendistart.destroy();
+        juhendistop.destroy();
+
+        mumm = game.add.sprite(436, 183, 'mumm');
+        lipuke = game.add.sprite(562, 228, 'lipuke');
+        juhendistart = game.add.sprite(321, 276, 'juhendistart');    
+        juhendistop = game.add.sprite(488, 325, 'juhendistop');    
+    
+        juhisedTekst  = game.add.group();
+        juhisedTekst.add(game.make.text(337,50,"Juhend", { font: "42px Arial", fill: '#000', fontWeight: "500" }));
+        juhisedTekst.add(game.make.text(100, 128, "Teekatte valimiseks kliki sobival nupul.",{ font: "20px Arial", fill: '#000', fontWeight: "500"}))
+        juhisedTekst.add(game.make.text(100, 178, "Sõidukiiruse valimiseks libista mumm     sobiva kiiruse juurde.",{ font: "20px Arial", fill: '#000', fontWeight: "500"}))
+        juhisedTekst.add(game.make.text(100, 228, "Peatumisteekonna pikkuse määramiseks libista lipp      sobivale kaugusele.",{ font: "20px Arial", fill: '#000', fontWeight: "500"}))
+        juhisedTekst.add(game.make.text(100, 278, "Sõidu alustamiseks kliki                 nuppu või tühiku klahvi.",{ font: "20px Arial", fill: '#000', fontWeight: "500"}))
+        juhisedTekst.add(game.make.text(100, 328, "Auto peatamiseks, takistuse ilmumisel, kliki                nuppu või tühiku klahvi.",{ font: "20px Arial", fill: '#000', fontWeight: "500"}))
+    
+        juhisedTekst.add(game.make.text(100, 522, "Kliki heli vaigistamiseks",{ font: "20px Arial", fill: '#000', fontWeight: "500"}))
+        juhisedTekst.add(game.make.text(375, 522, "Kliki juhiste vaatamiseks",{ font: "20px Arial", fill: '#000', fontWeight: "500"}))
+    
+        juhisedTekst.add(game.make.text(653, 515, "JÄTKAN!",{ font: "22px Arial", fill: '#ffffff', fontWeight: "500" }))    
+        
+        juhisedTekst.add(game.make.text(330, 279, "START!",{ font: "16px Arial", fill: '#fff', fontWeight: "500" }))
+        juhisedTekst.add(game.make.text(496, 329, "STOPP!",{ font: "16px Arial", fill: '#fff', fontWeight: "500" }))
+        
+    }
+    if (keelevalik == 1) {
+        juhisedTekst.destroy();
+        mumm.destroy();
+        lipuke.destroy();
+        juhendistart.destroy();
+        juhendistop.destroy();
+        
+        mumm = game.add.sprite(515, 180, 'mumm');
+        lipuke = game.add.sprite(720, 218, 'lipuke');
+        juhendistart = game.add.sprite(425, 276, 'juhendistart');    
+        juhendistop = game.add.sprite(468, 315, 'juhendistop');        
+
+        juhisedTekst  = game.add.group();
+        juhisedTekst.add(game.make.text(290,26,"Инструкция", { font: "42px Arial", fill: '#000', fontWeight: "500" }));
+        juhisedTekst.add(game.make.text(90, 127, "Для выбора дорожного покрытия нажми на подходящую кнопку.",{ font: "18px Arial", fill: '#000', fontWeight: "500"}))
+        juhisedTekst.add(game.make.text(90, 178, "Для выбора скорости движения перемести кнопку     на подходящую скорость.",{ font: "18px Arial", fill: '#000', fontWeight: "500"}))
+        juhisedTekst.add(game.make.text(90, 218, "Для выбора предполагаемой длины остановочного пути установи флажок\nна подходящем расстоянии.",{ font: "18px Arial", fill: '#000', fontWeight: "500"}))
+        juhisedTekst.add(game.make.text(90, 278, "Для начала движения нажми на кнопку                  или на клавишу пробел.",{ font: "18px Arial", fill: '#000', fontWeight: "500"}))
+        juhisedTekst.add(game.make.text(90, 318, "Для остановки автомобиля нажми на кнопку                  или на клавишу пробел\nпри появлении знака STOP.",{ font: "18px Arial", fill: '#000', fontWeight: "500"}))
+
+        juhisedTekst.add(game.make.text(95, 512, "Для выключения\nзвука нажми",{ font: "16px Arial", fill: '#000', fontWeight: "500"}))
+        juhisedTekst.add(game.make.text(370, 512, "Для просмотра\nинструкций нажми",{ font: "16px Arial", fill: '#000', fontWeight: "500"}))
+
+        juhisedTekst.add(game.make.text(650, 515, "ДАЛЬШЕ!",{ font: "22px Arial", fill: '#ffffff', fontWeight: "500" }))
+
+        juhisedTekst.add(game.make.text(440, 280, "СТАРТ",{ font: "14px Arial", fill: '#fff', fontWeight: "500" }))
+        juhisedTekst.add(game.make.text(485, 320, "СТОП",{ font: "14px Arial", fill: '#fff', fontWeight: "500" }))
+    }
+    if (keelevalik == 2) {
+        juhisedTekst.destroy();
+        mumm.destroy();
+        lipuke.destroy();
+        juhendistart.destroy();
+        juhendistop.destroy();
+        
+        mumm = game.add.sprite(235, 180, 'mumm');
+        lipuke = game.add.sprite(210, 226, 'lipuke');
+        juhendistart = game.add.sprite(168, 276, 'juhendistart');    
+        juhendistop = game.add.sprite(168, 326, 'juhendistop'); 
+
+        juhisedTekst  = game.add.group();
+        juhisedTekst.add(game.make.text(290,28,"Instructions", { font: "42px Arial", fill: '#000', fontWeight: "500" }));
+        juhisedTekst.add(game.make.text(90, 126, "Click on a road surface.",{ font: "20px Arial", fill: '#000', fontWeight: "500"}))
+        juhisedTekst.add(game.make.text(90, 176, "Slide the button     to select a speed.",{ font: "20px Arial", fill: '#000', fontWeight: "500"}))
+        juhisedTekst.add(game.make.text(90, 226, "Slide the flag      to the point you think marks the stopping distance.",{ font: "20px Arial", fill: '#000', fontWeight: "500"}))
+        juhisedTekst.add(game.make.text(90, 276, "Click on                or hit the spacebar to begin.",{ font: "20px Arial", fill: '#000', fontWeight: "500"}))
+        juhisedTekst.add(game.make.text(90, 326, "Click on                or hit the spacebar again when the stop sign appears.",{ font: "20px Arial", fill: '#000', fontWeight: "500"}))
+
+        juhisedTekst.add(game.make.text(95, 512, "To turn off sound,\nclick on",{ font: "18px Arial", fill: '#000', fontWeight: "500"}))
+        juhisedTekst.add(game.make.text(370, 512, "To read the instructions,\nclick on",{ font: "18px Arial", fill: '#000', fontWeight: "500"}))
+
+        juhisedTekst.add(game.make.text(640, 513, "CONTINUE",{ font: "22px Arial", fill: '#ffffff', fontWeight: "500" }))
+
+        juhisedTekst.add(game.make.text(180, 280, "START",{ font: "16px Arial", fill: '#fff', fontWeight: "500" }))
+        juhisedTekst.add(game.make.text(183, 330, "STOP",{ font: "16px Arial", fill: '#fff', fontWeight: "500" }))
+        
+    }
+}
+
+
+
 
 
