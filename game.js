@@ -13,24 +13,32 @@ function preload () {
     game.load.image('majadJaTee', 'assets/majadjatee.png');
     game.load.image('majadLompidega', 'assets/majadlompidega.png');
     game.load.image('majadLumine', 'assets/majadlumine.png');
-    game.load.image('maaKruus', 'assets/maakruus.png');
     game.load.image('maa', 'assets/maa.png');
     game.load.image('maaLombid', 'assets/maalombid.png');
     game.load.image('maaLumine', 'assets/maalumine.png');
 
     game.load.image('kiiruseM66dik', 'assets/kiirusem66dik.png');
     game.load.image('kiiruseM66dik_Must', 'assets/kiirusem66dik_must.png');
+
+
     game.load.image('asfaltGradient', 'assets/asfalt_gradient.png');
     game.load.image('lumiGradient', 'assets/lumi_gradient.png');
     game.load.image('vihmGradient', 'assets/vihm_gradient.png');
+
+
     game.load.image('alumineMenuu', 'assets/alumine.png');
     game.load.image('car', 'assets/car_r.png');
     game.load.image('kits', 'assets/kast.png');
     game.load.image('rist', 'assets/rist.png');
     game.load.image('hyyumark', 'assets/hyyumark.png');
     game.load.image('kiiruseNupp', 'assets/nupp.png');
+
+
     game.load.image('lipp', 'assets/lipp.png');
     game.load.image('lippMust', 'assets/lipp_must.png');
+
+
+
     game.load.image('l6puLause_1_1', 'assets/tagasiside1_1.png');
     game.load.image('l6puLause_1_2', 'assets/tagasiside1_2.png');
     game.load.image('l6puLause_1_3', 'assets/tagasiside1_3.png');
@@ -63,10 +71,18 @@ function preload () {
     game.load.spritesheet('heliNupp', 'assets/helinupp.png', 35, 35);
     game.load.spritesheet('juhisedNupp', 'assets/juhisednupp.png', 35, 35);
     game.load.spritesheet('linkNupp', 'assets/link.png', 314, 17);
-    
-    game.load.spritesheet('teekate_1', 'assets/kuivteekatenupp.png', 104, 25);
-    game.load.spritesheet('teekate_2', 'assets/m2rgteekatenupp.png', 104, 25);
-    game.load.spritesheet('teekate_3', 'assets/j2ineteekatenupp.png', 104, 25);
+
+
+        
+    game.load.spritesheet('teekate_1', 'assets/teekate_nupp.png', 104, 25);
+    game.load.spritesheet('teekate_2', 'assets/teekate_nupp.png', 104, 25);
+    game.load.spritesheet('teekate_3', 'assets/teekate_nupp.png', 104, 25);
+
+    game.load.spritesheet('teekate_vene1', 'assets/teekate_nupp_vene.png', 133, 25);
+    game.load.spritesheet('teekate_vene2', 'assets/teekate_nupp_vene.png', 133, 25);
+    game.load.spritesheet('teekate_vene3', 'assets/teekate_nupp_vene.png', 133, 25);
+
+
 /*     game.load.spritesheet('teekate_4', 'assets/kruusatee_nupp.png', 104, 25);
  
     game.load.spritesheet('rehv_1', 'assets/suverehvid_nupp.png', 104, 25);
@@ -102,12 +118,16 @@ var takistusTeke;
 function create () {
 
     
-    this.game.scale.pageAlignHorizontally = true;this.game.scale.refresh();
+    this.game.scale.pageAlignHorizontally = true;//this.game.scale.refresh();
+    
     
     
     game.physics.startSystem(Phaser.Physics.ARCADE)
     
 
+
+
+    // mängu aken
     teavasJaPilved = game.add.tileSprite(0, -25, 800, 450, 'teavasJaPilved')
 
 
@@ -146,14 +166,22 @@ function create () {
     // game.physics.arcade.enable(player)
     game.physics.arcade.enable(majadJaTee)
     game.physics.arcade.enable(takistus)
+    mangTekst  = game.add.group();
+    peatumisTekst = game.add.group();
+
+    
     
 
     startStopNupp = game.add.button(625, 484, 'startStopNupp', actionOnClick_ss, this, 0, 0, 0);
+    startTekst  = game.add.group();
+    startTekst.add(game.make.text(664,497,"START", { font: "22px Arial", fill: '#ffffff', fontWeight: "500" }));
     
     
     teekate_1 = game.add.button(123, 450, 'teekate_1', onClickTeekate_1, this, 2, 2, 2);
     teekate_2 = game.add.button(123, 484, 'teekate_2', onClickTeekate_2, this, 1, 0, 2);
     teekate_3 = game.add.button(123, 518, 'teekate_3', onClickTeekate_3, this, 1, 0, 2);
+
+    mangTekstFunc();
     
     // boundsM66dik = new Phaser.Rectangle(346, 360, 425, 65);
     boundsM66dik = new Phaser.Rectangle(375, 360, 425, 65);
@@ -186,22 +214,6 @@ function create () {
     juhendistop = game.add.sprite(488, 325, 'juhendistop');    
 
     juhisedTekst  = game.add.group();
-/*     juhisedTekst.add(game.make.text(330,20,"Juhend", { font: "42px Arial", fill: '#000', fontWeight: "500" }));
-    juhisedTekst.add(game.make.text(100, 128, "Teekatte valimiseks kliki sobival nupul.",{ font: "20px Arial", fill: '#000', fontWeight: "500"}))
-    juhisedTekst.add(game.make.text(100, 178, "Sõidukiiruse valimiseks libista mumm     sobiva kiiruse juurde.",{ font: "20px Arial", fill: '#000', fontWeight: "500"}))
-    juhisedTekst.add(game.make.text(100, 228, "Peatumisteekonna pikkuse määramiseks libista lipp      sobivale kaugusele.",{ font: "20px Arial", fill: '#000', fontWeight: "500"}))
-    juhisedTekst.add(game.make.text(100, 278, "Sõidu alustamiseks kliki                 nuppu või tühiku klahvi.",{ font: "20px Arial", fill: '#000', fontWeight: "500"}))
-    juhisedTekst.add(game.make.text(100, 328, "Auto peatamiseks, takistuse ilmumisel, kliki                nuppu või tühiku klahvi.",{ font: "20px Arial", fill: '#000', fontWeight: "500"}))
-
-    juhisedTekst.add(game.make.text(100, 522, "Kliki heli vaigistamiseks",{ font: "20px Arial", fill: '#000', fontWeight: "500"}))
-    juhisedTekst.add(game.make.text(375, 522, "Kliki juhiste vaatamiseks",{ font: "20px Arial", fill: '#000', fontWeight: "500"}))
-
-    juhisedTekst.add(game.make.text(653, 515, "JÄTKAN!",{ font: "22px Arial", fill: '#ffffff', fontWeight: "500" }))    
-    
-    juhisedTekst.add(game.make.text(330, 279, "START!",{ font: "16px Arial", fill: '#fff', fontWeight: "500" }))
-    juhisedTekst.add(game.make.text(496, 329, "STOPP!",{ font: "16px Arial", fill: '#fff', fontWeight: "500" })) */
-    
-    
    
     // Avaleht
     avaleht = game.add.sprite(0, 0, 'avaleht')   
@@ -383,7 +395,13 @@ function create () {
         mumm.destroy();
         lipuke.destroy();
         juhendistart.destroy();    
-        juhendistop.destroy();   
+        juhendistop.destroy();
+        
+
+        // funktsioon teekatte nuppude loomiseks, vene keelsel variandil on nupud suuremad, et tekst mahuks ära
+        teekateNupuFunc();
+        //tekstid mangulehel,nuppudel jms
+        mangTekstFunc();
   
         //tekstikontroll
         avalehtKontroll = 2;  
@@ -399,6 +417,7 @@ function create () {
         kiiruseNupp.inputEnabled = true;
         startStopNupp.inputEnabled = true;
         //startStopNupp.input.useHandCursor = true;
+        
         teekate_1.inputEnabled = true;
         teekate_2.inputEnabled = true;
         teekate_3.inputEnabled = true;
@@ -437,12 +456,19 @@ function update () {
                 
         // auto k2ivitusheli if
         if (efe2 == 0) { 
-            startStopNupp.destroy();           
+            startStopNupp.destroy(); 
+            startTekst.destroy();   
+            peatumisTekst.destroy();
+
             startStopNupp = game.add.button(625, 484, 'startStopNupp', actionOnClick_ss, this, 1, 1, 1);
+            startTekst  = game.add.group();
+            startTekst.add(game.make.text(664,497,"STOP", { font: "22px Arial", fill: '#ffffff', fontWeight: "500" }));
+
+
             kiiruseM66dik.destroy();
             lipp.destroy();
             maaGradient.destroy();
-            peatumisTekst.destroy();
+            //peatumisTekst.destroy();
             //sõiduajal kaota ära juhiste ja helinupp
             juhisedNupp.destroy();
             heliNupp.destroy();
@@ -591,9 +617,11 @@ function teekateValik(tee_var) {
     player.destroy();
     takistus.destroy();
     lipp.destroy();
-    peatumisTekst.destroy();
+    //peatumisTekst.destroy();
     kiiruseM66dik.destroy();
     maaGradient.destroy();
+
+    
 
     majadJaTee = game.add.sprite(0, 29, tee_var)
     for (i = 1; i < 3; i++) {
@@ -612,45 +640,73 @@ function actionOnClick_ss() {
     startStopInt += 1;
 } 
 
+
+
+
+
+
+
 function onClickTeekate_1() {
     teeValik = 1;
 
     teeolu_var = 1;
     pidurdusKonfitsent = 1.5 * teeolu_var * 4;
-    
+
     if (kiirus >= 51) {
         teekateValik('maa');
     } else {
         teekateValik('majadJaTee');
     }
-    
+
     teekateNupudDel();
 
-    teekate_1 = game.add.button(123, 450, 'teekate_1', onClickTeekate_1, this, 2, 2, 2);
-    console.log("teekate1 nupp vajutatud" )
-    teekate_2 = game.add.button(123, 484, 'teekate_2', onClickTeekate_2, this, 1, 0, 2);
-    teekate_3 = game.add.button(123, 518, 'teekate_3', onClickTeekate_3, this, 1, 0, 2);
-}
+    if (keelevalik == 0 || keelevalik == 2) {
+        teekate_1 = game.add.button(123, 450, 'teekate_1', onClickTeekate_1, this, 2, 2, 2);
+        console.log("teekate1 nupp vajutatud")
+        teekate_2 = game.add.button(123, 484, 'teekate_2', onClickTeekate_2, this, 1, 0, 2);
+        teekate_3 = game.add.button(123, 518, 'teekate_3', onClickTeekate_3, this, 1, 0, 2);
+    }
+    if (keelevalik == 1) {
+        teekate_1 = game.add.button(123, 450, 'teekate_vene1', onClickTeekate_1, this, 2, 2, 2);
+        console.log("teekate1 nupp vajutatud")
+        teekate_2 = game.add.button(123, 484, 'teekate_vene2', onClickTeekate_2, this, 1, 0, 2);
+        teekate_3 = game.add.button(123, 518, 'teekate_vene3', onClickTeekate_3, this, 1, 0, 2);
 
+    }
+
+    mangTekstFunc();
+
+}
+        
 function onClickTeekate_2() {
+
     teeValik = 2;
-    
     // m2rja asfalti haardetegur ; l6pulause pidurdusteekonna arvutus: ((x*x)/100)*0.55 * (1/0.57)
     teeolu_var = 0.57;
     pidurdusKonfitsent = 1.5 * teeolu_var * 4;
-    
+
     if (kiirus >= 51) {
         teekateValik('maaLombid');
     } else {
         teekateValik('majadLompidega');
     }
-    
+
     teekateNupudDel();
 
-    teekate_2 = game.add.button(123, 484, 'teekate_2', onClickTeekate_2, this, 2, 2, 2);
-    console.log("teekate2 nupp vajutatud" )
-    teekate_1 = game.add.button(123, 450, 'teekate_1', onClickTeekate_1, this, 1, 0, 2);    
-    teekate_3 = game.add.button(123, 518, 'teekate_3', onClickTeekate_3, this, 1, 0, 2);
+
+    if (keelevalik == 0 || keelevalik == 2) {
+        teekate_2 = game.add.button(123, 484, 'teekate_2', onClickTeekate_2, this, 2, 2, 2);
+        console.log("teekate2 nupp vajutatud")
+        teekate_1 = game.add.button(123, 450, 'teekate_1', onClickTeekate_1, this, 1, 0, 2);
+        teekate_3 = game.add.button(123, 518, 'teekate_3', onClickTeekate_3, this, 1, 0, 2);
+    }
+    if (keelevalik == 1) {
+        teekate_2 = game.add.button(123, 484, 'teekate_vene2', onClickTeekate_2, this, 2, 2, 2);
+        console.log("teekate2 nupp vajutatud")
+        teekate_1 = game.add.button(123, 450, 'teekate_vene1', onClickTeekate_1, this, 1, 0, 2);
+        teekate_3 = game.add.button(123, 518, 'teekate_vene3', onClickTeekate_3, this, 1, 0, 2);
+    }
+    mangTekstFunc();
 }
 
 function onClickTeekate_3() {
@@ -665,14 +721,30 @@ function onClickTeekate_3() {
     } else {
         teekateValik('majadLumine');
     }
-    
+
     teekateNupudDel();
 
-    teekate_3 = game.add.button(123, 518, 'teekate_3', onClickTeekate_3, this, 2, 2, 2);
-    console.log("teekate3 nupp vajutatud" )
-    teekate_1 = game.add.button(123, 450, 'teekate_1', onClickTeekate_1, this, 1, 0, 2);
-    teekate_2 = game.add.button(123, 484, 'teekate_2', onClickTeekate_2, this, 1, 0, 2);
+
+
+    if (keelevalik == 0 || keelevalik == 2) {
+        teekate_3 = game.add.button(123, 518, 'teekate_3', onClickTeekate_3, this, 2, 2, 2);
+        console.log("teekate3 nupp vajutatud")
+        teekate_1 = game.add.button(123, 450, 'teekate_1', onClickTeekate_1, this, 1, 0, 2);
+        teekate_2 = game.add.button(123, 484, 'teekate_2', onClickTeekate_2, this, 1, 0, 2);
+        
+    }
+    if (keelevalik == 1) {
+        teekate_3 = game.add.button(123, 518, 'teekate_vene3', onClickTeekate_3, this, 2, 2, 2);
+        console.log("teekate3 nupp vajutatud")
+        teekate_1 = game.add.button(123, 450, 'teekate_vene1', onClickTeekate_1, this, 1, 0, 2);
+        teekate_2 = game.add.button(123, 484, 'teekate_vene2', onClickTeekate_2, this, 1, 0, 2);
+
+        
+    }
+    mangTekstFunc();
 }
+
+
 
 function onClickUuesti() {
     startStopNupp.destroy();
@@ -710,6 +782,9 @@ function onClickUuesti() {
     
     startStopNupp = game.add.button(625, 484, 'startStopNupp', actionOnClick_ss, this, 0, 0, 0);
     //this.input.keyboard.enabled = true;
+    startTekst  = game.add.group();
+    startTekst.add(game.make.text(664,497,"START", { font: "22px Arial", fill: '#ffffff', fontWeight: "500" }));
+    
         
     nupuTaust = game.add.sprite(675, 20, 'nupuTaust')   
     game.physics.arcade.enable(nupuTaust)
@@ -764,7 +839,7 @@ function dragStop() {
 kiiruseM66dikX_var = 409;
 lippX_var = 387.5;
 function lipuTeke() {
-    peatumisTekstFunc();
+    //peatumisTekstFunc();
     
         if (teeValik == 3) {
             lipp = game.add.sprite(lippX_var, 392, 'lippMust')  
@@ -1072,11 +1147,11 @@ function reagAeg() {
 
 var pidurdusAeg;
 
-var peatumisTekst;
-function peatumisTekstFunc() {
-    peatumisTekst  = game.add.group();
-    peatumisTekst.add(game.make.text(500,430,"Peatumisteekond (m)", { font: "17px Arial", fill: "black", fontWeight : "bold"}));
-    }
+// var peatumisTekst;
+// function peatumisTekstFunc() {
+//     peatumisTekst  = game.add.group();
+//     peatumisTekst.add(game.make.text(500,430,"Peatumisteekond (m)", { font: "17px Arial", fill: "black", fontWeight : "bold"}));
+//     }
 
 // tekstiStiil
 
@@ -1144,7 +1219,7 @@ function rusFunk() {
         if (avalehtKontroll == 0) {
             avalehtTekst.destroy();
             avalehtTekst  = game.add.group();
-            avalehtTekst.add(game.make.text(340,413,"ПРОВЕРИТЬ!", { font: "19px Arial", fill: '#ffffff', fontWeight: "500" }));
+            avalehtTekst.add(game.make.text(340,413,"проверяй!", { font: "19px Arial", fill: '#ffffff', fontWeight: "500"})); // TEE SUUREKS
             avalehtTekst.add(game.make.text(40, 300, "Тебе известно, какой длины получается остановочный путь, двигаясь на автомобиле? \n Проверь свои знания! ",{ font: "18px Arial", fill: '#000', fontWeight: "500",align: 'center' }))
         }
         if (avalehtKontroll == 1) {
@@ -1240,8 +1315,8 @@ function juhisedTekstFunc() {
 
         juhisedTekst.add(game.make.text(650, 515, "ДАЛЬШЕ!",{ font: "22px Arial", fill: '#ffffff', fontWeight: "500" }))
 
-        juhisedTekst.add(game.make.text(440, 280, "СТАРТ",{ font: "14px Arial", fill: '#fff', fontWeight: "500" }))
-        juhisedTekst.add(game.make.text(485, 320, "СТОП",{ font: "14px Arial", fill: '#fff', fontWeight: "500" }))
+        juhisedTekst.add(game.make.text(440, 280, "START",{ font: "14px Arial", fill: '#fff', fontWeight: "500" }))
+        juhisedTekst.add(game.make.text(485, 320, "STOP",{ font: "14px Arial", fill: '#fff', fontWeight: "500" }))
     }
     if (keelevalik == 2) {
         juhisedTekst.destroy();
@@ -1275,6 +1350,77 @@ function juhisedTekstFunc() {
 }
 
 
+function mangTekstFunc() {
+
+    //eesti keel
+    if (keelevalik == 0) {
+        mangTekst.destroy();  
+        peatumisTekst.destroy();
+         
+    
+        mangTekst  = game.add.group();
+        peatumisTekst = game.add.group();
+        peatumisTekst.add(game.make.text(500,430,"Peatumisteekond (m)", { font: "17px Arial", fill: "black", fontWeight : "300"}));
+        mangTekst.add(game.make.text(134,455,"Kuiv teekate", { font: "14px Arial", fill: "black", fontWeight : "300"}));
+        mangTekst.add(game.make.text(134,489,"Märg teekate", { font: "14px Arial", fill: "black", fontWeight : "300"}));
+        mangTekst.add(game.make.text(132,523,"Jäine teekate", { font: "14px Arial", fill: "black", fontWeight : "300"}));
+        
+        
+    }
+    //vene keel
+    if (keelevalik == 1) {
+        mangTekst.destroy();
+        peatumisTekst.destroy();
+       
+        
+         
+        mangTekst  = game.add.group();
+        peatumisTekst = game.add.group();
+        peatumisTekst.add(game.make.text(500,430,"Длина остановочного пути", { font: "17px Arial", fill: "black", fontWeight : "300"}));
+        mangTekst.add(game.make.text(143,454,"Сухое покрытие", { font: "12px Arial", fill: "black", fontWeight : "300"}));
+        mangTekst.add(game.make.text(140,488,"Мокрое покрытие", { font: "12px Arial", fill: "black", fontWeight : "300"}));
+        mangTekst.add(game.make.text(130,522,"Обледенелое покрытие", { font: "11px Arial", fill: "black", fontWeight : "300"}));
+
+    }
+    //inglise keel
+    if (keelevalik == 2) {
+        mangTekst.destroy();
+        peatumisTekst.destroy();
+        
+    
+        mangTekst  = game.add.group();
+        peatumisTekst = game.add.group();
+        peatumisTekst.add(game.make.text(500,430,"Stopping distance", { font: "17px Arial", fill: "black", fontWeight : "300"}));
+        mangTekst.add(game.make.text(140,453,"Dry surface", { font: "14px Arial", fill: "black", fontWeight : "300"}));
+        mangTekst.add(game.make.text(139,487,"Wet surface", { font: "14px Arial", fill: "black", fontWeight : "300"}));
+        mangTekst.add(game.make.text(140,521,"Icy surface", { font: "14px Arial", fill: "black", fontWeight : "300"}));
+
+        
+    }
+}
+
+
+function teekateNupuFunc() {
+
+
+    if (keelevalik == 0 || keelevalik == 2){
+        teekateNupudDel();
+        
+        teekate_1 = game.add.button(123, 450, 'teekate_1', onClickTeekate_1, this, 2, 2, 2);
+        teekate_2 = game.add.button(123, 484, 'teekate_2', onClickTeekate_2, this, 1, 0, 2);
+        teekate_3 = game.add.button(123, 518, 'teekate_3', onClickTeekate_3, this, 1, 0, 2);
+
+    }
+
+    if (keelevalik == 1) {
+        teekateNupudDel();
+
+        teekate_1 = game.add.button(123, 450, 'teekate_vene1', onClickTeekate_1, this, 2, 2, 2);
+        teekate_2 = game.add.button(123, 484, 'teekate_vene2', onClickTeekate_2, this, 1, 0, 2);
+        teekate_3 = game.add.button(123, 518, 'teekate_vene3', onClickTeekate_3, this, 1, 0, 2);
+
+    }    
 
 
 
+}
