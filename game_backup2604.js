@@ -63,7 +63,7 @@ function preload () {
     game.load.spritesheet('linkNupp', 'assets/siit.png', 30, 14);
     game.load.spritesheet('linkNuppRUS', 'assets/siit_rus.png', 50, 14);
     game.load.spritesheet('linkNuppENG', 'assets/siit_eng.png', 45, 14);
-    game.load.spritesheet('linkNuppLopp', 'assets/l6pulink2.png', 227, 20);
+    game.load.spritesheet('linkNuppLopp', 'assets/l6pulink.JPG', 659, 30);
 
 
         
@@ -91,8 +91,6 @@ function preload () {
 keelevalik = 0;
 takistuseKaugus = 5000;
 var takistusTeke;
-lopetanInt = 0;
-eiPidurdanudInt = 0;
 
 function create () {
 
@@ -103,7 +101,7 @@ function create () {
     
     game.physics.startSystem(Phaser.Physics.ARCADE)
     
-    
+
 
 
     // mängu aken
@@ -162,8 +160,8 @@ function create () {
 
     mangTekstFunc();
     
-    //boundsM66dik = new Phaser.Rectangle(375, 360, 425, 65);
-    boundsM66dik = new Phaser.Rectangle(375, 360, 385, 65);    
+    // boundsM66dik = new Phaser.Rectangle(346, 360, 425, 65);
+    boundsM66dik = new Phaser.Rectangle(375, 360, 425, 65);
     //  vajadusel saab kastikiese ka v2lja joonistada:
     /* 
     var graphics = game.add.graphics(boundsM66dik.x, boundsM66dik.y);
@@ -187,7 +185,7 @@ function create () {
     jatkanNupp = game.add.button(625, 501, 'jatkanNupp', jatkanClick, this, 0, 0, 0);
 
     //sprited teksti vahel
-    mumm = game.add.sprite(420, 183, 'mumm');
+    mumm = game.add.sprite(436, 183, 'mumm');
     lipuke = game.add.sprite(562, 228, 'lipuke');
     juhendistart = game.add.sprite(321, 276, 'juhendistart');    
     juhendistop = game.add.sprite(488, 325, 'juhendistop');    
@@ -203,6 +201,30 @@ function create () {
     avalehtTekst.add(game.make.text(357,412,"TESTIN!", { font: "22px Arial", fill: '#ffffff', fontWeight: "500" }));
     avalehtTekst.add(game.make.text(163, 300, "Kas tead, kui pikk on peatumisteekond autoga sõites?\n Testi oma teadmisi!",{ font: "20px Arial", fill: '#000', fontWeight: "500",align: 'center' }))
 
+
+
+
+    
+    
+    
+    /* // võtan nupu teksti muutujast
+    proovinText = game.cache.getText('avalehtTestin');
+    // panen teksti kuvama
+    proovinTekst = game.add.text(357, 412, proovinText,  { font: "22px Arial", fill: '#ffffff', fontWeight: "500" });
+    //avalehe tekst
+    avalehtText = game.cache.getText('avalehtTekst');
+    // panen teksti kuvama
+    avalehtTekst = game.add.text(163, 300, avalehtText,  { font: "20px Arial", fill: '#000', fontWeight: "500",align: 'center' }); */
+
+
+
+    // nupud heli ja juhised --- SEE TULEKS SIIT VIIA ÄRA ----
+    //nupuTaust = game.add.sprite(675, 20, 'nupuTaust')   
+    //game.physics.arcade.enable(nupuTaust)
+    //heliNupp = game.add.button(685, 27, 'heliNupp', heliClick, this, 1, 1, 1);
+    //juhisedNupp = game.add.button(730, 27, 'juhisedNupp', juhisedClick, this, 0, 0, 0);
+    //juhisedNupp.inputEnabled = false;    
+
     // KEELEVALIK
     keeleNupuTaust = game.add.sprite(625, 20, 'keeleNupuTaust')
     est = game.add.button(635, 27, 'est', estClick, this, 1, 1, 1);
@@ -210,6 +232,10 @@ function create () {
     rus = game.add.button(682, 27, 'rus', rusClick, this, 0, 0, 0);
     eng = game.add.button(728, 27, 'eng', engClick, this, 0, 0, 0);
 
+
+
+
+    
     this.spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     
     // disablen nupud avalehe ja juhiste all
@@ -255,20 +281,20 @@ function create () {
 //   kiirus2 = ((kiiruseNupp.body.position.x - bounds.x)/(bounds.width-18)*100)+30;
 //    efe = kiirus*4;
 
-    tagasisideList = ["jalakäija ja sõiduki kokkupõrkel kiirusel 50 km/h on\njalakäija hukkumise tõenäosus 40%, suurendades kiirust „vaid” 10 km/h\non selleks tõenäosuseks juba 70%?",
-                        "reageerimisaeg ei ole kõigil 1 sekund. Olenevalt juhi\nvalmisolekust, kogemusest ja keskendumisest võib see varieeruda?",
-                        "et autoroolis sms-i kirjutamisel või lugemisel julgeb juht\nhoida oma pilku teelt ära kuni viis sekundit järjest. Selle aja jooksul liigub\nsõiduk „pimeduses” 50 km/h sõidukiirusel umbkaudu 70 meetrit?",
-                        "et autoroolis sms-i kirjutamisel või lugemisel julgeb juht\nhoida oma pilku teelt ära kuni viis sekundit järjest. Selle aja jooksul liigub\nsõiduk „pimeduses” 90 km/h sõidukiirusel umbkaudu 125 meetrit?"];
+    tagasisideList = ["jalakäija ja sõiduki kokkupõrkel kiirusel 50 km/h on\njalakäija hukkumise tõenäosus 40%, suurendades kiirust\n„vaid” 10 km/h on selleks tõenäosuseks juba 70%.",
+                        "reageerimisaeg ei ole kõigil 1 sekund. Olenevalt juhi\nvalmisolekust, kogemusest ja keskendumisest võib see varieeruda.",
+                        "on teada, et autoroolis sms-i kirjutamisel või lugemisel\njulgeb juht hoida oma pilku teelt ära kuni viis sekundit järjest. Selle aja\njooksul liigub sõiduk „pimeduses” 50 km/h sõidukiirusel ca 70 meetrit.",
+                        "on teada, et autoroolis sms-i kirjutamisel või lugemisel\njulgeb juht hoida oma pilku teelt ära kuni viis sekundit järjest. Selle aja\njooksul liigub sõiduk „pimeduses” 90 km/h sõidukiirusel ca 125 meetrit."];
     
-    tagasisideListRUS = ["при столкновении с пешеходом на скорости\n50 км/ч вероятность гибели пешехода составляет 40%. Увеличив\nскорость «всего» на 10 км/ч, эта вероятность составляет уже 70%.",
+    tagasisideListRUS = ["при столкновении с пешеходом на скорости\n50 км/ч вероятность гибели пешехода составляет 40%. Увеличив скорость\n«всего» на 10 км/ч, эта вероятность составляет уже 70%.",
                         "время реагирования не у всех 1 секунда.\nВ зависимости от подготовки, опыта и концентрации водителя оно\nможет варьироваться.",
-                        "что при наборе или чтении SMS за рулем\nавтомобиля водитель осмеливается отводить свой взгляд от\nдороги до пяти секунд подряд. За это время автомобиль\nпроезжает «вслепую» при скорости 50 км/ч приблизительно\n70 метров.",
-                        "что при наборе или чтении SMS за рулем\nавтомобиля водитель осмеливается отводить свой взгляд от\nдороги до пяти секунд подряд. За это время автомобиль\nпроезжает «вслепую» при скорости 90 км/ч приблизительно\n125 метров."]
+                        "известно, что при наборе или чтении SMS\nза рулем автомобиля водитель осмеливается отводить свой взгляд\nот дороги до пяти секунд подряд. За это время автомобиль\nпроезжает «вслепую» при скорости 50 км/ч приблизительно 70 метров.",
+                        "известно, что при наборе или чтении SMS\nза рулем автомобиля водитель осмеливается отводить свой взгляд\nот дороги до пяти секунд подряд. За это время автомобиль\nпроезжает «вслепую» при скорости 90 км/ч приблизительно 125 метров."]
     
     tagasisideListENG = ["if you hit a pedestrian at 50 km/h, the chances of them\nbeing killed are 40%. However, increase your speed by “just” 10 km/h\nand the chances of them being killed go up to 70%.",
-                        "not everyone’s reaction time is 1 second – it varies\ndepending on how alert and experienced the driver is and how\nfocused they are on the road.",
-                        "for example, it is known that drivers will happily take\ntheir eyes off the road for up to five seconds at a time while texting or\nreading at the wheel. In those few seconds, driving at a speed of 50 km/h,\ntheir car will travel ‘blind’ for around 70 meters.",
-                        "for example, it is known that drivers will happily take\ntheir eyes off the road for up to five seconds at a time while texting or\nreading at the wheel. In those few seconds, driving at a speed of 90 km/h,\ntheir car will travel ‘blind’ for around 125 meters."
+                        "not everyone’s reaction time is 1 second – it varies\ndepending on how alert and experienced the driver is and how\nfocussed they are on the road.",
+                        "for example, it is known that drivers will happily take\ntheir eyes off the road for up to five seconds at a time while texting or\nreading at the wheel. In those few seconds, driving at a speed of 50 km/h,\ntheir car will travel ‘blind’ for around 70 metres.",
+                        "for example, it is known that drivers will happily take\ntheir eyes off the road for up to five seconds at a time while texting or\nreading at the wheel. In those few seconds, driving at a speed of 90 km/h,\ntheir car will travel ‘blind’ for around 125 metres."
     ]
 
 
@@ -355,6 +381,10 @@ function create () {
         jatkanNupp.input.useHandCursor = true;
         proovinInt = 0;
         juhisedTekstFunc();
+
+
+        
+
     }
 
     function jatkanClick() {
@@ -371,6 +401,8 @@ function create () {
         lipuke.destroy();
         juhendistart.destroy();    
         juhendistop.destroy();
+        
+
         // funktsioon teekatte nuppude loomiseks, vene keelsel variandil on nupud suuremad, et tekst mahuks ära
         teekateNupuFunc();
         //tekstid mangulehel,nuppudel jms
@@ -378,6 +410,8 @@ function create () {
   
         //tekstikontroll
         avalehtKontroll = 2;  
+
+
         // juhised ja helinupp
         nupuTaust = game.add.sprite(675, 20, 'nupuTaust')   
         game.physics.arcade.enable(nupuTaust)
@@ -401,6 +435,7 @@ function create () {
         this.input.keyboard.enabled = true;
         setTimeout(engineSoundStartFunc, 800);
         k2ivitus_sound.play();        
+        
     }
        
     function carStart() {						// -18 tuleb yle checkkida
@@ -414,12 +449,6 @@ function create () {
             takistus.body.velocity.x = -1*efe;    
         }    
     }
-tyhikuInt = 0; 
-    function tyhikuVajutus() {
-        if (this.spaceKey.isDown) {
-            tyhikuInt += 1;
-        }
-    }
 
 
 
@@ -427,7 +456,7 @@ function update () {
     
     if (this.spaceKey.isDown && autoLiikumine == 1 && juhisedInt % 2 == 0 || startStopInt == 1 && taustaLiikumine == 0){
     //    if (this.spaceKey.isDown && player.body.position.x  == 0){
-        startStopInt = 1; 
+        startStopInt = 1;    
         console.log("startstopint: ",startStopInt);   
         
                 
@@ -498,14 +527,8 @@ function update () {
         // } else if (this.spaceKey.downDuration(10)) {
         
         // pidurdamise esime "if" ; kui space pidurdamise tarbeks alla vajutada
-        // voi klickid pidurit
         } else if (this.spaceKey.isDown && autoPidurdus == 1 || startStopInt > 1 && autoPidurdus == 1) {
         // } else if (this.spaceKey.isDown && autoPidurdus == 1) {
-
-            startStopInt = 2;
-            //et peale space pidurdust ei saaks klikkida, et lõputekstid tuleksid alati õiged
-            startStopNupp.inputEnabled = false;
-
 
             if (taustaLiikumine == 1) {
             pidurdusAlgPunkt = player.body.position.x + 185;
@@ -516,8 +539,6 @@ function update () {
             
             majadJaTee.body.velocity.x = 0;
             takistus.body.velocity.x = 0;
-
-
         
             if (autoPidurdus =! 0) {
                 efe = kiirus*1.55;
@@ -577,8 +598,7 @@ function update () {
 
     } else if (lipu_var == 1) {
         // m66dustik liigub vasakule
-        //if (lipp.x > 708 && kiiruseM66dik.x >= -590) {
-        if (lipp.x > 688 && kiiruseM66dik.x >= -630) {
+        if (lipp.x > 708 && kiiruseM66dik.x >= -590) {
             kiiruseM66dik.x = kiiruseM66dik.x - 3
         
         // m66dustik liigub paremale
@@ -628,7 +648,8 @@ function teekateValik(tee_var) {
 
 function actionOnClick_ss() {
     startStopInt += 1;
-
+    pidurdusInt +=1;
+    console.log("pidurdusint:", pidurdusInt)
 } 
 
 
@@ -747,17 +768,6 @@ function onClickUuesti() {
     textGroup.destroy();
     nupuTaust.destroy();
     mntLink.destroy();
-    l6petanNupp.destroy();
-
-    //selleks et viimaselt lehelt tagasi mängima minna
-    if (lopetanInt == 1) {
-        l6puTiiter.destroy();
-        l6ppTekst.destroy();
-        alustaAlgusestNupp.destroy();
-        //mntLink.destroy();
-        mntLinkLopp.destroy();
-    }
-
     
     kiiruseNupp.x = 370.6;
     kiirus = 50;
@@ -782,8 +792,8 @@ function onClickUuesti() {
     juhisedInt = 0;
     ennustus = 0;
     pidurdusInt = 0;
-    lopetanInt = 0;
 
+    console.log("pidurdusint:", pidurdusInt);
     
     startStopNupp = game.add.button(625, 484, 'startStopNupp', actionOnClick_ss, this, 0, 0, 0);
     //this.input.keyboard.enabled = true;
@@ -802,17 +812,12 @@ function onClickUuesti() {
 }
 
 function onClickL6petan() {
-    lopetanInt = 1;
     l6puTiiter = game.add.sprite(0, 0, 'l6puTiiter')   
     game.physics.arcade.enable(l6puTiiter)
     uuestiNupp.inputEnabled = false;
     l6petanNupp.inputEnabled = false;
     startStopNupp.inputEnabled = false;
     startStopNupp.input.useHandCursor = false;
-
-    //vii algusesse tagasi
-    alustaAlgusestNupp = game.add.button(300, 520, 'uuestiNupp', onClickUuesti , this, 0, 0, 0);
-
     
 
     if (keelevalik == 0){
@@ -827,34 +832,25 @@ function onClickL6petan() {
 
 }
 
-function onClickAlgusest() {
-    console.log('jjeeee');
-}
-
-
-
 function l6pp() {
     l6ppTekst = game.add.group();
     l6ppTekst.add(game.make.text(170,100,"PIIRKIIRUSEL ON PÕHJUS!", { font: "36px Arial", fill: '#000', fontWeight: "700" }));
-    l6ppTekst.add(game.make.text(65,180,"Hooli oma sõpradest ja jaga rakendust ka neile!", { font: "32px Arial", fill: '#000', fontWeight: "500" }));
-    l6ppTekst.add(game.make.text(316, 532, "TESTIN UUESTI", { font: "22px Arial", fill: '#ffffff', fontWeight: "500" } ))
-    mntLinkFuncLopp(285,260);
+    l6ppTekst.add(game.make.text(210,200,"Hooli oma sõpradest ja jaga rakendust ka neile!", { font: "18px Arial", fill: '#000', fontWeight: "500" }));
+    mntLinkFuncLopp(70,240);
 }
 
 function l6ppRUS() {
     l6ppTekst = game.add.group();
-    l6ppTekst.add(game.make.text(40,100,"ОГРАНИЧЕНИЕ СКОРОСТИ ИМЕЕТ ПРИЧИНУ!", { font: "32px Arial", fill: '#000', fontWeight: "700" }));
-    l6ppTekst.add(game.make.text(65,180,"Заботься о своих друзьях и поделись приложением с ними! ", { font: "24px Arial", fill: '#000', fontWeight: "500" }));
-    l6ppTekst.add(game.make.text(350, 532, "ЗАНОВО!", { font: "22px Arial", fill: '#ffffff', fontWeight: "500" } ))
-    mntLinkFuncLopp(285,260);
+    l6ppTekst.add(game.make.text(130,100,"ПОТРАТЬ ВРЕМЯ, А НЕ ЖИЗНЬ!", { font: "36px Arial", fill: '#000', fontWeight: "700" }));
+    l6ppTekst.add(game.make.text(150,180,"Заботься о своих друзьях и поделись приложением с ними! ", { font: "18px Arial", fill: '#000', fontWeight: "500" }));
+    mntLinkFuncLopp(70,240);
 }
 
 function l6ppENG() {
     l6ppTekst = game.add.group();
-    l6ppTekst.add(game.make.text(40,90,"THERE IS A REASON FOR SPEED LIMITS!", { font: "36px Arial", fill: '#000', fontWeight: "700" }));
+    l6ppTekst.add(game.make.text(188,90,"TAKE TIME, NOT LIVES!", { font: "36px Arial", fill: '#000', fontWeight: "700" }));
     l6ppTekst.add(game.make.text(160,180,"Show you care – share this app with your friends and family!", { font: "18px Arial", fill: '#000', fontWeight: "500" }));
-    l6ppTekst.add(game.make.text(320, 532, "RETAKE TEST!", { font: "22px Arial", fill: '#ffffff', fontWeight: "500" } ))
-    mntLinkFuncLopp(285,260);
+    mntLinkFuncLopp(70,240);
 }
 
 
@@ -938,13 +934,8 @@ function otsaSoit() {
     if (takistus.x <= (player.x + 185) && efe3 == 0) {
         // automaatne pidurdus
         //kui startstopint ei muutuks siin 2ks siis auto ei pidurda automaatselt kui see takistusele otsa sõidab
-        if (startStopInt == 1) {
-            // pidurdusInt muutub v22rtuseks 1 vaid siis kui soitja pidurit ei vajuta ja soidab takistusele otsa
-            pidurdusInt = 1;
-            }
         startStopInt = 2;
         autoPidurdus = 1;
-
         //kui sõidad otsa takistusele siis on proloog 1
         proloog = 1;
         takistusePositsioon = takistus.position.x 
@@ -964,31 +955,31 @@ function otsaSoit() {
 
 function l6puLause_kuva() {
 
-    // kui ei pidurdagi -- toimib, rus toimib, eng ok
-    if (pidurdusInt == 1 ){
+    // kui ei pidurdagi
+    if (pidurdusInt == 1){
         lopuText_4();
         console.log("sa ei pidurdanud");
     }
 
-    //vajutad pidurit, aga ikka sõitsid otsa, takistus on juba ekraanil - TOIMIB, toimib rus, ENG OK
-    else if (pidurdusInt == 0 && startStopInt == 2 && player.body.position.x + 185 > takistus.body.position.x) {
-        console.log('pidurdasid, aga sõitsid otsa')
+    // vajutad pidurit, aga ikka sõitsid otsa
+    else if (pidurdusInt == 2 && startStopInt == 2 && player.body.position.x + 185 > takistusePositsioon) {
+    
         lopuText_5();
 
     }
 
-    //kui ei sõida otsa ja ei ennusta, st pidurdad õigel ajal -- TOIMIB, venekeeles toimib, ENG OK
-    else if (proloog == 1 && ennustus == 0 && pidurdusInt == 0) {
+    //kui ei sõida otsa ja ei ennusta
+    else if (proloog == 1 && ennustus == 0 && pidurdusInt == 2) {
         console.log("said pidama õigel ajal, ei ennustanud");
         lopuText_1();
     }
-    //peatasid auto enne takistuse ilmumist -- TOIMIB, venekeeles toimib, eng ok
-    else if (proloog == 0 && pidurdusInt == 0) {
-        console.log("peatasid auto enne kokkuporget");
+    // peatasid auto enne takistuse ilmumist -- toimib
+    else if (proloog == 0 && pidurdusInt == 2) {
+        console.log("sõitsid otsa2");
         lopuText_2();
     }    
-    //peatasid auto enne takistuse ilmumist, ennustasid pidurdusteekonda -- TOIMIB, venekeeles toimib
-    else if (proloog == 1 && ennustus > 0 && pidurdusInt == 0) {
+    //peatasid auto enne takistuse ilmumist, ennustasid pidurdusteekonda
+    else if (proloog == 1 && ennustus > 0 && pidurdusInt == 2) {
         console.log("said pidama õigel ajal, ennustasid");
         lopuText_3();
     }
@@ -997,23 +988,27 @@ function l6puLause_kuva() {
 
 var mntLink;
 function mntLinkFunc(xx,yy) {
+    // mntLink = game.add.text(133, 428, "https://kiirus.mnt.ee/vota-aega-mitte-elu", { font: "20px Arial", fill: "blue" });
     mntLink = game.add.button(xx, yy, 'linkNupp', onClickLink, this, 1, 0, 0);
 }
 
 function mntLinkFuncRUS(xx,yy) {
+    // mntLink = game.add.text(133, 428, "https://kiirus.mnt.ee/vota-aega-mitte-elu", { font: "20px Arial", fill: "blue" });
     mntLink = game.add.button(xx, yy, 'linkNuppRUS', onClickLink, this, 1, 0, 0);
 }
 
 function mntLinkFuncENG(xx,yy) {
+    // mntLink = game.add.text(133, 428, "https://kiirus.mnt.ee/vota-aega-mitte-elu", { font: "20px Arial", fill: "blue" });
     mntLink = game.add.button(xx, yy, 'linkNuppENG', onClickLink, this, 1, 0, 0);
 }
 
 function mntLinkFuncLopp(xx,yy) {
-    mntLinkLopp = game.add.button(xx, yy, 'linkNuppLopp', onClickLink, this, 1, 0, 0);
+    // mntLink = game.add.text(133, 428, "https://kiirus.mnt.ee/vota-aega-mitte-elu", { font: "20px Arial", fill: "blue" });
+    mntLink = game.add.button(xx, yy, 'linkNuppLopp', onClickLink, this, 1, 0, 0);
 }
 
 function onClickLink() {
-    window.open("https://liikluskasvatus.ee", "_blank");
+    window.open("https://www.liikluskasvatus.ee/et/taiskasvanule/2/soidukijuht-ja-soitja/kiirus", "_blank");
 }
 
 
@@ -1186,20 +1181,20 @@ function avarii() {
     tagasisideRand();
     textGroup.add(game.make.text(120,250,"Kas teadsid, et " + tagasiside, { font: "18px Arial", fill: '#000', fontWeight: "500" }))
     textGroup.add(game.make.text(120,400,"Loe lisaks ", { font: "18px Arial", fill: '#000', fontWeight: "500" })) 
-
-    textGroup.add(game.make.text(508, 493, "TESTIN UUESTI",{ font: "22px Arial", fill: '#ffffff', fontWeight: "500" }));
-    textGroup.add(game.make.text(151, 493, "LÕPETAN",{ font: "22px Arial", fill: '#ffffff', fontWeight: "500" }));
     mntLinkFunc(208,403);
 }
 //sa ei vajutanudki pidurit RUS
 function avariiRUS() {
     reagAeg();
     tagasisideRandRus();
+    // tegelik peatumisteekond meetrites
+    peatumisTeekond = Math.round((num + reagMmeeter_var + Number.EPSILON) * 100) / 100;  
+    //reageerimisajal läbitud meetrid - reagMmeeter_var
     //pidurdusteekond
     pidurdusteekond = Math.round((num + Number.EPSILON) * 100) / 100;
     textGroup = game.add.group();
-    textGroup.add(game.make.text(120,150,"Твоё скорость реакции не хватило, чтобы избежать столкновения!\nЗанимался ли Ты при этом какой-либо постаронней действий? ", { font: "18px Arial", fill: '#000', fontWeight: "500" }));
-    textGroup.add(game.make.text(120,250,"Тебе известно, " + tagasiside, { font: "18px Arial", fill: '#000', fontWeight: "500" }));
+    textGroup.add(game.make.text(120,150," VAJA VENE KEELDE TÕLKIDA:\nSinu reageerimiskiirus ei olnud piisav otsasõidu vältimiseks.\nKas tegelesid samal ajal mõne kõrvalise tegevusega? ", { font: "18px Arial", fill: '#000', fontWeight: "500" }));
+    textGroup.add(game.make.text(120,300,"Тебе известно, что " + tagasiside, { font: "18px Arial", fill: '#000', fontWeight: "500" }));
     textGroup.add(game.make.text(120,430,"Подробнее читайте ", { font: "18px Arial", fill: '#000', fontWeight: "500" }))
     mntLinkFuncRUS(290,435);
     textGroup.add(game.make.text(540,493, "ЗАНОВО!",{ font: "22px Arial", fill: '#ffffff', fontWeight: "500" }));
@@ -1216,10 +1211,10 @@ function avariiENG() {
     //pidurdusteekond
     pidurdusteekond = Math.round((num + Number.EPSILON) * 100) / 100;
     textGroup = game.add.group();
-    textGroup.add(game.make.text(120,150,"Your reaction time was not enough to avoid a collision.\nWhere you engaged in any extraneous activity at the same time? ", { font: "18px Arial", fill: '#000', fontWeight: "500" }));
+    textGroup.add(game.make.text(120,150,"OLEKS VAJA INGLISE KEELDE:\nSinu reageerimiskiirus ei olnud piisav otsasõidu vältimiseks.\nKas tegelesid samal ajal mõne kõrvalise tegevusega? ", { font: "18px Arial", fill: '#000', fontWeight: "500" }));
     
     //textGroup.add(game.make.text(120,195,"Sinu kiirus oli " + Math.round(kiirus) + " km/h. Sinu reageerimisteekond oli " + Math.round(reagMmeeter_var) + " meetrit ning\npidurdusteekond " + Math.round(pidurdusteekond) + " meetrit.\nKokku oli peatumisteekond "+ Math.round(peatumisTeekond) + " meetrit.", tekstiStiil2));
-    textGroup.add(game.make.text(120,250,"Did you know " + tagasiside, { font: "18px Arial", fill: '#000', fontWeight: "500" }));
+    textGroup.add(game.make.text(120,300,"Did you know " + tagasiside, { font: "18px Arial", fill: '#000', fontWeight: "500" }));
     textGroup.add(game.make.text(120,430,"Read more ", { font: "18px Arial", fill: '#000', fontWeight: "500" }))
     textGroup.add(game.make.text(517,493, "RETAKE TEST",{ font: "22px Arial", fill: '#ffffff', fontWeight: "500" }));
     textGroup.add(game.make.text(173, 493, "EXIT",{ font: "22px Arial", fill: '#ffffff', fontWeight: "500" }));
@@ -1236,7 +1231,7 @@ function avariiENG() {
 
 
 
-//vajutad pidurit, aga ikka sõitsid otsa || SEE OSA PEAKS OLEMA TEKSTILISELT KORRAS, EESTI KEELES
+//vajutad pidurit, aga ikka sõitsid otsa
 function pidurAvarii() {
     reagAeg();
     // tegelik peatumisteekond meetrites
@@ -1247,7 +1242,7 @@ function pidurAvarii() {
     textGroup = game.add.group();
     textGroup.add(game.make.text(120,110,"Teel oli takistus, sõitsid sellele otsa. Sinu reageerimiskiirus ei olnud\njärelikult piisav otsasõidu vältimiseks. Kas tegelesid samal ajal mõne\nkõrvalise tegevusega?", { font: "18px Arial", fill: '#000', fontWeight: "500" }));
     tagasisideRand();
-    textGroup.add(game.make.text(120,195,"Sinu kiirus oli " + Math.round(kiirus) + " km/h. Sinu reageerimisteekond oli " + Math.round(reagMmeeter_var) + " meetrit ning\npidurdusteekond " + Math.round(pidurdusteekond) + " meetrit.\nKokku oli peatumisteekond "+ (Math.round(pidurdusteekond) + Math.round(reagMmeeter_var)) + " meetrit.", tekstiStiil2));
+    textGroup.add(game.make.text(120,195,"Sinu kiirus oli " + Math.round(kiirus) + " km/h. Sinu reageerimisteekond oli " + Math.round(reagMmeeter_var) + " meetrit ning\npidurdusteekond " + Math.round(pidurdusteekond) + " meetrit.\nKokku oli peatumisteekond "+ Math.round(peatumisTeekond) + " meetrit.", tekstiStiil2));
     textGroup.add(game.make.text(120,300,"Kas teadsid, et " + tagasiside, { font: "18px Arial", fill: '#000', fontWeight: "500" }));
     textGroup.add(game.make.text(120,430,"Loe lisaks ", { font: "18px Arial", fill: '#000', fontWeight: "500" }))
     mntLinkFunc(208,433);
@@ -1265,10 +1260,10 @@ function pidurAvariiRUS() {
     //pidurdusteekond
     pidurdusteekond = Math.round((num + Number.EPSILON) * 100) / 100;
     textGroup = game.add.group();
-    textGroup.add(game.make.text(120,120,"Твоё скорость реакции не хватило, чтобы избежать столкновения!\nЗанимался ли Ты при этом какой-либо постаронней действий?\n\nПри скорости " + Math.round(kiirus) + " .км/ч путь реагирования было " + Math.round(reagMmeeter_var) + " м,\nа тормозной путь " + Math.round(pidurdusteekond) + " м. Общий остановочный путь составил "+ (Math.round(pidurdusteekond) + Math.round(reagMmeeter_var)) + " м.", tekstiStiil2));
-    
+    //textGroup.add(game.make.text(120,110,"Teel oli takistus, sõitsid sellele otsa. Sinu reageerimiskiirus ei olnud\njärelikult piisav otsasõidu vältimiseks. Kas tegelesid samal ajal mõne\nkõrvalise tegevusega?", { font: "18px Arial", fill: '#000', fontWeight: "500" }));
+
     //textGroup.add(game.make.text(120,195,"Sinu kiirus oli " + Math.round(kiirus) + " km/h. Sinu reageerimisteekond oli " + Math.round(reagMmeeter_var) + " meetrit ning\npidurdusteekond " + Math.round(pidurdusteekond) + " meetrit.\nKokku oli peatumisteekond "+ Math.round(peatumisTeekond) + " meetrit.", tekstiStiil2));
-    textGroup.add(game.make.text(120,270,"Тебе известно, что " + tagasiside, { font: "18px Arial", fill: '#000', fontWeight: "500" }));
+    textGroup.add(game.make.text(120,300,"Тебе известно, что " + tagasiside, { font: "18px Arial", fill: '#000', fontWeight: "500" }));
     textGroup.add(game.make.text(120,430,"Подробнее читайте ", { font: "18px Arial", fill: '#000', fontWeight: "500" }))
     mntLinkFuncRUS(290,435);
     textGroup.add(game.make.text(540,493, "ЗАНОВО!",{ font: "22px Arial", fill: '#ffffff', fontWeight: "500" }));
@@ -1287,10 +1282,8 @@ function pidurAvariiENG() {
     pidurdusteekond = Math.round((num + Number.EPSILON) * 100) / 100;
     textGroup = game.add.group();
     //textGroup.add(game.make.text(120,110,"Teel oli takistus, sõitsid sellele otsa. Sinu reageerimiskiirus ei olnud\njärelikult piisav otsasõidu vältimiseks. Kas tegelesid samal ajal mõne\nkõrvalise tegevusega?", { font: "18px Arial", fill: '#000', fontWeight: "500" }));
-    textGroup.add(game.make.text(120,120,"Your reaction time was not enough to avoid a collision.\nWhere you engaged in any extraneous activity at the same time? ", { font: "18px Arial", fill: '#000', fontWeight: "500" }));
+    
     //textGroup.add(game.make.text(120,195,"Sinu kiirus oli " + Math.round(kiirus) + " km/h. Sinu reageerimisteekond oli " + Math.round(reagMmeeter_var) + " meetrit ning\npidurdusteekond " + Math.round(pidurdusteekond) + " meetrit.\nKokku oli peatumisteekond "+ Math.round(peatumisTeekond) + " meetrit.", tekstiStiil2));
-    textGroup.add(game.make.text(120,200,"Your speed was " + Math.round(kiirus) + " km/h.\nYour reaction distance was " + Math.round(reagMmeeter_var) + " m and your braking distance was " + Math.round(pidurdusteekond) + " m.\nThe total stopping distance was "+ Math.round(peatumisTeekond) + " m.", tekstiStiil2));
-
     textGroup.add(game.make.text(120,300,"Did you know " + tagasiside, { font: "18px Arial", fill: '#000', fontWeight: "500" }));
     textGroup.add(game.make.text(120,430,"Read more ", { font: "18px Arial", fill: '#000', fontWeight: "500" }))
     textGroup.add(game.make.text(517,493, "RETAKE TEST",{ font: "22px Arial", fill: '#ffffff', fontWeight: "500" }));
@@ -1309,12 +1302,9 @@ function ennustamata() {
     pidurdusteekond = Math.round((num + Number.EPSILON) * 100) / 100;
     textGroup = game.add.group();
     tagasisideRand();
-    textGroup.add(game.make.text(120,150,"Sa ei ennustanud pidurdusteekonda!", { font: "18px Arial", fill: '#000', fontWeight: "500" }));
-    textGroup.add(game.make.text(120,300,"Kas teadsid, et " + tagasiside, { font: "18px Arial", fill: '#000', fontWeight: "500" }));
-    textGroup.add(game.make.text(120,200,"Sinu kiirus oli " + Math.round(kiirus) + " km/h. Sinu reageerimisteekond oli " + Math.round(reagMmeeter_var) + " meetrit ning\npidurdusteekond " + Math.round(pidurdusteekond) + " meetrit.\nKokku oli peatumisteekond "+ (Math.round(pidurdusteekond) + Math.round(reagMmeeter_var)) + " meetrit.", tekstiStiil2));
+    textGroup.add(game.make.text(120,250,"Kas teadsid, et " + tagasiside, { font: "18px Arial", fill: '#000', fontWeight: "500" }));
+    textGroup.add(game.make.text(120,150,"Sinu kiirus oli " + Math.round(kiirus) + " km/h. Sinu reageerimisteekond oli " + Math.round(reagMmeeter_var) + " meetrit ning\npidurdusteekond " + Math.round(pidurdusteekond) + " meetrit.\nKokku oli peatumisteekond "+ Math.round(peatumisTeekond) + " meetrit.", tekstiStiil2));
     textGroup.add(game.make.text(120,400,"Loe lisaks ", { font: "18px Arial", fill: '#000', fontWeight: "500" }))
-    textGroup.add(game.make.text(507,493, "TESTIN UUESTI",{ font: "22px Arial", fill: '#ffffff', fontWeight: "500" }));
-    textGroup.add(game.make.text(145, 493, "LÕPETAN",{ font: "22px Arial", fill: '#ffffff', fontWeight: "500" }));
     mntLinkFunc(208,403);
 }
 
@@ -1327,9 +1317,8 @@ function ennustamataRUS(){
     //pidurdusteekond
     pidurdusteekond = Math.round((num + Number.EPSILON) * 100) / 100;
     textGroup = game.add.group();
-    textGroup.add(game.make.text(120,150,"Вы не предсказали тормозной путь.\n\nПри скорости " + Math.round(kiirus) + " .км/ч путь реагирования было " + Math.round(reagMmeeter_var) + " м,\nа тормозной путь " + Math.round(pidurdusteekond) + " м. Общий остановочный путь составил "+ (Math.round(pidurdusteekond) + Math.round(reagMmeeter_var)) + " м.", tekstiStiil2));
     //textGroup.add(game.make.text(120,195,"Sinu kiirus oli " + Math.round(kiirus) + " km/h. Sinu reageerimisteekond oli " + Math.round(reagMmeeter_var) + " meetrit ning\npidurdusteekond " + Math.round(pidurdusteekond) + " meetrit.\nKokku oli peatumisteekond "+ Math.round(peatumisTeekond) + " meetrit.", tekstiStiil2));
-    textGroup.add(game.make.text(120,280,"Тебе известно, " + tagasiside, { font: "18px Arial", fill: '#000', fontWeight: "500" }));
+    textGroup.add(game.make.text(120,300,"Тебе известно, что " + tagasiside, { font: "18px Arial", fill: '#000', fontWeight: "500" }));
     textGroup.add(game.make.text(120,430,"Подробнее читайте ", { font: "18px Arial", fill: '#000', fontWeight: "500" }))
     mntLinkFuncRUS(290,435);
     textGroup.add(game.make.text(540,493, "ЗАНОВО!",{ font: "22px Arial", fill: '#ffffff', fontWeight: "500" }));
@@ -1346,9 +1335,6 @@ function ennustamataENG() {
     //pidurdusteekond
     pidurdusteekond = Math.round((num + Number.EPSILON) * 100) / 100;
     textGroup = game.add.group();    
-    textGroup.add(game.make.text(120,150,"You did not predict the stopping distance!", { font: "18px Arial", fill: '#000', fontWeight: "500" }));
-    textGroup.add(game.make.text(120,200,"Your speed was " + Math.round(kiirus) + " km/h.\nYour reaction distance was " + Math.round(reagMmeeter_var) + " m and your braking distance was " + Math.round(pidurdusteekond) + " m.\nThe total stopping distance was "+ (Math.round(pidurdusteekond) + Math.round(reagMmeeter_var)) + " m.", tekstiStiil2));
-
     //textGroup.add(game.make.text(120,195,"Sinu kiirus oli " + Math.round(kiirus) + " km/h. Sinu reageerimisteekond oli " + Math.round(reagMmeeter_var) + " meetrit ning\npidurdusteekond " + Math.round(pidurdusteekond) + " meetrit.\nKokku oli peatumisteekond "+ Math.round(peatumisTeekond) + " meetrit.", tekstiStiil2));
     textGroup.add(game.make.text(120,300,"Did you know " + tagasiside, { font: "18px Arial", fill: '#000', fontWeight: "500" }));
     textGroup.add(game.make.text(120,430,"Read more ", { font: "18px Arial", fill: '#000', fontWeight: "500" }))
@@ -1376,11 +1362,9 @@ function ennustatud() {
      //pidurdusteekond
     pidurdusteekond = Math.round((num + Number.EPSILON) * 100) / 100;
     textGroup = game.add.group();
-    textGroup.add(game.make.text(120,270,"Kas teadsid, et " + tagasiside, tekstiStiil2));
-    textGroup.add(game.make.text(120,150,"Sinu pakkumine oli " + ennustus + " meetrit.\n\nKiiruse " + Math.round(kiirus) + " km/h juures oli Sinu reageerimisteekond " + Math.round(reagMmeeter_var) + " meetrit ning\npidurdusteekond " + Math.round(pidurdusteekond) + " meetrit. Kokku oli peatumisteekond "+ (Math.round(pidurdusteekond) + Math.round(reagMmeeter_var)) + " meetrit.", tekstiStiil2));
+    textGroup.add(game.make.text(120,260,"Kas teadsid, et " + tagasiside, tekstiStiil2));
+    textGroup.add(game.make.text(120,150,"Sinu pakkumine oli " + ennustus + " meetrit. Kiiruse " + Math.round(kiirus) + " km/h juures oli sinu\nreageerimisteekond " + Math.round(reagMmeeter_var) + " meetrit ning pidurdusteekond " + Math.round(pidurdusteekond) + " meetrit.\nKokku oli peatumisteekond "+ Math.round(peatumisTeekond) + " meetrit.", tekstiStiil2));
     textGroup.add(game.make.text(120,400,"Loe lisaks ",tekstiStiil2))
-    textGroup.add(game.make.text(507,493, "TESTIN UUESTI",{ font: "22px Arial", fill: '#ffffff', fontWeight: "500" }));
-    textGroup.add(game.make.text(145, 493, "LÕPETAN",{ font: "22px Arial", fill: '#ffffff', fontWeight: "500" }));
     mntLinkFunc(208,403);
 }
 //ennustusega venekeelne
@@ -1393,9 +1377,8 @@ function ennustatudRUS(){
     //pidurdusteekond
     pidurdusteekond = Math.round((num + Number.EPSILON) * 100) / 100;
     textGroup = game.add.group();
-    textGroup.add(game.make.text(120,150,"Твое предложение была " + ennustus + " метров.\n\nПри скорости " + Math.round(kiirus) + " .км/ч путь реагирования было " + Math.round(reagMmeeter_var) + " м,\nа тормозной путь " + Math.round(pidurdusteekond) + " м. Общий остановочный путь составил "+ (Math.round(pidurdusteekond) + Math.round(reagMmeeter_var)) + " м.", tekstiStiil2));
     //textGroup.add(game.make.text(120,195,"Sinu kiirus oli " + Math.round(kiirus) + " km/h. Sinu reageerimisteekond oli " + Math.round(reagMmeeter_var) + " meetrit ning\npidurdusteekond " + Math.round(pidurdusteekond) + " meetrit.\nKokku oli peatumisteekond "+ Math.round(peatumisTeekond) + " meetrit.", tekstiStiil2));
-    textGroup.add(game.make.text(120,270,"Тебе известно, что " + tagasiside, { font: "18px Arial", fill: '#000', fontWeight: "500" }));
+    textGroup.add(game.make.text(120,300,"Тебе известно, что " + tagasiside, { font: "18px Arial", fill: '#000', fontWeight: "500" }));
     textGroup.add(game.make.text(120,430,"Подробнее читайте ", { font: "18px Arial", fill: '#000', fontWeight: "500" }))
     mntLinkFuncRUS(290,435);
     textGroup.add(game.make.text(540,493, "ЗАНОВО!",{ font: "22px Arial", fill: '#ffffff', fontWeight: "500" }));
@@ -1412,9 +1395,7 @@ function ennustatudENG() {
     //pidurdusteekond
     pidurdusteekond = Math.round((num + Number.EPSILON) * 100) / 100;
     textGroup = game.add.group();    
-    textGroup.add(game.make.text(120,150,"The stopping distance you predicted was " + ennustus + " meters.", { font: "18px Arial", fill: '#000', fontWeight: "500" }));
-    textGroup.add(game.make.text(120,200,"Your speed was " + Math.round(kiirus) + " km/h.\nYour reaction distance was " + Math.round(reagMmeeter_var) + " m and your braking distance was " + Math.round(pidurdusteekond) + " m.\nThe total stopping distance was "+ (Math.round(pidurdusteekond) + Math.round(reagMmeeter_var)) + " m.", tekstiStiil2));
-
+    //textGroup.add(game.make.text(120,195,"Sinu kiirus oli " + Math.round(kiirus) + " km/h. Sinu reageerimisteekond oli " + Math.round(reagMmeeter_var) + " meetrit ning\npidurdusteekond " + Math.round(pidurdusteekond) + " meetrit.\nKokku oli peatumisteekond "+ Math.round(peatumisTeekond) + " meetrit.", tekstiStiil2));
     textGroup.add(game.make.text(120,300,"Did you know " + tagasiside, { font: "18px Arial", fill: '#000', fontWeight: "500" }));
     textGroup.add(game.make.text(120,430,"Read more ", { font: "18px Arial", fill: '#000', fontWeight: "500" }))
     textGroup.add(game.make.text(517,493, "RETAKE TEST",{ font: "22px Arial", fill: '#ffffff', fontWeight: "500" }));
@@ -1543,15 +1524,9 @@ var peatumisTeekond;
 
 var reag_var;
 var reagMmeeter_var;
-var reagUnoSec;
 // reag_var on reageerimis aeg, sekundites ; reagMmeeter_var on reageerimis ajal l2bitud meetrid
 function reagAeg() {
-    reagUnoSec = currentTime2 - currentTime1;
-    // allolev IF on vajalik, et kui reag-aeg on v2iksem kui 1 sec, tehakse temast ikkagi 1 sec
-    if (reagUnoSec < 1000){
-        reagUnoSec = 1000;
-        }
-    reag_var = Math.round((reagUnoSec + Number.EPSILON)*100) / 100000
+    reag_var = Math.round(((currentTime2 - currentTime1) + Number.EPSILON)*100) / 100000
     reagMmeeter_var = Math.round(((kiirus/3.6*reag_var) + Number.EPSILON)*100) / 100
 }
 
@@ -1678,7 +1653,7 @@ function juhisedTekstFunc() {
         juhendistart.destroy();
         juhendistop.destroy();
 
-        mumm = game.add.sprite(420, 183, 'mumm');
+        mumm = game.add.sprite(436, 183, 'mumm');
         lipuke = game.add.sprite(562, 228, 'lipuke');
         juhendistart = game.add.sprite(321, 276, 'juhendistart');    
         juhendistop = game.add.sprite(488, 325, 'juhendistop');    
@@ -1686,7 +1661,7 @@ function juhisedTekstFunc() {
         juhisedTekst  = game.add.group();
         juhisedTekst.add(game.make.text(337,26,"Juhend", { font: "42px Arial", fill: '#000', fontWeight: "500" }));
         juhisedTekst.add(game.make.text(100, 128, "Teekatte valimiseks kliki sobival nupul.",{ font: "20px Arial", fill: '#000', fontWeight: "500"}))
-        juhisedTekst.add(game.make.text(100, 178, "Sõidukiiruse valimiseks libista nupp     sobiva kiiruse juurde.",{ font: "20px Arial", fill: '#000', fontWeight: "500"}))
+        juhisedTekst.add(game.make.text(100, 178, "Sõidukiiruse valimiseks libista mumm     sobiva kiiruse juurde.",{ font: "20px Arial", fill: '#000', fontWeight: "500"}))
         juhisedTekst.add(game.make.text(100, 228, "Peatumisteekonna pikkuse määramiseks libista lipp      sobivale kaugusele.",{ font: "20px Arial", fill: '#000', fontWeight: "500"}))
         juhisedTekst.add(game.make.text(100, 278, "Sõidu alustamiseks kliki                 nuppu või tühiku klahvi.",{ font: "20px Arial", fill: '#000', fontWeight: "500"}))
         juhisedTekst.add(game.make.text(100, 328, "Auto peatamiseks, takistuse ilmumisel, kliki                nuppu või tühiku klahvi.",{ font: "20px Arial", fill: '#000', fontWeight: "500"}))
@@ -1720,8 +1695,8 @@ function juhisedTekstFunc() {
         juhisedTekst.add(game.make.text(90, 278, "Для начала движения нажми на кнопку                  или на клавишу пробел.",{ font: "18px Arial", fill: '#000', fontWeight: "500"}))
         juhisedTekst.add(game.make.text(90, 318, "Для остановки автомобиля нажми на кнопку                  или на клавишу пробел\nпри появлении знака STOP.",{ font: "18px Arial", fill: '#000', fontWeight: "500"}))
 
-        juhisedTekst.add(game.make.text(95, 512, "Нажми для\nвыключения звука ",{ font: "16px Arial", fill: '#000', fontWeight: "500"}))
-        juhisedTekst.add(game.make.text(370, 512, "Нажми для\nпросмотра инструкций ",{ font: "16px Arial", fill: '#000', fontWeight: "500"}))
+        juhisedTekst.add(game.make.text(95, 512, "Для выключения\nзвука нажми",{ font: "16px Arial", fill: '#000', fontWeight: "500"}))
+        juhisedTekst.add(game.make.text(370, 512, "Для просмотра\nинструкций нажми",{ font: "16px Arial", fill: '#000', fontWeight: "500"}))
 
         juhisedTekst.add(game.make.text(650, 515, "ДАЛЬШЕ!",{ font: "22px Arial", fill: '#ffffff', fontWeight: "500" }))
 
