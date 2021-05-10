@@ -29,6 +29,8 @@ function preload () {
     game.load.image('alumineMenuu', 'assets/alumine.png');
     game.load.image('car', 'assets/car_r.png');
     game.load.image('kits', 'assets/kast.png');
+    game.load.image('kits2', 'assets/takistus2.png');
+    game.load.image('kits3', 'assets/takistus3.png');
     game.load.image('hyyumark', 'assets/hyyumark.png');
     game.load.image('kiiruseNupp', 'assets/nupp.png');
 
@@ -93,6 +95,7 @@ takistuseKaugus = 5000;
 var takistusTeke;
 lopetanInt = 0;
 eiPidurdanudInt = 0;
+takistusList = ['kits','kits2','kits3']
 
 function create () {
 
@@ -1444,8 +1447,9 @@ function podraTeke() {
     }    
 
     takistus.destroy();
+    takInt = Math.floor(Math.random() * 3);
     
-    takistus = game.add.sprite(takistuseKaugus2, game.world.height - 242, 'kits')
+    takistus = game.add.sprite(takistuseKaugus2, game.world.height - 242, takistusList[takInt]);
     game.physics.arcade.enable(takistus)
     
     console.log(takistuseKaugus2)
