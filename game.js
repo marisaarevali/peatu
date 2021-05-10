@@ -256,19 +256,18 @@ function create () {
 //    efe = kiirus*4;
 
     tagasisideList = ["jalakäija ja sõiduki kokkupõrkel kiirusel 50 km/h on\njalakäija hukkumise tõenäosus 40%, suurendades kiirust „vaid” 10 km/h\non selleks tõenäosuseks juba 70%?",
-                        "reageerimisaeg ei ole kõigil 1 sekund. Olenevalt juhi\nvalmisolekust, kogemusest ja keskendumisest võib see varieeruda?",
-                        "et autoroolis sms-i kirjutamisel või lugemisel julgeb juht\nhoida oma pilku teelt ära kuni viis sekundit järjest. Selle aja jooksul liigub\nsõiduk „pimeduses” 50 km/h sõidukiirusel umbkaudu 70 meetrit?",
-                        "et autoroolis sms-i kirjutamisel või lugemisel julgeb juht\nhoida oma pilku teelt ära kuni viis sekundit järjest. Selle aja jooksul liigub\nsõiduk „pimeduses” 90 km/h sõidukiirusel umbkaudu 125 meetrit?"];
+                        "reageerimisaeg ei ole kõigil 1 sekund? Olenevalt juhi\nvalmisolekust, kogemusest ja keskendumisest võib see varieeruda.",
+                        "autoroolis sms-i kirjutamisel või lugemisel julgeb juht\nhoida oma pilku teelt ära kuni viis sekundit järjest? Selle aja jooksul liigub\nsõiduk „pimeduses” 50 km/h sõidukiirusel umbkaudu 70 meetrit.",
+                        "autoroolis sms-i kirjutamisel või lugemisel julgeb juht\nhoida oma pilku teelt ära kuni viis sekundit järjest? Selle aja jooksul liigub\nsõiduk „pimeduses” 90 km/h sõidukiirusel umbkaudu 125 meetrit."];
     
     tagasisideListRUS = ["при столкновении с пешеходом на скорости\n50 км/ч вероятность гибели пешехода составляет 40%. Увеличив\nскорость «всего» на 10 км/ч, эта вероятность составляет уже 70%.",
                         "время реагирования не у всех 1 секунда.\nВ зависимости от подготовки, опыта и концентрации водителя оно\nможет варьироваться.",
-                        "что при наборе или чтении SMS за рулем\nавтомобиля водитель осмеливается отводить свой взгляд от\nдороги до пяти секунд подряд. За это время автомобиль\nпроезжает «вслепую» при скорости 50 км/ч приблизительно\n70 метров.",
-                        "что при наборе или чтении SMS за рулем\nавтомобиля водитель осмеливается отводить свой взгляд от\nдороги до пяти секунд подряд. За это время автомобиль\nпроезжает «вслепую» при скорости 90 км/ч приблизительно\n125 метров."]
+                        "при наборе или чтении SMS за рулем\nавтомобиля водитель осмеливается отводить свой взгляд от\nдороги до пяти секунд подряд. За это время автомобиль\nпроезжает «вслепую» при скорости 50 км/ч приблизительно\n70 метров.",
+                        "при наборе или чтении SMS за рулем\nавтомобиля водитель осмеливается отводить свой взгляд от\nдороги до пяти секунд подряд. За это время автомобиль\nпроезжает «вслепую» при скорости 90 км/ч приблизительно\n125 метров."]
     
-    tagasisideListENG = ["if you hit a pedestrian at 50 km/h, the chances of them\nbeing killed are 40%. However, increase your speed by “just” 10 km/h\nand the chances of them being killed go up to 70%.",
-                        "not everyone’s reaction time is 1 second – it varies\ndepending on how alert and experienced the driver is and how\nfocused they are on the road.",
-                        "for example, it is known that drivers will happily take\ntheir eyes off the road for up to five seconds at a time while texting or\nreading at the wheel. In those few seconds, driving at a speed of 50 km/h,\ntheir car will travel ‘blind’ for around 70 meters.",
-                        "for example, it is known that drivers will happily take\ntheir eyes off the road for up to five seconds at a time while texting or\nreading at the wheel. In those few seconds, driving at a speed of 90 km/h,\ntheir car will travel ‘blind’ for around 125 meters."
+    tagasisideListENG = ["if you hit a pedestrian at 50 km/h, the chances of them\nbeing killed are 40%? However, increase your speed by “just” 10 km/h\nand the chances of them being killed go up to 70%.",
+                        "not everyone’s reaction time is 1 second? It varies\ndepending on how alert and experienced the driver is and how\nfocused they are on the road.",
+                        "for example, that drivers will take their eyes off the road\nup to five seconds at the time while texting or reading at the wheel?"
     ]
 
 
@@ -1656,7 +1655,7 @@ function engFunk() {
         if (avalehtKontroll == 0) {
             avalehtTekst.destroy();
             avalehtTekst  = game.add.group();
-            avalehtTekst.add(game.make.text(342,412,"TAKE TEST", { font: "22px Arial", fill: '#ffffff', fontWeight: "500" }));
+            avalehtTekst.add(game.make.text(338,412,"TAKE A TEST", { font: "20px Arial", fill: '#ffffff', fontWeight: "500" }));
             avalehtTekst.add(game.make.text(157, 300, "Do you know what the stopping distance is when driving?\n Test yourself to find out how much you know! ",{ font: "20px Arial", fill: '#000', fontWeight: "500",align: 'center' }))
         }
 
@@ -1786,7 +1785,7 @@ function mangTekstFunc() {
          
         mangTekst  = game.add.group();
         peatumisTekst = game.add.group();
-        peatumisTekst.add(game.make.text(500,430,"Длина остановочного пути", { font: "17px Arial", fill: "black", fontWeight : "300"}));
+        peatumisTekst.add(game.make.text(500,430,"Длина остановочного пути (м)", { font: "17px Arial", fill: "black", fontWeight : "300"}));
         mangTekst.add(game.make.text(143,454,"Сухое покрытие", { font: "12px Arial", fill: "black", fontWeight : "300"}));
         mangTekst.add(game.make.text(140,488,"Мокрое покрытие", { font: "12px Arial", fill: "black", fontWeight : "300"}));
         mangTekst.add(game.make.text(130,522,"Обледенелое покрытие", { font: "11px Arial", fill: "black", fontWeight : "300"}));
@@ -1800,7 +1799,7 @@ function mangTekstFunc() {
     
         mangTekst  = game.add.group();
         peatumisTekst = game.add.group();
-        peatumisTekst.add(game.make.text(500,430,"Stopping distance", { font: "17px Arial", fill: "black", fontWeight : "300"}));
+        peatumisTekst.add(game.make.text(500,430,"Stopping distance (m)", { font: "17px Arial", fill: "black", fontWeight : "300"}));
         mangTekst.add(game.make.text(140,453,"Dry surface", { font: "14px Arial", fill: "black", fontWeight : "300"}));
         mangTekst.add(game.make.text(139,487,"Wet surface", { font: "14px Arial", fill: "black", fontWeight : "300"}));
         mangTekst.add(game.make.text(140,521,"Icy surface", { font: "14px Arial", fill: "black", fontWeight : "300"}));
