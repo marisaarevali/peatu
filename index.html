@@ -10,14 +10,21 @@
       background-repeat: no-repeat;
       background-size: cover;
       background-position: bottom;
-      position: relative;
-
-
     }
-
     html {
       height: 100%;
     }
+
+    .game-canvas{
+     position:absolute;
+}
+    .fb-share-button{
+    position: relative;
+    top: 595px;
+    left: 60%;
+    right: 40%;
+
+}
   </style>
   <title>Peatu</title>
   <script type="text/javascript" src="phaser.min.js"></script>
@@ -28,15 +35,15 @@
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/et_EE/sdk.js#xfbml=1&version=v10.0"
     nonce="0ZCOZNfw"></script>
 
-  <div class="game-canvas">
-    <script type="text/javascript" src="game.js" id="container"></script>
+ 
+    <script type="text/javascript" src="game.js" id="container" class="game-canvas"></script>
 
     <div class="fb-share-button" data-href="http://peatu.ee/" data-layout="button_count" data-size="small"><a
         target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fpeatu.ee%2F&amp;src=sdkpreparse"
         class="fb-xfbml-parse-ignore">Jaga</a></div>
 
 
-  </div>
+
 
 
 

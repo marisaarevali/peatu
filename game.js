@@ -263,10 +263,10 @@ function create () {
                         "autoroolis sms-i kirjutamisel või lugemisel julgeb juht\nhoida oma pilku teelt ära kuni viis sekundit järjest? Selle aja jooksul liigub\nsõiduk „pimeduses” 50 km/h sõidukiirusel umbkaudu 70 meetrit.",
                         "autoroolis sms-i kirjutamisel või lugemisel julgeb juht\nhoida oma pilku teelt ära kuni viis sekundit järjest? Selle aja jooksul liigub\nsõiduk „pimeduses” 90 km/h sõidukiirusel umbkaudu 125 meetrit."];
     
-    tagasisideListRUS = ["при столкновении с пешеходом на скорости\n50 км/ч вероятность гибели пешехода составляет 40%. Увеличив\nскорость «всего» на 10 км/ч, эта вероятность составляет уже 70%.",
-                        "время реагирования не у всех 1 секунда.\nВ зависимости от подготовки, опыта и концентрации водителя оно\nможет варьироваться.",
-                        "при наборе или чтении SMS за рулем\nавтомобиля водитель осмеливается отводить свой взгляд от\nдороги до пяти секунд подряд. За это время автомобиль\nпроезжает «вслепую» при скорости 50 км/ч приблизительно\n70 метров.",
-                        "при наборе или чтении SMS за рулем\nавтомобиля водитель осмеливается отводить свой взгляд от\nдороги до пяти секунд подряд. За это время автомобиль\nпроезжает «вслепую» при скорости 90 км/ч приблизительно\n125 метров."]
+    tagasisideListRUS = ["при столкновении с пешеходом на скорости\n50 км/ч вероятность гибели пешехода составляет 40%? Увеличив\nскорость «всего» на 10 км/ч, эта вероятность составляет уже 70%.",
+                        "время реагирования не у всех 1 секунда?\nВ зависимости от подготовки, опыта и концентрации водителя оно\nможет варьироваться.",
+                        "при наборе или чтении SMS за рулем\nавтомобиля водитель осмеливается отводить свой взгляд от\nдороги до пяти секунд подряд? За это время автомобиль\nпроезжает «вслепую» при скорости 50 км/ч приблизительно\n70 метров.",
+                        "при наборе или чтении SMS за рулем\nавтомобиля водитель осмеливается отводить свой взгляд от\nдороги до пяти секунд подряд? За это время автомобиль\nпроезжает «вслепую» при скорости 90 км/ч приблизительно\n125 метров."]
     
     tagasisideListENG = ["if you hit a pedestrian at 50 km/h, the chances of them\nbeing killed are 40%? However, increase your speed by “just” 10 km/h\nand the chances of them being killed go up to 70%.",
                         "not everyone’s reaction time is 1 second? It varies\ndepending on how alert and experienced the driver is and how\nfocused they are on the road.",
