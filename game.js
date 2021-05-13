@@ -806,7 +806,7 @@ function l6pp() {
     l6ppTekst.add(game.make.text(170, 100, "PIIRKIIRUSEL ON PÕHJUS!", { font: "36px Arial", fill: '#000', fontWeight: "700" }));
     l6ppTekst.add(game.make.text(65, 180, "Hooli oma sõpradest ja jaga rakendust ka neile!", { font: "32px Arial", fill: '#000', fontWeight: "500" }));
     l6ppTekst.add(game.make.text(120, 350, "Rakendus on valminud Tallinna Ülikooli Haapsalu Kolledži praktika raames.", { font: "16px Arial", fill: '#000', fontWeight: "500" }));
-    l6ppTekst.add(game.make.text(105, 470, "Mari Joamets Mari Saareväli\nMartin Kirsimägi Rene Reede", { font: "14px Arial", fill: '#000', fontWeight: "500" }));
+    l6ppTekst.add(game.make.text(105, 470, "Mari Joamets, Mari Saareväli,\nMartin, Kirsimägi, Rene Reede", { font: "14px Arial", fill: '#000', fontWeight: "500" }));
     l6ppTekst.add(game.make.text(316, 532, "TESTIN UUESTI", { font: "22px Arial", fill: '#ffffff', fontWeight: "500" }))
     mntLinkFuncLopp(285, 260);
 }
@@ -817,7 +817,7 @@ function l6ppRUS() {
     l6ppTekst.add(game.make.text(65, 180, "Заботься о своих друзьях и поделись приложением с ними! ", { font: "24px Arial", fill: '#000', fontWeight: "500" }));
     l6ppTekst.add(game.make.text(205, 330, "Приложения было заполнено в рамках стажировки", { font: "16px Arial", fill: '#000', fontWeight: "500" }));
     l6ppTekst.add(game.make.text(195, 330, "\nв Хаапсалуском колледже Таллиннского университета.", { font: "16px Arial", fill: '#000', fontWeight: "500" }));
-    l6ppTekst.add(game.make.text(105, 470, "Mari Joamets Mari Saareväli\nMartin Kirsimägi Rene Reede", { font: "16px Arial", fill: '#000', fontWeight: "500" }));
+    l6ppTekst.add(game.make.text(105, 470, "Mari Joamets, Mari Saareväli,\nMartin Kirsimägi, Rene Reede", { font: "16px Arial", fill: '#000', fontWeight: "500" }));
     l6ppTekst.add(game.make.text(350, 532, "ЗАНОВО!", { font: "22px Arial", fill: '#ffffff', fontWeight: "500" }))
     mntLinkFuncLopp(285, 260);
 }
@@ -827,7 +827,7 @@ function l6ppENG() {
     l6ppTekst.add(game.make.text(40, 90, "THERE IS A REASON FOR SPEED LIMITS!", { font: "36px Arial", fill: '#000', fontWeight: "700" }));
     l6ppTekst.add(game.make.text(160, 180, "Show you care – share this app with your friends and family!", { font: "18px Arial", fill: '#000', fontWeight: "500" }));
     l6ppTekst.add(game.make.text(40, 350, " The application has been developed during the period of practical training at Haapsalu College of Tallinn University.", { font: "14px Arial", fill: '#000', fontWeight: "500" }));
-    l6ppTekst.add(game.make.text(105, 470, "Mari Joamets Mari Saareväli\nMartin Kirsimägi Rene Reede", { font: "14px Arial", fill: '#000', fontWeight: "500" }));
+    l6ppTekst.add(game.make.text(105, 470, "Mari Joamets, Mari Saareväli,\nMartin Kirsimägi, Rene Reede", { font: "14px Arial", fill: '#000', fontWeight: "500" }));
     l6ppTekst.add(game.make.text(320, 532, "RETAKE TEST!", { font: "22px Arial", fill: '#ffffff', fontWeight: "500" }))
     mntLinkFuncLopp(285, 260);
 }
@@ -1120,14 +1120,10 @@ function tagasisideRandEng() {
 function vara() {
     textGroup = game.add.group();
     textGroup.add(game.make.text(270, 256, "Peatasid auto liiga vara!", { font: "26px Arial", fill: '#000', fontWeight: "500" }));
-
-
     textGroup.add(game.make.text(508, 337, "TESTIN UUESTI", { font: "22px Arial", fill: '#ffffff', fontWeight: "500" }));
     textGroup.add(game.make.text(158, 337, "LÕPETAN", { font: "22px Arial", fill: '#ffffff', fontWeight: "500" }));
-
     //et proovi uuestiga saaks kustutada
     mntLinkFunc(3500, 100);
-
 }
 //pidurdasid liiga vara RUS
 function varaRUS() {
@@ -1137,17 +1133,14 @@ function varaRUS() {
     textGroup.add(game.make.text(165, 338, "ВЫЙТИ!", { font: "22px Arial", fill: '#ffffff', fontWeight: "500" }));
     //et proovi uuestiga saaks kustutada
     mntLinkFunc(3500, 100);
-
 }
 function varaENG() {
     textGroup = game.add.group();
     textGroup.add(game.make.text(240, 256, "You stopped the car too soon! ", { font: "26px Arial", fill: '#000', fontWeight: "500" }));
     textGroup.add(game.make.text(518, 337, "RETAKE TEST", { font: "22px Arial", fill: '#ffffff', fontWeight: "500" }));
     textGroup.add(game.make.text(188, 337, "EXIT", { font: "22px Arial", fill: '#ffffff', fontWeight: "500" }));
-
     //et proovi uuestiga saaks kustutada
     mntLinkFunc(3500, 100);
-
 }
 
 
@@ -1191,7 +1184,7 @@ function avariiENG() {
     //pidurdusteekond
     pidurdusteekond = Math.round((num + Number.EPSILON) * 100) / 100;
     textGroup = game.add.group();
-    textGroup.add(game.make.text(120, 150, "Your reaction time was not enough to avoid a collision.\nWhere you engaged in any extraneous activity at the same time? ", { font: "18px Arial", fill: '#000', fontWeight: "500" }));
+    textGroup.add(game.make.text(120, 150, "Your reaction time was not enough to avoid a collision.\nWere you engaged in any extraneous activity at the same time? ", { font: "18px Arial", fill: '#000', fontWeight: "500" }));
 
     //textGroup.add(game.make.text(120,195,"Sinu kiirus oli " + Math.round(kiirus) + " km/h. Sinu reageerimisteekond oli " + Math.round(reagMmeeter_var) + " meetrit ning\npidurdusteekond " + Math.round(pidurdusteekond) + " meetrit.\nKokku oli peatumisteekond "+ Math.round(peatumisTeekond) + " meetrit.", tekstiStiil2));
     textGroup.add(game.make.text(120, 250, "Did you know " + tagasiside, { font: "18px Arial", fill: '#000', fontWeight: "500" }));
@@ -1262,7 +1255,7 @@ function pidurAvariiENG() {
     pidurdusteekond = Math.round((num + Number.EPSILON) * 100) / 100;
     textGroup = game.add.group();
     //textGroup.add(game.make.text(120,110,"Teel oli takistus, sõitsid sellele otsa. Sinu reageerimiskiirus ei olnud\njärelikult piisav otsasõidu vältimiseks. Kas tegelesid samal ajal mõne\nkõrvalise tegevusega?", { font: "18px Arial", fill: '#000', fontWeight: "500" }));
-    textGroup.add(game.make.text(120, 120, "Your reaction time was not enough to avoid a collision.\nWhere you engaged in any extraneous activity at the same time? ", { font: "18px Arial", fill: '#000', fontWeight: "500" }));
+    textGroup.add(game.make.text(120, 120, "Your reaction time was not enough to avoid a collision.\nWere you engaged in any extraneous activity at the same time? ", { font: "18px Arial", fill: '#000', fontWeight: "500" }));
     //textGroup.add(game.make.text(120,195,"Sinu kiirus oli " + Math.round(kiirus) + " km/h. Sinu reageerimisteekond oli " + Math.round(reagMmeeter_var) + " meetrit ning\npidurdusteekond " + Math.round(pidurdusteekond) + " meetrit.\nKokku oli peatumisteekond "+ Math.round(peatumisTeekond) + " meetrit.", tekstiStiil2));
     textGroup.add(game.make.text(120, 200, "Your speed was " + Math.round(kiirus) + " km/h.\nYour reaction distance was " + Math.round(reagMmeeter_var) + " m and your braking distance was " + Math.round(pidurdusteekond) + " m.\nThe total stopping distance was " + Math.round(peatumisTeekond) + " m.", tekstiStiil2));
 
