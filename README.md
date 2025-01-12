@@ -1,5 +1,5 @@
 # peatu
-
+check it out - https://www.liikluskasvatus.ee/ta-peatumisteekond/
 
 Rakendus on valminud Tallinna Ülikooli Haapsalu Kolledži praktika raames.
 
